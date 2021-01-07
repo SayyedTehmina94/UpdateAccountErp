@@ -1,0 +1,107 @@
+<div class="row">
+  <h3 class="title-border col-md-12">
+    Edit Sales Tax
+  </h3>
+</div>
+
+<div class="page-section">
+
+  <div class="row">
+      <div class="col-md-12" *blockUI="'container-blockui'">
+          <form class="form-horizontal add-inv-form" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm"
+          novalidate>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group" [ngClass]="{ 'validation-error' : f.submitted && code.invalid}">
+                        <label class="col-md-3 label-col">Sales Tax Code:*</label>
+                        <div class="col-md-9">
+                          <input type="text" name="code" class="form-control" maxlength="50"
+                                                autocomplete="off" [(ngModel)]="model.code" #code="ngModel" required
+                                                appAlphaNumericsOnly />
+
+                                            <div class="validation-error-message" *ngIf="f.submitted && code.invalid">
+                                                Sales tax code is required
+                                            </div>
+                      </div>
+                   </div>
+                  </div>
+              </div>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group" [ngClass]="{ 'validation-error' : f.submitted && taxPercentage.invalid}">
+                        <label class="col-md-3 label-col">Tax:*</label>
+                        <div class="col-md-9">
+                          <div class="input-group">
+                            <input type="text" name="taxPercentage" class="form-control"
+                            maxlength="6" autocomplete="off" [(ngModel)]="model.taxPercentage"
+                            #taxPercentage="ngModel" appDecimalNumbersOnly required />
+                              <div class="input-group-append">
+                                  <button class="btn btn-success" type="button">
+                                      <i class="fa fa-percent"></i>
+                                  </button>
+                              </div>
+                          </div>
+                          <div class="validation-error-message"
+                          *ngIf="f.submitted && taxPercentage.invalid">
+                          Tax percentage is required
+                      </div>                        
+                       </div>
+                        <!-- <button type="button"
+                            class="btn btn-outline-success btn-elevate btn-icon btn-sm m-l-5"
+                            (click)="openCustomerModal(addCustomerModal)">
+                            <i class="la la-plus"></i></button> -->
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group" [ngClass]="{ 'validation-error' : f.submitted && description.invalid}">
+                          <label class="col-md-3 label-col">Description:*</label>
+                          <div class="col-md-9">
+                            <textarea name="description" class="form-control" maxlength="250" rows="2"
+                            autocomplete="off" [(ngModel)]="model.description"
+                            #description="ngModel" appAlphaNumericsLevelOne></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                          <div class="text-left p-l-15">
+                            <a [routerLink]="['/sales-tax/manage']" class="btn btn-success m-r-5">
+                              <i class="fa fa-arrow-left"></i> Back</a>
+                            <button type="submit" class="btn btn-success">
+                              <i class="fa fa-save"></i> Submit</button>
+                          </div>
+                    </div>
+                  </div>
+             
+          </form>
+      </div>
+  </div>
+</div>
+
+
+
+<ng-template #addCustomerModal let-modal>
+  <div class="modal-header">
+      <h5 class="modal-title">Add Customer</h5>
+      <button type="button" class="close" aria-label="Close" (click)="closeCustomerModal()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <!-- <app-item-selector [selectedItems]='selectedItems'></app-item-selector> -->
+      <app-add-customer-popup></app-add-customer-popup>
+  </div>
+  <div class="modal-footer">
+      <div class="col-md-12 text-right">
+          <button type="button" class="btn btn-success" (click)="closeCustomerModal()">
+              <i class="la la-check"></i> Done
+          </button>
+      </div>
+  </div>
+</ng-template>

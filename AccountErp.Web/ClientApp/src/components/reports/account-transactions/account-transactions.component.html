@@ -1,0 +1,209 @@
+<div class="row">     
+    <h3 class="blue-h   title-border col-md-6"> Account Transactions </h3>
+    <div class="col-md-6 text-right title-border"> 
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+            Action
+            </button>
+            <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+
+                <ul>
+                <li>
+                    <a href="javascript:;" (click)="openPDF()">
+                        <i class="fa fa-print"></i>
+                        <span> Preview</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;" (click)="downloadPDF()">
+                        <i class="fa fa-print"></i>
+                        <span> Print</span>
+                    </a>
+                </li>
+                </ul>
+
+            </div>
+        </div>            
+    </div>
+</div>
+<div  id="htmlData" #htmlData></div>
+
+<div class="page-section report">
+    <div class="row">
+
+        <form name="form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+                <div class="col-md-12" *blockUI="'container-blockui'">
+                 
+                    <div class="row">
+                                                        <div class="col-4">
+                                                            <div class="form-group row">
+                                                                <label class="col-md-12">Acconts:</label>
+                                                                <div class="col-md-12">
+                                                                    <select name="account"  [(ngModel)]="accountId" #account="ngModel" (change)="selectAccount($event)" class="form-control height-38" >
+                                                                        <optgroup label="">
+                                                                            <option value=0>All</option>
+                                                                        </optgroup>
+                                                                        <optgroup *ngFor="let acchead of allAccounts" label="{{acchead.accountMasterName}}">
+                                                                        <option *ngFor="let acc of acchead.bankAccount" value="{{acc.id}}">{{acc.accountName}}</option>
+                                                                    </optgroup>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-4">
+                                                            <div class="form-group row">
+                                                                <label class="col-md-12">from:</label>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <input class="form-control height-38" name="invoiceStartDate" id="invoiceStartDate"
+                                                                            #invoiceStartDate="ngModel" [(ngModel)]="startDate"
+                                                                            ngbDatepicker #d="ngbDatepicker" (dateSelect)="changeStartDate()"  readonly />
+                                                                        <div class="input-group-append">
+                                                                            <button class="btn btn-success calendar"
+                                                                                (click)="d.toggle()" type="button">
+                                                                                <i class="fa fa-calendar"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-4">
+                                                            <div class="form-group row">
+                                                                <label class="col-md-12">to:</label>
+                                                                <div class="col-md-12">
+                                                                    <div class="input-group">
+                                                                        <input class="form-control height-38" name="invoiceDueDate" id="invoiceDueDate"
+                                                                            #invoiceDueDate="ngModel" (dateSelect)="changeEnddate()"
+                                                                            [(ngModel)]="endDate" ngbDatepicker
+                                                                            #d1="ngbDatepicker" [autoClose]=" true" readonly />
+                                                                        <div class="input-group-append">
+                                                                            <button class="btn btn-success calendar"
+                                                                                (click)="d1.toggle()" type="button">
+                                                                                <i class="fa fa-calendar"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                    </div>
+
+                    <div class="row">
+                                                    <div class="col-4">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-12">Report Type:</label>
+                                                            <div class="col-md-12">
+                                                                <!-- <select class="form-control height-38" id="statementType" [(ngModel)]="selectedstType" 
+                                                                    name="statementType" #statementType="ngModel">
+                                                                    <option value=1>Accural (Paid & Unpaid)</option>
+                                                                    <option value=0>Cash Basis (Paid)</option>
+                                                                </select> -->
+                                                        <ngx-select-dropdown  name="statementType" #statementType="ngModel" (change)="getStatementType()" [multiple]="false" 
+                                            [(ngModel)]="selectedstType" [config]="config" [options]="reportTypeList"></ngx-select-dropdown>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-4">
+                                                        <div class="form-group row">
+                                                            <label class="col-md-12">Contact:</label>
+                                                            <div class="col-md-12">
+                                                                <select class="form-control height-38" id="statementType" [(ngModel)]="contactTypenID" (change)="selectContact($event)"
+                                                        name="contanct" #contanct="ngModel">
+                                                            <!-- <option [ngValue]="statementType" *ngFor="let statementType of statementTypes">{{statementType.name}}</option> -->
+                                                            <optgroup>
+                                                                <option value="0/0">All</option>
+                                                            </optgroup>
+                                                            
+                                                            <optgroup  label="Customer">
+                                                                <option *ngFor="let item of customers"  value="{{item.keyInt+'/'+1}}">{{item.value}}</option>
+                                                            </optgroup>
+                                                            <optgroup label="Vendor">
+                                                                <option *ngFor="let item of vendors"  value="{{item.keyInt+'/'+2}}">{{item.value}}</option>
+                                                            </optgroup>
+                                                            
+                                                        </select>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="form-group row updat-rpt-btn">
+                                                            <div class="col-md-12" style="position:absolute; left:360; top:31px;">
+                                                                <button type="submit" class="btn btn-success" (click)="showAccountTransaction()">
+                                                                    <i class="fa fa-search"></i> View Report</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                    </div>
+                                            
+                                
+                </div>
+            
+                <div class="row">
+                        <div class="col-md-12" *blockUI="'container-blockui'">
+                                            <div class="row justify-content-center">  
+                                                <div class="col-12"> 
+                                                        <table class="table" id="my-table">
+                                                            <thead>
+                                                                    <th>DATE</th>
+                                                                    <th>DESCRIPTION</th>
+                                                                    <th>Debit</th>
+                                                                    <th>Credit</th>
+                                                                    <th class="c">Balance</th>
+                                                                    <!-- <th colspan="2" style="text-align:right"  style="font-size:15px">{{fromDate | date}} to {{toDate | date}}</th>                                                    </tr> -->
+                                                            </thead>
+                                                            <tbody *ngFor="let head of accountTransactionData.bankList">
+                                                                <tr class="accHeading">
+                                                                    <td colspan="10" >{{head.accountName}}</td>
+                                                                </tr>
+                                                                <tr class="accSubHeading">
+                                                                    <td colspan="4">Starting Balance</td>
+                                                                    <td class="pull-right">{{head.startingBalance}}</td>
+                                                                    </tr>
+                                                                    <tr *ngFor="let item of head.transactions">
+                                                                        <td >{{item.transactionDate | date}}</td>
+                                                                        <td >{{getTransactionDesc(item.transactionType)}}</td>
+                                                                        <td >{{item.debitAmount}}</td>
+                                                                        <td >{{item.creditAmount}}</td>
+                                                                        <td class="pull-right">{{item.balance}}</td>
+                                                                    </tr>
+                                                                    <tr class="accSubHeading">
+                                                                        <td colspan="2">Totals and Ending Balance</td>
+                                                                        <td>{{head.totalAndEndingBalanceDebitAmount}}</td>
+                                                                        <td>{{head.totalAndEndingBalanceCreditAmount}}</td>
+                                                                        <td class="pull-right">{{head.totalAndEndingBalance}}</td>
+                                                                    </tr>
+                                                                    <tr colspan="10"  class="accHeading">
+                                                                        <td>Balance Change<br/>
+                                                                        <span style="font-size:0.7em">Difference between starting and ending balances</span>
+                                                                        </td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td colspan="5" class="pull-right">{{head.totalAndEndingBalance}}</td>
+                                                                    </tr>
+                                                                    <br/><br/>
+                                                            </tbody>
+                                                        
+                                                        </table>
+                                                </div>
+                                            </div>
+                        </div>
+                        
+                </div>
+                <div class="row">
+                    <div class="col-md-12 reportback text-right">
+                      <a [routerLink]="['/reports/report-menu']" class="btn btn-success">
+                        <i class="fa fa-arrow-left"></i> Back</a>
+                        &nbsp;
+                    </div>
+                  </div>
+        </form>
+    </div>
+</div>
+  

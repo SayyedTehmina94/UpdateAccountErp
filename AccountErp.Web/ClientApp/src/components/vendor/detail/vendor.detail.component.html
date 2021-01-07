@@ -1,0 +1,462 @@
+<div class="row">
+    <h3 class="blue-h  col-md-6 title-border">
+        Vendor Detail
+    </h3>
+    <div class="col-md-6 text-right title-border">
+        <button  type="button" class="btn btn-outline-success btn-sm dropdown-toggle"
+          data-toggle="dropdown" >
+          Action
+        </button>
+        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+          <ul class="manageList table-hover">
+            <!-- <li class="" *ngIf="model.status === 0">
+              <a [routerLink]="['/bill/add', model.id]" class="">
+                <em class="la la-credit-card"></em>
+                <span class=""> Pay Bill</span>
+              </a>
+            </li> -->
+            <!-- <li class="">
+              <a href="javascript:;" class="" (click)="downloadPDF()">
+                <em class="la la-print"></em>
+                <span class=""> Print Bill</span>
+              </a>
+            </li> -->
+            <li class="list" >
+              <a [routerLink]="['/vendor/edit', model.id]" class="">
+                <em class="fa fa-edit"></em>
+                <span class=""> Edit</span>
+              </a>
+            </li>
+            <li class="list">
+              <a href="javascript:;" class="" (click)="openDeleteModal(deleteModal)">
+                <em class="fa fa-trash"></em>
+                <span class=""> Delete </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </div>
+    <div class="page-section ">
+        <div class="box">
+        <div class="row">
+            <div class="col-md-12" *blockUI="'container-blockui'">
+                 <div class="" *ngIf="isModelLoaded">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="detailHeading">Personal Detail : </span>
+                            <div class="">
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">HST#:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.hstNumber}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3">Vendor Name:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.name}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3  ">Phone:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.phone | mask: '000-000-0000'}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Fax#:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.fax}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Email:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.email}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Website:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.website}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="detailHeading">Bill Address :</span>
+                                    <div class="">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Street#:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.billingAddress.streetNumber}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3">Street Name:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.billingAddress.streetName}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Postal Code:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.billingAddress.postalCode}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">City:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.billingAddress.city}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">State:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.billingAddress.state}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Country:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.billingAddress.countryName}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="detailHeading">Shipping Address :</span>
+                                    <div class="">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Street#:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.shippingAddress.streetNumber}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Street Name:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.shippingAddress.streetName}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Postal Code:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.shippingAddress.postalCode}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">City:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.shippingAddress.city}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">State:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.shippingAddress.state}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3">Country:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.shippingAddress.countryName}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div *ngFor="let item of model.contacts; index as $index">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span class="detailHeading">Contacts {{($index + 1)}} :</span>
+                                        <div class="">
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 ">First Name:</label>
+                                            <div class="col-md-9">
+                                                <p class="">{{item.firstName}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 ">Middle Name:</label>
+                                            <div class="col-md-9">
+                                                <p class="">{{item.middleName}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 ">Last Name:</label>
+                                            <div class="col-md-9">
+                                                <p class="">{{item.lastName}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 ">Job Title:</label>
+                                            <div class="col-md-9">
+                                                <p class="">{{item.jobTitle}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 ">Phone:</label>
+                                            <div class="col-md-9">
+                                                <p class="">{{item.phone}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 ">Email:</label>
+                                            <div class="col-md-9">
+                                                <p class="">{{item.email}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 ">Street#:</label>
+                                            <div class="col-md-9">
+                                                <p class="">{{item.address.streetName}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 ">Street Name:</label>
+                                            <div class="col-md-9">
+                                                <p class="">{{item.address.streetName}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 ">Postal Code:</label>
+                                            <div class="col-md-9">
+                                                <p class="">{{item.address.postalCode}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 ">City:</label>
+                                            <div class="col-md-9">
+                                                <p class="">{{item.address.city}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 ">State#:</label>
+                                            <div class="col-md-9">
+                                                <p class="">{{item.address.state}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 ">Country:</label>
+                                            <div class="col-md-9">
+                                                <p class="">{{item.address.countryName}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="detailHeading">Payment Details :</span>
+                                    <div class="">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Bank name:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.bankName}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Bank Branch:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.bankBranch}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Account#:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.accountNumber}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">IFSC:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.ifsc}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <ngb-tabset>
+                                        <ngb-tab title="Bills">
+                                            <ng-template ngbTabContent><br>
+                                                <app-bill-list [vendorId]="model.id"></app-bill-list>
+                                            </ng-template>
+                                        </ngb-tab>
+                                        <ngb-tab title="Payment">
+                                            <ng-template ngbTabContent><br>
+                                                <app-bill-payment-list [vendorId]="model.id"></app-bill-payment-list>
+                                            </ng-template>
+                                        </ngb-tab>
+                                    </ngb-tabset>
+                                </div>
+                            </div><br>
+
+
+                         
+                  </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="">
+        <div class="text-right" *ngIf="isModelLoaded">
+            <a [routerLink]="['/vendor/manage']" class="btn btn-success m-r-5">
+                <i class="fa fa-arrow-left"></i> Back
+            </a>
+        </div>
+    </div>
+
+    </div>
+   
+    <ng-template #deleteModal class="delmodal" id="deleteModal" let-modal>
+           
+        <div class="modal-header">
+            <h4 class="blue-h heading">Delete Confirmation</h4>
+            <div class="close-btn btn-success" (click)="closeDeleteModal()">
+                <img src="assets/images/sidebar-close-icon.png" alt="close">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="">
+                <span>Are you sure you want to delete the selected Vendor?</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="text-right">
+                <button type="button" class="btn btn-success" (click)="closeDeleteModal()">
+                    <i class="fa fa-arrow-left"></i> Cancel
+                </button>&nbsp;
+                <button type="button" class="btn btn-success" (click)="delete()">
+                    <i class="fa fa-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+   
+</ng-template>

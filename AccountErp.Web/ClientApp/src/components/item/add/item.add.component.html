@@ -1,0 +1,188 @@
+<div class="row">
+  <h3 class="title-border col-md-12">
+    Add Item & Service
+  </h3>
+</div>
+
+<div class="page-section">
+
+  <div class="row">
+      <div class="col-md-12" *blockUI="'container-blockui'">
+          <form class="form-horizontal add-inv-form"  name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm"
+          novalidate>
+            <div class="">
+              <div class="row">
+
+
+                <div class="col-md-6">
+                  <div class="form-group row"[ngClass]="{ 'validation-error' : f.submitted && name.invalid}">
+                        <label class="col-md-3 label-col">Item/Service Name:*</label>
+                        <div class="col-md-9">
+                          <input type="text" name="name" class="form-control height-38" maxlength="100" autocomplete="off"
+                          [(ngModel)]="model.name" #name="ngModel" appAlphaNumericsLevelThree required />
+                        <div class="validation-error-message" *ngIf="f.submitted && name.invalid">
+                          Item/service name is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row"[ngClass]="{ 'validation-error' : f.submitted && rate.invalid}">
+                        <label class="col-md-3 label-col">Rate (per unit) :*</label>
+                        <div class="col-md-9">
+                          <div class="input-group">
+                              <input type="text" name="rate" class="form-control height-38"
+                                  maxlength="6" autocomplete="off" [(ngModel)]="model.rate"
+                                  #rate="ngModel" appDecimalNumbersOnly required />
+                              <!-- <div class="input-group-append">
+                                  <span class="input-group-text">
+                                      %
+                                  </span>
+                              </div> -->
+                              <div class="input-group-append">
+                                <button class="btn btn-success" type="button">
+                                    <i class="fa fa-usd"></i>
+                                </button>
+                            </div>
+                          </div>
+                          <div class="validation-error-message"
+                              *ngIf="f.submitted && rate.invalid">
+                              Tax rate is required
+                          </div>                         
+                       </div>
+                    </div>
+                    <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && description.invalid}">
+
+                          <label class="col-md-3 label-col">Description:*</label>
+                          <div class="col-md-9">
+                            <textarea name="description" class="form-control height-38" rows="2" maxlength="250" autocomplete="off"
+                            [(ngModel)]="model.description" #description="ngModel" appAlphaNumericsLevelOne></textarea>
+                        </div>
+                      </div>
+                      
+                    <div class="form-group row">
+                      <label class="col-3 label-col">Item For:</label>
+                      <div class="col-md-9">
+                        <label class="radio col-md-4">
+                          <input type="radio" name="producttoSaleOrBuy" (change)="loadIncomeAccounts()" value="1" [(ngModel)]="model.isForSell" >
+                          Sell
+                          <span></span>
+                        </label>
+                        <label class="radio col-md-4">
+                          <input type="radio" name="producttoSaleOrBuy" (change)="loadExpenseAccounts()" value="0" [(ngModel)]="model.isForSell" >
+                          Buy
+                          <span></span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="row" *ngIf='model.isForSell==1'>
+                      <div class="col-12">
+                          <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && model.isForSell==1 && incomeAccountId.invalid}">
+
+                            <label class="col-md-3 label-col">Income Account: *</label>
+                            <div class="col-md-9">
+                          
+                                <ngx-select-dropdown name="incomeAccountId" #incomeAccountId="ngModel" (change)="getIncome()" 
+                                [multiple]="false" [(ngModel)]="SelectedIncomeAccountId" required [config]="config" [options]="incomeAccount"></ngx-select-dropdown>
+                                <div class="validation-error-message" *ngIf="f.submitted && model.isForSell==1 && !incomeAccountId.valid">
+                                  Income account is required
+                                </div>
+                             </div>
+                         </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf='model.isForSell==0'>
+                      <div class="col-12">
+                          <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && model.isForSell==0 && expenseAccountId.invalid}">
+
+                            <label class="col-md-3 label-col">Expense Account: *</label>
+                            <div class="col-md-9">
+                            
+                            <ngx-select-dropdown  name="expenseAccountId" #expenseAccountId="ngModel"  (change)="changeExpenseAcc($event)" 
+                            [multiple]="false" [(ngModel)]="selectedExpAcc" 
+                            required  [config]="config" [options]="expenseAccount"></ngx-select-dropdown>
+                            <div class="validation-error-message" *ngIf="f.submitted && model.isForSell==0 && !expenseAccountId.valid">
+                              Expense account is required
+                            </div>
+                             </div>
+                         </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-3 label-col">Tax Applicability:</label>
+                      <div class="col-md-9">
+                        <label class="radio col-md-4">
+                          <input type="radio" name="taxApplicability" value="1" [(ngModel)]="model.isTaxable">
+                          Taxable
+                          <span></span>
+                        </label>
+                        <label class="radio col-md-6">
+                          <input type="radio" name="taxApplicability" value="0" [(ngModel)]="model.isTaxable"> Non
+                        Taxable
+                          <span></span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="row" *ngIf='model.isTaxable==1'>
+                      <div class="col-12">
+                          <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && !salesTaxId.valid}">
+
+                            <label class="col-md-3 label-col">Sales Tax: *</label>
+                            <div class="col-md-9">
+                              <!-- <select name="salesTaxId" class="form-control height-38" [(ngModel)]="model.salesTaxId"
+                              #salesTaxId="ngModel" required>
+                              <option value="">[Select]</option>
+                              <option *ngFor="let item of salesTaxes" [value]="item.id">
+                                {{item.code}}
+                              </option>
+                            </select> -->
+                            <ngx-select-dropdown  (change)="changeTax($event)" [multiple]="false" [(ngModel)]="selectedTax"
+                                [config]="config2" [options]="salesTaxes" name="salesTaxId"  #salesTaxId="ngModel" required></ngx-select-dropdown>
+                            <div class="validation-error-message" *ngIf="f.submitted && !salesTaxId.valid">
+                              Sales tax is required
+                            </div>
+                             </div>
+                         </div>
+                        </div>
+                    </div>
+                      <div class="">
+                          <div class="text-right">
+                            <a [routerLink]="['/item/manage']" class="btn btn-success m-r-5">
+                              <i class="fa fa-arrow-left"></i> Back</a>
+                            <button type="submit" class="btn btn-success">
+                              <i class="fa fa-save"></i> Submit</button>
+                          </div>
+                        </div>
+                      
+                </div>
+            </div>
+              
+        
+
+            </div>
+           
+          </form>
+      </div>
+  </div>
+</div>
+
+
+
+<!-- <ng-template #addCustomerModal let-modal>
+  <div class="modal-header">
+      <h5 class="modal-title">Add Customer</h5>
+      <button type="button" class="close" aria-label="Close" (click)="closeCustomerModal()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <app-add-customer-popup></app-add-customer-popup>
+  </div>
+  <div class="modal-footer">
+      <div class="col-md-12 text-right">
+          <button type="button" class="btn btn-success" (click)="closeCustomerModal()">
+              <i class="la la-check"></i> Done
+          </button>
+      </div>
+  </div>
+</ng-template> -->

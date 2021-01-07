@@ -1,0 +1,157 @@
+ <div class="row">
+  <h3 class="blue-h heading col-md-12 title-border">
+    Home Setting
+ </h3>
+    
+  </div>
+  
+  <div class="page-section">
+    <div class="row">
+        <div class="col-md-12" *blockUI="'container-blockui'">
+            <h3 class="blue-h heading">
+                  Settings
+            </h3>
+            <form class="" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm"
+              novalidate>
+              <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && firstName.invalid}">
+                      <label class="col-md-3">First Name:*</label>
+                      <div class="col-md-8">
+                        <input type="text" name="firstName" class="form-control" maxlength="250" autocomplete="off"
+                          [(ngModel)]="model.firstName" #firstName="ngModel" required />
+  
+                        <div class="validation-error-message" *ngIf="f.submitted && firstName.invalid">
+                          First name is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && lastName.invalid}">
+                      <label class="col-md-3">Last Name:</label>
+                      <div class="col-md-8">
+                        <input type="text" name="lastName" class="form-control" maxlength="250" autocomplete="off"
+                          [(ngModel)]="model.lastName" #lastName="ngModel"/>
+                        <div class="validation-error-message" *ngIf="f.submitted && lastName.invalid">
+                          Last name is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group row"
+                      [ngClass]="{ 'validation-error' : f.submitted && email.invalid}">
+                      <label class="col-md-3">Email:*</label>
+                      <div class="col-md-8">
+                        <input type="text" name="email" class="form-control" maxlength="250"
+                          autocomplete="off" [(ngModel)]="model.email" #email="ngModel"
+                          required />
+                        <div class="validation-error-message" *ngIf="f.submitted && email.invalid">
+                          Email is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && phoneNumber.invalid}">
+                      <label class="col-md-3">Phone:</label>
+                      <div class="col-md-8">
+                        <input type="text" name="phoneNumber" class="form-control" maxlength="250" autocomplete="off"
+                          [(ngModel)]="model.phoneNumber" #phoneNumber="ngModel" mask="000-000-0000" />
+                        <div class="validation-error-message" *ngIf="f.submitted && phoneNumber.invalid">
+                          Phone is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 align-rgt setting-btns">
+           
+                  <button type="submit" class="btn btn-primary" [routerLink]="['/dashboard']">
+                    <i class="fa fa-arrow-left"></i> Back</button>
+                    &nbsp;
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-save"></i> Submit</button>
+                </div>
+              </div>
+
+            </form>
+            
+        </div>
+    </div>
+
+          <div class="row">
+            <div class="col-md-12" *blockUI="'container-blockui'">
+            
+                <h3 class="blue-h heading">
+                  Change Password
+                </h3>
+                <form name="form" (ngSubmit)="f.form.valid && changePassword()" #f="ngForm"
+                  novalidate>
+
+                  <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && currentPassword.invalid}">
+                          <label class="col-md-3">Old Password:*</label>
+                          <div class="col-md-8">
+                            <input type="password" name="currentPassword" class="form-control" maxlength="250" autocomplete="off"
+                              [(ngModel)]="changePasswordModel.currentPassword" #currentPassword="ngModel" required />
+      
+                            <div class="validation-error-message" *ngIf="f.submitted && currentPassword.invalid">
+                              Old password is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row"
+                          [ngClass]="{ 'validation-error' : f.submitted && newPassword.invalid}">
+                          <label class="col-md-3">New Password:*</label>
+                          <div class="col-md-8">
+                            <input type="password" name="newPassword" class="form-control" maxlength="250"
+                              autocomplete="off" [(ngModel)]="changePasswordModel.newPassword" #newPassword="ngModel"
+                              required />
+                            <div class="validation-error-message" *ngIf="f.submitted && newPassword.invalid">
+                              New password is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && confirmPassword.invalid}">
+                          <label class="col-md-3">Confirm Password:*</label>
+                          <div class="col-md-8">
+                            <input type="password" name="confirmPassword" class="form-control" maxlength="250" autocomplete="off"
+                              [(ngModel)]="changePasswordModel.confirmPassword" #confirmPassword="ngModel" required />
+                            <div class="validation-error-message" *ngIf="f.submitted && confirmPassword.invalid">
+                              Confirm password is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 align-rgt setting-btns">
+
+                        <button type="submit" class="btn btn-primary" [routerLink]="['/dashboard']">
+                          <i class="fa fa-arrow-left"></i> Back</button>
+                        &nbsp;
+                      <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save"></i> Submit</button>
+                    </div>
+                  </div>
+                  
+                </form>
+            </div>
+          </div>
+
+  </div>

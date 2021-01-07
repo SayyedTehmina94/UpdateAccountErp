@@ -1,0 +1,35 @@
+
+  
+  <div class="row">
+    <h3 class="blue-h heading col-md-12">
+      <a [routerLink]="['/customer/manage']"> Recurring Invoice</a> &nbsp; <span>Detail</span>
+    </h3>
+  </div>
+  <div  class="page-section">
+    <div class="row">
+      <div class="col-md-12">
+          <h3 class="blue-h heading">  View Detail  </h3>
+          <div class="row">
+            <div class="col-md-4">
+              <app-recinvoice-form-wizard-aside class="col-md-4" [wizardStep]="wizardStep" (setWizardStep)="setWizardStep($event)">
+              </app-recinvoice-form-wizard-aside>
+            </div> 
+              <div class=" col-md-8" *blockUI="'container-blockui'">
+                <app-invoice-basic-detail [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+                *ngIf="wizardStep === 1">
+              </app-invoice-basic-detail>
+              <app-set-schedule [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+                *ngIf="wizardStep === 2">
+              </app-set-schedule>
+              <app-get-recinvoice-payment [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+              *ngIf="wizardStep === 3">
+            </app-get-recinvoice-payment>
+              <app-send-recinvoice [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+                *ngIf="wizardStep === 4">
+              </app-send-recinvoice>
+              </div>
+           
+          </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,114 @@
+
+<footer>
+  <div class="row justify-content-between">
+    <div class="col-auto devider-right footer-icons">
+      <div class="row">
+        <div class="col-auto">
+          <span class="glyph icon-icon_add"></span>
+        </div>
+        <div class="col-auto">
+          <span class="glyph icon-icon_search"></span>
+        </div>
+        <div class="col-auto">
+          <span class="glyph icon-icon_help"></span>
+        </div>
+
+      </div>
+    </div>
+    <div class="col tabs-outer-col">
+      <div class="row tabs-container">
+        <div class="foot-inv foot-inv-first">
+          <button type="button" class="col tab-box btn-lg dropdown-toggle"
+          data-toggle="dropdown">
+         <span>Over Due Invoices</span> <span class="ftr-inv-count">{{overDueInvoiceModel.count}}</span>
+      </button>
+      <!-- -->
+      <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right ftr-inv-pop-outer widgets-area">
+        
+          <div class="box green-border">
+            <div class="row box-header">
+              <div class="col-md-8"><h5 class="light-h">Over Due Invoices</h5></div>
+              <div class="col-md-4">
+                  <a [routerLink]="['/invoice/manage']" class="view-all"><span>View All</span></a>
+              </div>
+            </div>
+            <div class="row content-row message-row" *ngFor="let item of overDueInvoiceModel.invoiceListTopTensList">
+              <div class="col-md-8">
+                  <h6 class="pop-inv-num">{{item.invoiceNumber}}</h6>
+                  <p class="pop-inv-namem">{{item.customerName}}</p>
+              </div>
+              <div class="col-md-4">
+                <h6>{{item.totalAmount}}</h6>
+              </div>
+            </div>
+      
+          </div>
+      </div>
+      <!---->
+    </div>
+
+
+   
+        <div class="foot-inv">
+          <!-- <button type="button" class="col tab-box btn-lg dropdown-toggle"
+          data-toggle="dropdown">
+          Recurring Invoices | {{recurringInvoiceModel.count}}
+      </button> -->
+     
+      <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right ftr-inv-pop-outer widgets-area">
+        
+        <div class="box green-border">
+          <div class="row box-header">
+            <div class="col-md-8"><h5 class="light-h">Over Due Invoices</h5></div>
+            <div class="col-md-4">
+                <a [routerLink]="['/recurring-invoice/manage']" class="view-all"><span>View All</span></a>
+            </div>
+          </div>
+          <div class="row content-row message-row" *ngFor="let item of recurringInvoiceModel.recListTopTenDtos">
+            <div class="col-md-8">
+                <h6 class="pop-inv-num">{{item.invoiceNumber}}</h6>
+                <p class="pop-inv-namem">{{item.customerName}}</p>
+            </div>
+            <div class="col-md-4">
+              <h6>{{item.totalAmount}}</h6>
+            </div>
+          </div>
+    
+        </div>
+    </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-auto footer-chat-container align-self-center">
+      <div class="row justify-content-end">
+        <div class="col-auto chat-box-container">
+          <div class="row">
+            <div class="col-auto notify chat-box">
+              <span class="count">4</span>
+            </div>
+            <div class="col-auto notify chat-box">
+              <span class="count">1</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="row">
+            <div class="col-auto chat-area">
+              <span class="glyph icon-icon_chat"></span>
+              <span class="chat-status">Online <span class="status-color"></span> </span>
+            </div>
+            <div class="col-auto notify">
+              <span class="count">4</span>
+              <span class="glyph icon-icon_message"></span>
+            </div>
+            <div class="col-auto notify">
+              <span class="count">8</span>
+              <span class="glyph icon-icon_notification"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

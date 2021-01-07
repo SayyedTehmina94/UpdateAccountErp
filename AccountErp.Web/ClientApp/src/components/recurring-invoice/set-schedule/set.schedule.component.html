@@ -1,0 +1,156 @@
+<form name="form" (ngSubmit)="f.form.valid && next()" #f="ngForm" novalidate>
+    <div class="cust-add-title">Set schedule</div>
+
+            <div class="row add-customer-form">
+                <div class="col-xl-6">
+                    <div class="form-group row" >
+                        <label class="col-md-4 inv-pad-rgt-0">Repeat this invoice:</label>
+                        <div class="col-md-4">
+                            <select class="form-control" (change)="selectRepeatMode($event)"
+                                [(ngModel)]="repeatMode" #rptMode="ngModel" name="rptMode">
+                                <option *ngFor="let item of repeatList">{{item.value}}</option>
+                            </select>
+                           
+                        </div>
+                        <label *ngIf="repeatMode=='Monthly'" class="col-md-3">on the</label>
+                        <label *ngIf="repeatMode=='Weekly'" class="col-md-3">on every</label>
+                        <label *ngIf="repeatMode=='Yearly'" class="col-md-3">every</label>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div *ngIf="repeatMode=='Monthly'" class="form-group row">
+                        <div class="col-md-6">
+                            <select  class="form-control" (change)="selectStartingDay($event)"
+                            [(ngModel)]="startDay" #strDay="ngModel" name="strDay">
+                                <option *ngFor="let item of mothdays" value={{item.id}}>{{item.value}}</option>
+                            </select>
+                           
+                        </div>
+                        <label class="col-md-6">day of every month
+                        </label>
+                    </div>
+                    <div *ngIf="repeatMode=='Weekly'" class="form-group row">
+                        <div class="col-md-0">
+                            <select class="form-control" (change)="selectWeekDay($event)"
+                            [(ngModel)]="selectedWeekDay" #weekDay="ngModel" name="weekDay">
+                                <option *ngFor="let item of weekdayList" value={{item.id}}>{{item.value}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6" *ngIf="repeatMode=='Yearly'">
+                        <div  class="form-group row">
+                                <select class="form-control" (change)="selectYearlyMonth($event)"
+                                [(ngModel)]="yearlyMonth" #yrlMonth="ngModel" name="yrlMonth">
+                                    <option *ngFor="let item of monthList" value="{{item.id}}">{{item.value}}</option>
+                                </select>
+                             
+                        </div>         
+                    </div>
+
+                    
+                </div>
+                
+                <div class="col-xl-12" *ngIf="repeatMode=='Yearly'">
+                    <div  class="form-group row">
+                        <label class="col-md-2">on the
+                        </label>
+                        <div class="col-md-4">
+                            <select class="form-control" (change)="selectYearlyMonthDays($event)"
+                            [(ngModel)]="yearlyMonthDays" #yrlMonthDays="ngModel" name="yrlMonthDays">
+                                <option *ngFor="let item of mothdays" value={{item.id}}>{{item.value}}</option>
+                            </select>
+                        </div>
+                        <label class="col-md-3">day of the month.</label>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="row add-customer-form">
+                <div class="col-xl-6">
+                    <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && address2.invalid}">
+                        <label class="col-md-4">Create first invoice on</label>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input class="form-control" name="firstInvDate" #firstInvDate="ngModel"
+                                    [(ngModel)]="invoiceDate" (dateSelect)="changeInvoiceDate()" ngbDatepicker
+                                    #d="ngbDatepicker" readonly />
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                        type="button">
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row add-customer-form">
+                <div class="col-xl-6">
+                    <div class="form-group row"
+                        [ngClass]="{ 'validation-error' : f.submitted && postalCode.invalid}">
+                        <label class="col-md-4">end</label>
+                        <div class="col-md-8">
+                            <select class="form-control" (change)="selectEndMode($event)"
+                            [(ngModel)]="selectedEndMode" #endMode="ngModel" name="endMode">
+                                <option value="0">Never</option>
+                                <option value="1">After</option>
+                                <option value="2">On</option>
+                            </select>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6" *ngIf="selectedEndMode==1">
+                    <div class="form-group row"
+                        [ngClass]="{ 'validation-error' : f.submitted && postalCode.invalid}">
+                        <div class="col-md-6">
+                            
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" [(ngModel)]="endAfterNumber" #endAfter="ngModel" name="endAfter">
+                        </div>
+                            <label class="col-md-3">invoices</label>
+                    </div>
+                </div>
+
+                <div class="col-xl-6" *ngIf="selectedEndMode==2">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <input class="form-control" name="lastInvDate" #lastInvDate="ngModel"
+                                    [(ngModel)]="lastInvoiceDate" (dateSelect)="changeLastInvoiceDate()" ngbDatepicker
+                                    #d2="ngbDatepicker" readonly />
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()"
+                                        type="button">
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                
+            </div>
+            <div class="row add-customer-form">
+                
+                <div class="col-xl-6">
+                    <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && phone.invalid}">
+                        <label class="col-md-4 inv-pad-rgt-0">Create in:</label>
+                        <div class="col-md-5">
+                            <select class="form-control">
+                                <option>Asia/Kolkata</option>
+                            </select>
+                           
+                        </div>
+                        <label class="col-md-3 inv-pad-rgt-0">time zone</label>
+                    </div>
+                </div>
+
+            </div>
+<app-customer-form-wizard-navigator (moveBackward)="prev()" [wizardStep]="wizardStep">
+</app-customer-form-wizard-navigator>
+</form>

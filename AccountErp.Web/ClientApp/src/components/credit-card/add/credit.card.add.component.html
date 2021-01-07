@@ -1,0 +1,75 @@
+<div class="row">
+  <h3 class="title-border col-md-12">
+    Add Credit Card
+  </h3>
+</div>
+
+<div class="page-section">
+
+  <div class="row">
+      <div class="col-md-12" *blockUI="'container-blockui'">
+          <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm"
+            novalidate>
+              <div class="row add-customer-form">
+                <div class="col-md-6">
+                  <div class="form-group row"
+                    [ngClass]="{ 'validation-error' : f.submitted && creditCardNumber.invalid}">
+                    <label class="col-md-3">Card#:*</label>
+                    <div class="col-md-9">
+                      <input type="text" name="creditCardNumber" class="form-control height-38" maxlength="16" autocomplete="off"
+                        [(ngModel)]="model.creditCardNumber" #creditCardNumber="ngModel" appNumbersOnly required />
+                      <div class="validation-error-message" *ngIf="f.submitted && creditCardNumber.invalid">
+                        Credit card number is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <div class="row add-customer-form">
+                <div class="col-md-6">
+                  <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && cardHolderName.invalid}">
+                    <label class="col-md-3">Card Holder Name:*</label>
+                    <div class="col-md-9">
+                      <input type="text" name="cardHolderName" class="form-control height-38" maxlength="250" autocomplete="off"
+                        [(ngModel)]="model.cardHolderName" #cardHolderName="ngModel" appAlphaNumericsLevelThree
+                        required />
+                      <div class="validation-error-message" *ngIf="f.submitted && cardHolderName.invalid">
+                        Credit card holder name is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- </div> -->
+              <div class="row add-customer-form">
+                <div class="col-md-6">
+                  <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && bankName.invalid}">
+                    <label class="col-md-3">Bank Name:*</label>
+                    <div class="col-md-9">
+                      <input type="text" name="bankName" class="form-control height-38" maxlength="250" autocomplete="off"
+                        [(ngModel)]="model.bankName" #bankName="ngModel" appAlphaNumericsLevelThree required />
+                      <div class="validation-error-message" *ngIf="f.submitted && bankName.invalid">
+                        Bank name is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="text-right">
+                  <button [routerLink]="['/credit-card/manage']" class="btn btn-success">
+                    <i class="fa fa-arrow-left"></i> Back</button>&nbsp;
+                  <button type="submit" class="btn btn-success">
+                    <i class="fa fa-save"></i> Submit</button>
+                </div>
+              </div>
+              <!-- <div class="text-left">
+                <a [routerLink]="['/credit-card/manage']" class="btn btn-outline-secondary m-r-5">
+                  <i class="fa fa-arrow-left"></i> Back</a>
+                <button type="submit" class="btn btn-success">
+                  <i class="fa fa-save"></i> Submit</button>
+              </div> -->
+          </form>
+    </div>
+  </div>
+</div>

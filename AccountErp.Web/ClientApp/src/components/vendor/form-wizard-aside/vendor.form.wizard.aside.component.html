@@ -1,0 +1,46 @@
+<ul class="add-cust-ul">
+    <li>
+        <h6>    
+        <a href="javascript:;" [ngClass]="{'active': wizardStep === 1}" (click)="setWizardStep.emit(1)">
+         <span class="li-bold"> Profile </span> <br/> Personal Detail  
+        </a>
+        </h6>
+    </li>
+    <li>
+        <h6>    
+            <a href="javascript:;" href="javascript:;" [ngClass]="{'active': wizardStep === 2}"(click)="setWizardStep.emit(2)">
+            <span class="li-bold"> Billing Address </span> <br/>  Billing Address Details
+            </a>
+        </h6>
+    </li>
+    <li>
+        <h6>    
+            <a href="javascript:;" href="javascript:;" [ngClass]="{'active': wizardStep === 3}" (click)="setWizardStep.emit(3)">
+            <span class="li-bold"> Shipping Address </span> <br/>  Shipping Address Details
+            </a>
+        </h6>
+    </li>
+    <li>
+        <h6>    
+            <a href="javascript:;" href="javascript:;" [ngClass]="{'active': wizardStep === 4}"  (click)="setWizardStep.emit(4)">
+            <span class="li-bold"> Contacts</span> <br/>  Vendor Address Details
+            </a>
+        </h6>
+    </li>
+    <li>
+        <h6>    
+            <a href="javascript:;" href="javascript:;" [ngClass]="{'active': wizardStep === 5}"  (click)="setWizardStep.emit(5)">
+            <span class="li-bold"> Payment</span> <br/>   Bank Account Detail
+            </a>
+        </h6>
+    </li>
+    <li>
+        <h6>    
+            <a href="javascript:;" href="javascript:;" [ngClass]="{'active': wizardStep === 6}" (click)="setWizardStep.emit(6)">
+            <span class="li-bold"> Discount</span> <br/> Discount Detail
+            </a>
+        </h6>
+    </li>
+    
+   
+</ul>

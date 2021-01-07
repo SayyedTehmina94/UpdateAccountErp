@@ -1,0 +1,213 @@
+<div class="modal-header row  col-md-12">
+  <h3 class="blue-h heading ">
+      <span>&nbsp; &nbsp;Add Account</span> 
+  </h3>
+  <div class="close-btn btn-success" (click)="closeAddAccountModal.emit()">
+    <img src="assets/images/sidebar-close-icon.png" alt="close">
+  </div>
+</div>
+   
+            <div class="col-md-12" *blockUI="'container-blockui'">
+                <div class="">
+                   
+                    <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm"
+                        novalidate>
+                       
+                        <!-- <div class="modal-header row">
+                            <h3 class="blue-h heading ">
+                              <span>Add Account</span> 
+                          </h3> -->
+                            <!-- <button type="button" class="close btn btn-primary" aria-label="Close" (click)="closeAddAccountModal.emit()">
+                                <span aria-hidden="true">&times;</span>
+                                
+                            </button> -->
+                            <!-- <div class="btn btn-primary" (click)="closeAddAccountModal.emit()">
+                              <img src="assets/images/sidebar-close-icon.png" alt="close">
+                            </div> -->
+                            <!-- <div class="close-btn btn-success" (click)="closeAddAccountModal.emit()">
+                              <img src="assets/images/sidebar-close-icon.png" alt="close">
+                            </div>
+                        </div> -->
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row"
+                                        [ngClass]="{ 'validation-error' : f.submitted && acctype.invalid}">
+                                        <label class="col-md-12">Account Type:*</label>
+                                        <div class="col-md-12">
+                                           <!-- <select name="acctype" class="form-control height-38" 
+                                                autocomplete="off" [(ngModel)]="model.coA_AccountTypeId" #acctype="ngModel"
+                                                 required>
+                                                 <option>select type</option>
+                                                 <option *ngFor="let item of acctypeList" value={{item.id}}>{{item.accountTypeName}}</option>
+                                                </select> -->
+                                                <ngx-select-dropdown  name="acctype"  #acctype="ngModel" (change)="getAccountType()"  [multiple]="false"
+                                                [(ngModel)]="selectedAccountType" [config]="config"[options]="acctypeList" ></ngx-select-dropdown>    
+                                            <div class="validation-error-message" *ngIf="f.submitted && acctype.invalid">
+                                                Account type is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row"
+                                        [ngClass]="{ 'validation-error' : f.submitted && ledgertype.invalid}">
+                                        <label class="col-md-12">Ledger Type:*</label>
+                                        <div class="col-md-12">
+                                           <!-- <select name="ledgertype" class="form-control height-38" 
+                                                autocomplete="off" [(ngModel)]="model.ledgerType" #ledgertype="ngModel"
+                                                 required>
+                                                 <option value=0>select ledger type</option>
+                                                 <option value=1>Cash</option>
+                                                 <option value=2>Bank</option>
+                                                 <option value=3>Other</option>
+                                            </select> -->
+                                            <ngx-select-dropdown  (change)="changeLedgerType()" [multiple]="false" [(ngModel)]="selectedLedgerType"
+                                            [config]="config1" [options]="ledgerList" name="ledgertype"  #ledgertype="ngModel" required></ngx-select-dropdown>
+                                            <div class="validation-error-message" *ngIf="f.submitted && ledgertype.invalid">
+                                                Account type is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="model.ledgerType==2">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && accountNumber.invalid}">
+                                      <label class="col-md-12">Account#:*</label>
+                                      <div class="col-md-12">
+                                        <input type="text" name="accountNumber" class="form-control height-38" maxlength="50" autocomplete="off"
+                                          [(ngModel)]="model.accountNumber" #accountNumber="ngModel" required appNumbersOnly />
+                                        <div class="validation-error-message" *ngIf="f.submitted && accountNumber.invalid">
+                                          Account number is required
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-6">
+                                    <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && bankName.invalid}">
+                                      <label class="col-md-12">Bank Name:*</label>
+                                      <div class="col-md-12">
+                                        <input type="text" name="bankName" class="form-control height-38" maxlength="250" autocomplete="off"
+                                          [(ngModel)]="model.bankName" #bankName="ngModel" appAlphaNumericsLevelThree required />
+                                        <div class="validation-error-message" *ngIf="f.submitted && bankName.invalid">
+                                          Bank name is required
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-6">
+                                    <div class="form-group row"
+                                      [ngClass]="{ 'validation-error' : f.submitted && accountHolderName.invalid}">
+                                      <label class="col-md-12">Account Holder Name:*</label>
+                                      <div class="col-md-12">
+                                        <input type="text" name="accountHolderName" class="form-control height-38" maxlength="250"
+                                          autocomplete="off" [(ngModel)]="model.accountHolderName" #accountHolderName="ngModel"
+                                          appAlphaNumericsLevelTwo required />
+                                        <div class="validation-error-message" *ngIf="f.submitted && accountHolderName.invalid">
+                                          Account holder name is required
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-6">
+                                    <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && branchName.invalid}">
+                                      <label class="col-md-12">Branch Name:*</label>
+                                      <div class="col-md-12">
+                                        <input type="text" name="branchName" class="form-control height-38" maxlength="250" autocomplete="off"
+                                          [(ngModel)]="model.branchName" #branchName="ngModel" appAlphaNumericsLevelThree required />
+                                        <div class="validation-error-message" *ngIf="f.submitted && branchName.invalid">
+                                          Branch name is required
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-6">
+                                    <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && ifsc.invalid}">
+                                      <label class="col-md-12">IFSC:*</label>
+                                      <div class="col-md-12">
+                                        <input type="text" name="ifsc" class="form-control height-38" maxlength="250" autocomplete="off"
+                                          [(ngModel)]="model.ifsc" #ifsc="ngModel" appAlphaNumericsOnly required />
+                                        <div class="validation-error-message" *ngIf="f.submitted && ifsc.invalid">
+                                          IFSC is required
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                           
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row"
+                                        [ngClass]="{ 'validation-error' : f.submitted && accName.invalid}">
+                                        <label class="col-md-12">Account name:*</label>
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <input type="text" name="accName" class="form-control height-38"
+                                                     autocomplete="off" [(ngModel)]="model.accountName"
+                                                    #accName="ngModel"  required />
+                                            </div>
+                                            <div class="validation-error-message"
+                                                *ngIf="f.submitted && accName.invalid">
+                                                Account name is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row"
+                                        [ngClass]="{ 'validation-error' : f.submitted && accId.invalid}">
+                                        <label class="col-md-12">Account ID:*</label>
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <input type="text" name="accId" class="form-control height-38"
+                                                     autocomplete="off" [(ngModel)]="model.accountId"
+                                                    #accId="ngModel"  required />
+                                            </div>
+                                            <div class="validation-error-message"
+                                                *ngIf="f.submitted && accId.invalid">
+                                                Account ID is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row"
+                                        [ngClass]="{ 'validation-error' : f.submitted && description.invalid}">
+                                        <label class="col-md-12">Description:</label>
+                                        <div class="col-md-12">
+                                            <textarea type="text" name="description" class="form-control height-38"
+                                                maxlength="250" rows="2" autocomplete="off"
+                                                [(ngModel)]="model.description" #description="ngModel"
+                                                appAlphaNumericsLevelOne></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                          
+                        </div>
+                        <div class="modal-footer">
+                                <div class="text-right">
+                                  <!-- <a (click)="closeAddAccountModal.emit()" class="btn btn-primary m-r-5">
+                                    <i class="fa fa-arrow-left"></i>Cancel</a> -->
+                                  <!-- <button type="submit" class="btn btn-success">Submit</button> -->
+                                  <button type="button" class="btn btn-success" (click)="closeAddAccountModal.emit()">
+                                    <i class="fa fa-arrow-left"></i> Cancel
+                                  </button>&nbsp;
+                                  <button type="submit" class="btn btn-success">
+                                    <i class="fa fa-save"></i> Submit
+                                  </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+          
+        
+    </div>

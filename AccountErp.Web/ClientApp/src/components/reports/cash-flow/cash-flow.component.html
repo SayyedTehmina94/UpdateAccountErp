@@ -1,0 +1,293 @@
+<div class="row ">
+  <h3 class="blue-h  col-md-6 title-border">
+    Cash Flow
+  </h3>
+  <div class="col-md-6 text-right title-border">
+    <div class="btn-group">
+      <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle" data-toggle="dropdown">
+        Action
+      </button>
+      <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+
+        <ul class="manageList table-hover">
+          <li>
+            <a href="javascript:;" (click)="openPDF()">
+              <i class="fa fa-print"></i>
+              <span> Preview</span>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;" (click)="downloadPDF()">
+              <i class="fa fa-print"></i>
+              <span> Print</span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+</div>
+</div>
+<div  id="htmlData" #htmlData></div>
+
+<div class="page-section report" >
+  <div class="row">
+      <form name="form" (ngSubmit)="onSubmit(f)" #f="ngForm" class="add-inv-form form-horizontal">
+                <div class="col-md-12" *blockUI="'container-blockui'">
+                                        <div class="row">
+                                        
+                                        <div class="form-group col-md-3 row">
+                                            <label class="col-md-3">from:</label>
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <input class="form-control height-38" name="invoiceStartDate" id="invoiceStartDate"
+                                                        #invoiceStartDate="ngModel" [(ngModel)]="startDate"
+                                                        ngbDatepicker #d="ngbDatepicker" (dateSelect)="changeStartDate()"  readonly />
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-success calendar"
+                                                            (click)="d.toggle()" type="button">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                
+                                        <div class="form-group col-md-3 row">
+                                            <label class="col-md-3">to:</label>
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <input class="form-control height-38" name="invoiceDueDate" id="invoiceDueDate"
+                                                        #invoiceDueDate="ngModel" (dateSelect)="changeEnddate()"
+                                                        [(ngModel)]="endDate" ngbDatepicker
+                                                        #d1="ngbDatepicker" [autoClose]=" true" readonly />
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-success calendar"
+                                                            (click)="d1.toggle()" type="button">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                            <div class="form-group row col-md-3 updat-rpt-btn">
+                   
+                                              <div class="input-group">
+                                                <button class="btn btn-success " type="submit" (click)="showCashFlow()"> 
+                                                  <i class="fa fa-search"></i> View Report</button>
+                                              </div>
+                                          </div>
+
+                                        </div>
+                               <div id="htmlData" #htmlData></div>
+                                <div class="row report-calculation box" >
+                                      <div class="col-md-4">
+                                        <span>GROSS CASH INFLOW &nbsp; - </span>
+                                        <div>{{cashflowSummary.overview[1].amount | currency}}</div>
+                                      </div>
+                                      <div class="col-md-4">
+                                        <span>GROSS CASH OUTFLOW &nbsp; - </span>
+                                        <div>{{cashflowSummary.overview[2].amount| currency}}</div>
+                                      </div>
+                                      <div class="col-md-4">
+                                        <span>NET CASH CHANGE &nbsp; = </span>
+                                        <div>{{cashflowSummary.overview[3].amount| currency}}</div>
+                                      </div>
+                                </div>
+                     
+                    <div class="container">
+                      <div class="row center">
+                          <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons">
+                              
+                              <label class="btn btn-outline-success active">
+                              <input type="radio" name="options" id="option1" autocomplete="off" checked (click)="toggleSummary()"> Summary 
+                              </label>
+
+                              <label class="btn btn-outline-success">
+                              <input type="radio" name="options" id="option2" autocomplete="off" (click)="toggleDetail()"> Details
+                              </label>
+                              
+                          </div>        
+                      </div>
+                  </div><br>
+                  
+                              <div class="row">
+                                  <div class="col-md-12" *blockUI="'container-blockui'">
+                                                  <!-- <div class="container"> -->
+                                                      <div class="row justify-content-center">  
+                                                            <div class="col-12" *ngIf="showSummary"> 
+
+                                                              <table class="table table-striped" id="my-table">
+                                                                <thead>
+                                                                  <th>CASH INFLOW AND OUTFLOW</th>
+                                                                  <th colspan="2" style="text-align:right" class="c" style="font-size:15px">
+                                                                    {{fromDate | date}} to {{toDate | date}}</th>
+                                                                  <!-- <th style="width:15%">{{fromDate | date}} to {{toDate | date}}</th> -->
+                                                                </thead>
+                                    
+                                    
+                                                                <!-- SHOW SUMMARY STARTS -->
+                                    
+                                                                <tbody>
+                                                                  <tr>
+                                                                    <td colspan="2" style="background-color:rgb(0, 153, 0, 0.3)" class="Bold">Operating Activities
+                                                                    </td>
+                                                                  </tr>
+                                    
+                                                                  <tr *ngFor="let item of cashflowSummary.operatingActivities">
+                                                                    <td>{{item.accountName}}</td>
+                                                                    <td scope="row" class="c"> {{item.amount | currency}} </td>
+                                                                  </tr>
+                                    
+                                    
+                                                                </tbody>
+                                    
+                                    
+                                    
+                                                                <!-- SHOW SUMMARY ENDS -->
+                                    
+                                    
+                                                                <!-- SHOW DETAIL ENDS -->
+                                                              </table>
+
+                                                              <table class="table table-striped" id="my-table1">
+                                                                <thead>
+                                                                  <th>OVERVIEW</th>
+                                                                  <th colspan="2" style="text-align:right" class="c" style="font-size:15px"></th>
+                                                                </thead>
+                                                                
+                                                                <tbody>
+                                                                  <tr *ngFor="let item of cashflowSummary.overview; idx as $index;">
+                                                                    <td>{{item.accountName}}</td>
+                                                                    <td scope="row" class="c"> {{item.amount | currency}} </td>
+                                                                  </tr>
+                                                                </tbody>
+                                    
+                                                                <!-- SHOW DETAIL ENDS -->
+                                                              </table>
+                                                            </div>
+
+                                                            <div class="col-12" *ngIf="showDetail"> 
+
+                                                                  <table class="table table-striped" id="my-table">
+                                                                    <thead>
+                                                                      <th>CASH INFLOW AND OUTFLOW</th>
+                                                                      <th colspan="2" style="text-align:right" class="c" style="font-size:15px">
+                                                                        {{fromDate | date}} to {{toDate | date}}</th>
+                                                                      <!-- <th style="width:15%">{{fromDate | date}} to {{toDate | date}}</th> -->
+                                                                    </thead>
+                                        
+                                        
+                                                                    <!-- SHOW SUMMARY STARTS -->
+                                        
+                                                                    <tbody>
+                                                                      <tr>
+                                                                        <td colspan="2" style="background-color:rgb(0, 153, 0, 0.3)" class="Bold">Operating Activities
+                                                                        </td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                        <td colspan="2" style="background-color:rgb(0, 153, 0, 0.3)" class="Bold">Sales
+                                                                        </td>
+                                                                      </tr>
+                                                                                                  
+                                                                      <tr *ngFor="let item of cashflowDetails.operatingActivities[0].sales">
+                                                                        <td>{{item.accountName}}</td>
+                                                                        <td scope="row" class="c" > {{item.amount | currency}} </td>
+                                                                      </tr>
+
+                                                                      <tr>
+                                                                        <td colspan="2" style="background-color:rgb(0, 153, 0, 0.3)" class="Bold">Purchase
+                                                                        </td>
+                                                                      </tr>
+                                                                                                  
+                                                                      <tr *ngFor="let item of cashflowDetails.operatingActivities[0].purchase">
+                                                                        <td>{{item.accountName}}</td>
+                                                                        <td scope="row" class="c" > {{item.amount | currency}} </td>
+                                                                      </tr>
+
+                                                                      <tr>
+                                                                        <td colspan="2" style="background-color:rgb(0, 153, 0, 0.3)" class="Bold">salesTax
+                                                                        </td>
+                                                                      </tr>
+                                                                                                  
+                                                                      <tr *ngFor="let item of cashflowDetails.operatingActivities[0].salesTax">
+                                                                        <td>{{item.accountName}}</td>
+                                                                        <td scope="row" class="c" > {{item.amount | currency}} </td>
+                                                                      </tr>
+                                        
+                                        
+                                                                    </tbody>
+                                        
+                                        
+                                        
+                                                                    <!-- SHOW SUMMARY ENDS -->
+                                        
+                                        
+                                                                    <!-- SHOW DETAIL ENDS -->
+                                                                  </table>
+
+                                                                  <table class="table table-striped" id="my-table1">
+                                                                    <thead>
+                                                                      <th>OVERVIEW</th>
+                                                                      <th colspan="2" style="text-align:right" class="c" style="font-size:15px"></th>
+                                                                    </thead>
+                                                                    
+                                                                    <tbody>
+                                                                      <tr>
+                                                                        <td colspan="4" style="background-color:rgb(0, 153, 0, 0.3)" class="Bold">Starting Balance
+                                                                        </td>
+                                                                      </tr>
+                                        
+                                                                      <tr *ngFor="let item of cashflowDetails.overview.startingBalance">
+                                                                        <td>{{item.accountName}}</td>
+                                                                        <td scope="row" class="c" > {{item.amount | currency}} </td>
+                                                                      </tr>
+                                                                      <br/>
+
+                                                                      <tr class="Bold" *ngFor="let item of cashflowDetails.overview.grossDetail">
+                                                                        <td>{{item.accountName}}</td>
+                                                                        <td scope="row" class="c" > {{item.amount | currency}} </td>
+                                                                      </tr>
+
+                                                                      <tr>
+                                                                        <td colspan="4" style="background-color:rgb(0, 153, 0, 0.3)" class="Bold">Ending Balance
+                                                                        </td>
+                                                                        
+                                                                      </tr>
+
+                                                                      <tr *ngFor="let item of cashflowDetails.overview.endingBalance">
+                                                                        <td>{{item.accountName}}</td>
+                                                                        <td scope="row" class="c" > {{item.amount | currency}} </td>
+                                                                      </tr>
+                                        
+                                        
+                                                                    </tbody>
+                                        
+                                        
+                                        
+                                                                
+                                        
+                                        
+                                                                    <!-- SHOW DETAIL ENDS -->
+                                                                  </table>
+                                                            </div>
+
+                                                            
+                                                      </div>
+                                                      <!-- </div> -->
+                                  </div>
+                              </div>
+                       
+                </div>
+          
+                <div class="row">
+                  <div class="col-md-12 reportback text-right">
+                    <a [routerLink]="['/reports/report-menu']" class="btn btn-success">
+                      <i class="fa fa-arrow-left"></i> Back</a>
+                      &nbsp;
+                  </div>
+                </div>
+      </form>
+    </div>
+</div>

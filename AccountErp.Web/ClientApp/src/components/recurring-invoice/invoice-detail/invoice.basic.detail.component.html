@@ -1,0 +1,45 @@
+<form name="form" (ngSubmit)="f.form.valid && next()" #f="ngForm" novalidate>
+        <div class="cust-add-title">Invoice Details</div>
+                <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row">
+                            <label class="col-md-4">Customer:</label>
+                            <div class="col-md-8">
+                                <p class="">{{model.customer.firstName}} {{model.customer.middleName}} {{model.customer.lastName}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row">
+                            <label>Invoice amount:</label>
+                            <div class="col-md-8">
+                                <p class="">{{model.totalAmount}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row">
+                            <label class="col-md-4">Created on:</label>
+                            <div class="col-md-8">
+                                <p class="">{{model.createdOn | date}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row">
+                            <label>Payment terms:</label>
+                            <div class="col-md-8">
+                                <p class="">On Receipt</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                   
+                </div>
+    
+    <app-customer-form-wizard-navigator (moveBackward)="prev()" [wizardStep]="wizardStep">
+    </app-customer-form-wizard-navigator>
+</form>

@@ -1,0 +1,50 @@
+<div class="row">
+    <h3 class="blue-h heading col-md-12">
+        <span> Recurring Invoices </span>
+        <span>Manage</span>
+    </h3>
+       <div class="col-md-12">
+            <a [routerLink]="['/recurring-invoice/add']" class="btn btn-primary" type="button"> 
+                <span class="glyphicon glyphicon-plus">New invoice</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="page-section">
+        <div class="row">
+           
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <select class="form-control height-38" name="role" [(ngModel)]="filterModel.customerId">
+                                            <option value="">[Select Customer]</option>
+                                            <option *ngFor="let item of customers" [value]="item.keyInt">
+                                                {{item.value}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control height-38" placeholder="Filter invoice"
+                                            [(ngModel)]="filterModel.filterKey" autocomplete="Off" maxlength="50"
+                                            (keydown.enter)="doFilter()" appAlphaNumericsOnly />
+                                    </div>
+                                    <div class="col-md-6 align-rgt filt-rest">
+                                        <button type="button" class="btn btn-success"
+                                            (click)="doFilter()">
+                                            <span class="glyph icon-icon_search"></span> Filter
+                                        </button>
+
+                                        <button type="button" class="btn btn-secondary"
+                                            (click)="resetFilter()">
+                                            <i class="la la-close"></i> Reset
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 custom-table" *blockUI="'container-blockui'">
+                                <table datatable [dtOptions]="dtOptions" data-page="2" class="table table-sm table-striped table-hover">
+                                </table>
+                            </div>
+                        
+        </div>
+    </div>
+

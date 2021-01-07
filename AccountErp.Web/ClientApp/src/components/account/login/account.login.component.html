@@ -1,0 +1,44 @@
+ <div id="loginDiv" class="login-screen">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 login-text-center">
+                            <a [routerLink]="['/']">
+                                <h1>iClose ERP</h1>
+                            </a>
+            </div>
+            <div class="col-md-4"></div>
+       </div>
+ 
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 login-form">
+                        <div class="col-md-12 login-text-center">
+                            <h3 class="">Sign In To Continue</h3>
+                        </div>
+                        <form class="" name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate
+                            *blockUI="'container-blockui'">
+                            <div class="form-group" [ngClass]="{ 'validation-error' : f.submitted && !userName.valid}">
+                                <input type="text" name="userName" class="form-control" maxlength="250"
+                                    autocomplete="off" placeholder="Username" [(ngModel)]="model.userName"
+                                    #userName="ngModel" required />
+                                <div class="validation-error-message" *ngIf="f.submitted && !userName.valid">
+                                    Username is required
+                                </div>
+                            </div>
+                            <div class="form-group" [ngClass]="{ 'validation-error' : f.submitted && !password.valid}">
+                                <input type="password" name="password" class="form-control" maxlength="50"
+                                    autocomplete="off" placeholder="Password" [(ngModel)]="model.password"
+                                    #password="ngModel" required />
+                                <div class="validation-error-message" *ngIf="f.submitted && !password.valid">
+                                    Password is required
+                                </div>
+                            </div>
+                            <div class="btn-center">
+                                <button type="submit" class="btn btn-success btn-elevate">
+                                    <i class="fa fa-sign-in"></i> Sign In</button>
+                            </div>
+                        </form>
+            </div>         
+            <div class="col-md-4"></div>
+        </div>
+</div>

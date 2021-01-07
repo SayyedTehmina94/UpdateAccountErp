@@ -1,0 +1,15 @@
+.lblOverdue{
+    color: rgb(161, 153, 153);
+    font-weight: bold;
+}
+
+.Bold { font-weight: bold; }
+
+.c {
+    text-align: right;
+  } 
+
+  .balance-sheet .col-md-3 {
+    font-size: 25px;
+    color: #009900;
+}

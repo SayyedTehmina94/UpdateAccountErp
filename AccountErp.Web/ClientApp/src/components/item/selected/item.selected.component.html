@@ -1,0 +1,87 @@
+
+<table class="table table-striped" id="my-table1">
+    <thead>
+        <tr>
+            <th>
+                #{{testVariable}}
+            </th>
+           
+            <th>
+                Item/Service
+            </th>
+           
+            <th style="width: 15%;">
+                Rate
+            </th>
+            <th>
+                Tax
+            </th>
+            <th style="width: 10%;">
+                Qty
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Amount
+            </th>
+            <th *ngIf="!readOnly">
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of selectedItems; index as $index;">
+            <td>
+                {{($index + 1)}}
+            </td>
+            <td>
+                <ngx-select-dropdown class="height-38" (change)="getItemDetail($index);updateTotalAmount.emit()" [multiple]="false" [(ngModel)]="itemId[$index]" [config]="config" [options]="itemsandservices"></ngx-select-dropdown>
+                <!-- <select class="form-control" (change)="getItemDetail($index);updateTotalAmount.emit()"  [(ngModel)]="itemId[$index]">
+                    <option [disabled]="true">select item</option>
+                    <option *ngFor="let product of itemsandservices;indx as $index"  [ngValue]="product">{{product.name}}</option>
+                    <option>item2</option>
+                    
+                </select> -->
+               
+                
+            </td>
+           
+           
+            <td>
+                <input class="form-control height-38" type="number" (input)="changeRate($event,$index);updateTotalAmount.emit()"  value="{{item.rate}}"/>
+                
+            </td>
+            <td *ngIf='item.taxPercentage' >
+                <ngx-select-dropdown class="height-38" (change)="changeTax($index,$event);updateTotalAmount.emit()" [multiple]="false" [(ngModel)]="selectedTax[$index]"
+                 [config]="config2" [options]="taxList"></ngx-select-dropdown>
+                <!-- <select class="form-control" (change)="changeTax($index,$event);updateTotalAmount.emit()" [(ngModel)]="selectedTax[$index]" >
+                    <option *ngFor="let tax of taxList;idx as $index"   [ngValue]="tax.code">{{tax.code}} ({{tax.taxPercentage}}%)</option>
+                </select> -->
+               
+            </td>
+            <td *ngIf='!item.taxPercentage'>
+                Non-taxable
+            </td>
+            <td>
+                <input class="form-control height-38" type="number" (input)="changeQty($event,$index);updateTotalAmount.emit()" value={{item.qty}}/>
+                
+            </td>
+            <td>
+                {{item.description}}
+            </td>
+            <td>
+                {{item.price}}
+            </td>
+            <td>
+                {{item.lineAmount}}
+            </td>
+            <td class="text-center" *ngIf="!readOnly">
+                <em class='fa fa-trash cursor-pointer' (click)='deleteSelected($index);deleteItem.emit($index)'></em>
+            </td>
+        </tr>
+    </tbody>
+</table>

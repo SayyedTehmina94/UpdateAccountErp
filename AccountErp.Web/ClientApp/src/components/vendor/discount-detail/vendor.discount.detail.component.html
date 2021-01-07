@@ -1,0 +1,29 @@
+<form name="form" (ngSubmit)="f.form.valid && next()" #f="ngForm" novalidate>
+        <div class="cust-add-title">Discount Detail</div>
+        <div class="">Payment Details</div><br>
+        
+                <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && !discount.valid}">
+                            <label class="col-md-3">Discount:</label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <input type="text" name="discount" class="form-control" maxlength="6"
+                                        autocomplete="off" [(ngModel)]="model.discount" #discount="ngModel"
+                                        appDecimalNumbersOnly required/>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-success" type="button">
+                                                <i class="fa fa-percent"></i>
+                                            </button>
+                                        </div>
+                                </div>
+                                <div class="validation-error-message" *ngIf="f.submitted && !discount.valid">
+                                    Discount is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    <app-vendor-form-wizard-navigator (moveBackward)="prev()" [wizardStep]="wizardStep">
+    </app-vendor-form-wizard-navigator>
+</form>

@@ -1,0 +1,316 @@
+<div class="row">
+  <div class="blue-h col-md-6 title-border">
+    <h3 >
+      Quotation Detail
+    </h3>
+  </div >
+   
+  <div class="col-md-6 text-right title-border">
+        <button type="button"class="btn btn-outline-success btn-sm dropdown-toggle"
+          data-toggle="dropdown">
+          Action
+        </button>
+        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+          <ul class="manageList table-hover">
+            <li class="list" *ngIf="model.status === 0">
+              <a [routerLink]="['/invoice/add', model.id]" class="">
+                <em class="fa fa-credit-card"></em>
+                <span class=""> Create Invoice</span>
+              </a>
+            </li>
+            <li class="list">
+              <a href="javascript:;" class="" (click)="downloadPDF()">
+                <em class="fa fa-print"></em>
+                <span class=""> Print Quotation</span>
+              </a>
+            </li>
+            <li class="list" *ngIf="model.status === 0">
+              <a [routerLink]="['/Quotation/edit', model.id]" class="">
+                <em class="fa fa-edit"></em>
+                <span class=""> Edit</span>
+              </a>
+            </li>
+            <li class="list">
+              <a href="javascript:;" class="" (click)="openDeleteModal(deleteModal)">
+                <em class="fa fa-trash"></em>
+                <span class=""> Delete </span>
+              </a>
+            </li>
+          </ul>
+      </div>
+  </div>
+</div>
+
+<div class="page-section">
+  <div class="box">
+  <div class="row">
+    <div class="col-md-12" *blockUI="'container-blockui'">
+
+      <div>
+        <div  id="htmlData" #htmlData>
+      <!-- <div  id="htmlData" #htmlData> -->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row" >
+              <label class="col-md-4">Quotation#:</label>
+              <div class="col-md-6">
+                <p >{{ model.quotationNumber | uppercase }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-4">Customer Name:</label>
+              <div class="col-md-6">
+                <p class="">
+                  {{ model.customer.firstName }}
+                  {{ model.customer.lastName }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-4">Phone:</label>
+              <div class="col-md-6">
+                <p class="">{{ model.customer.phone }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-4">Email:</label>
+              <div class="col-md-6">
+                <p class="">{{ model.customer.email }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-4">Customer Discount:</label>
+              <div class="col-md-6">
+                <p class="" *ngIf="model.customer.discount">
+                  {{ model.customer.discount }}%
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-4">Created On:</label>
+                  <div class="col-md-6">
+                    <p class=""> {{ model.createdOn }} </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-md-4">Status:</label>
+                  <div class="col-md-6">
+                      <p class="" *ngIf="model.status === 0">Pending</p>
+                      <p class="" *ngIf="model.status === 1">Paid</p>
+                      <p class="" *ngIf="model.status === 2">Deleted</p>
+                  </div>
+                </div>
+              </div>
+            </div>    
+          <div class="row">  
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-4">Quotation Date:</label>
+              <div class="col-md-6">
+                <p class="">{{ model.quotationDate }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-md-4">Expiry Date:</label>
+              <div class="col-md-6">
+                <p class="">{{ model.expiryDate }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="title-border blue-h heading">Items/Services</h3>
+          </div>
+        </div>
+      </div>
+        <div class="row">
+          <div class="col-12 disableDiv">
+            <app-item-selected
+              [selectedItems]="selectedItems"
+              [itemId]="itemId"
+              [selectedTax]="selectedTax"
+              [readOnly]="true"
+            >
+            </app-item-selected>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h3 class="blue-h heading title-border">Summary</h3>
+          </div>
+        </div>
+
+       
+        <div class="row">
+          <div class="col-8">
+            <div class="form-group row">
+              <label class="col-md-3">Description:</label>
+              <div class="col-md-9">
+                <p class="">{{ model.remark }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <table class="table" id="my-table">
+              <tbody>
+                <tr>
+                  <td>Sub Total:</td>
+                  <td class="Bold">
+                    <p class="">{{ model.subTotal | currency }}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Total Discount:</td>
+                  <td class="Bold">
+                    <p class="">{{ model.discount | currency }}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Tax:</td>
+                  <td class="Bold">
+                    <p class="">{{ model.tax | currency }}</p>
+                  </td>
+                </tr>
+                <tr class="Bold totaoblock">
+                  <td>Total Amount:</td>
+                    <td>{{ model.totalAmount | currency }} </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- <div class="form-group row">
+                                <label class="col-md-8 ">Tax:</label>
+                                <div class="col-md-4">
+                                  <p class="">{{model.tax | currency}} </p>
+                                </div>
+                              </div>
+          
+                              <div class="form-group row">
+                                <label class="col-md-8 ">Total Discount:</label>
+                                <div class="col-md-4">
+                                  <p class="">{{model.discount | currency}} </p>
+                                </div>
+                              </div>
+          
+                              <div class="form-group row">
+                                <label class="col-md-8 ">Total Amount:</label>
+                                <div class="col-md-4">
+                                  <p class="">{{model.totalAmount | currency}} </p>
+                                </div>
+                              </div> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h3 class="blue-h heading title-border">Attachments</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div
+              class="form-group"
+              *ngFor="let item of model.attachments; index as $index"
+            >
+              <a [href]="item.fileUrl" target="_blank">
+                <span class="m-r-5">{{ $index + 1 }}.</span>
+                {{ item.title }}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="model.attachments.length === 0">
+          <div class="col-12">
+            <div class="form-group">
+              <p>No attachment found</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+   
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="text-right">
+  <a  [routerLink]="['/Quotation/quotation-manage']" class="btn btn-success m-r-5"  >
+    <i class="fa fa-arrow-left"></i> Back</a  >
+</div>
+</div>
+
+
+<ng-template #ConfirmationModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Add Customer</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="closeConfirmationModal()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ ConfirmationMessage }}
+  </div>
+  <div class="modal-footer">
+    <div class="col-md-12 text-right">
+      <button type="button" class="btn btn-success" (click)="submit()">
+        <i class="fa fa-check"></i> Yes
+      </button>
+      <button  type="button"   class="btn btn-success"   (click)="closeConfirmationModal()"  >
+        <i class="fa fa-check"></i> Cancel
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #deleteModal class="delmodal" id="deleteModal" let-modal>
+           
+  <div class="modal-header">
+      <h4 class="blue-h heading">Delete Confirmation</h4>
+      <div class="close-btn btn-success" (click)="closeDeleteModal()">
+          <img src="assets/images/sidebar-close-icon.png" alt="close">
+      </div>
+  </div>
+  <div class="col-md-12">
+      <div class="">
+          <span>Are you sure you want to delete the selected Quotation?</span>
+      </div>
+  </div>
+  <div class="modal-footer">
+      <div class="text-right">
+          <button type="button" class="btn btn-success" (click)="closeDeleteModal()">
+              <i class="fa fa-arrow-left"></i> Cancel
+          </button>&nbsp;
+          <button type="button" class="btn btn-success" (click)="delete()">
+              <i class="fa fa-trash"></i> Delete
+          </button>
+      </div>
+  </div>
+
+</ng-template>

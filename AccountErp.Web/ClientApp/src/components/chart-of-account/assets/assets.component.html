@@ -1,0 +1,32 @@
+<!-- Cash and Bank -->
+<div class="row">
+    <div class="form-group col-md-12">
+        <br>
+        <button type="button" class="btn btn-sm btn-outline-success  pull-right" (click)="openAddAccountModal.emit()">
+            <i class="fa fa-plus"></i> Add Account</button>
+    </div>
+</div>
+<sub-accounts [data]="accountList"></sub-accounts>
+<div *ngFor="let item of accountList">
+    <div class="wv-table__row--header">
+        <div class="wv-table__cell accHeader">{{item.accountTypeName}}</div>
+    </div>
+    <sub-accounts (openAddAccountModal)="openAddAccountModal.emit()" [data]="item"></sub-accounts>
+    <!-- <div class="wv-table__row--header">
+        <div class="wv-table__cell accHeader">{{item.accountTypeName}}</div>
+    </div>
+    <hr>
+    <sub-accounts [data]="item"></sub-accounts>
+    <div class="row" *ngFor="let account of item.bankAccount">
+        <div class="col-md-12">
+            <div class="row"><div class="col-md-10">{{account.accountName}}</div> 
+            </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-6">Acc Holder: {{account.accountHolderName}}<br/>Acc No:{{account.accountNumber}}</div>
+                <div class="col-md-2" (click)="openAddAccountModal.emit(account.id)"><i class='fa fa-edit cursor-pointer m-r-3' title='Edit'></i></div>    
+            </div>
+        </div>
+    </div>
+    <hr> -->
+</div>

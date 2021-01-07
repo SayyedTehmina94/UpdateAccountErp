@@ -1,0 +1,33 @@
+.lblOverdue{
+    color: rgb(161, 153, 153);
+    font-weight: bold;
+}
+
+.Bold { font-weight: bold; }
+
+.acchead{
+    font-weight: bold;
+    background-color:#d2d2d4;
+}
+.accline{
+    
+    background-color:white;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: white;
+}
+
+.totaoblock{
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+.c {
+    text-align: right;
+  } 
+
+  
+mark { 
+    background-color: grey;
+    color: black;
+  }

@@ -1,0 +1,99 @@
+<form name="form" (ngSubmit)="f.form.valid && next()" #f="ngForm" novalidate>
+        <div class="cust-add-title">Billing Address</div>
+                <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row"
+                            [ngClass]="{ 'validation-error' : f.submitted && streetNumber.invalid}">
+                            <label class="col-md-3">Street#:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="streetNumber" class="form-control" maxlength="15"
+                                    autocomplete="off" [(ngModel)]="model.billingAddress.streetNumber"
+                                    #streetNumber="ngModel" appAlphaNumericsOnly />
+                                <div class="validation-error-message" *ngIf="f.submitted && streetNumber.invalid">
+                                    Street number is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row"
+                            [ngClass]="{ 'validation-error' : f.submitted && streetName.invalid}">
+                            <label class="col-md-3">Street Name:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="streetName" class="form-control" maxlength="10"
+                                    autocomplete="off" [(ngModel)]="model.billingAddress.streetName"
+                                    #streetName="ngModel" appAlphaNumericsLevelThree />
+                                <div class="validation-error-message" *ngIf="f.submitted && streetName.invalid">
+                                    Street Name is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row"
+                            [ngClass]="{ 'validation-error' : f.submitted && postalCode.invalid}">
+                            <label class="col-md-3">Postal Code:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="postalCode" class="form-control" maxlength="15"
+                                    autocomplete="off" [(ngModel)]="model.billingAddress.postalCode"
+                                    #postalCode="ngModel" appAlphaNumericsOnly />
+                                <div class="validation-error-message" *ngIf="f.submitted && postalCode.invalid">
+                                    Postal code is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && city.invalid}">
+                            <label class="col-md-3">City:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="city" class="form-control" maxlength="10" autocomplete="off"
+                                    [(ngModel)]="model.billingAddress.city" #city="ngModel"
+                                    appAlphaNumericsLevelThree />
+                                <div class="validation-error-message" *ngIf="f.submitted && city.invalid">
+                                    City is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && state.invalid}">
+                            <label class="col-md-3">State:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="state" class="form-control" maxlength="10" autocomplete="off"
+                                    [(ngModel)]="model.billingAddress.state" #state="ngModel"
+                                    appAlphaNumericsLevelThree />
+                                <div class="validation-error-message" *ngIf="f.submitted && state.invalid">
+                                    State number is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row"
+                            [ngClass]="{ 'validation-error' : f.submitted && countryId.invalid}">
+                            <label class="col-md-3">Country:</label>
+                            <div class="col-md-9">
+                                <!-- <select name="countryId" class="form-control"
+                                    [(ngModel)]="model.billingAddress.countryId" #countryId="ngModel">
+                                    <option value="" selected>[Select]</option>
+                                    <option *ngFor="let item of countries" [value]="item.keyInt">
+                                        {{item.value}}
+                                    </option>
+                                </select> -->
+                                <ngx-select-dropdown  name="countryId" #countryId="ngModel"  (change)="getCustomerAdd()" [multiple]="false" 
+                                [(ngModel)]="selectedCountry" [config]="config" [options]="countries"></ngx-select-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+     
+    
+    <app-vendor-form-wizard-navigator (moveBackward)="prev()" [wizardStep]="wizardStep">
+    </app-vendor-form-wizard-navigator>
+</form>

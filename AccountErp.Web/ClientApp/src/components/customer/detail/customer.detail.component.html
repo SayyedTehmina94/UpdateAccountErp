@@ -1,0 +1,278 @@
+<div class="row">
+    <h3 class="blue-h  col-md-6 title-border">
+        Customer Detail
+    </h3>
+    <div class="col-md-6 text-right title-border">
+        <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle"  data-toggle="dropdown">
+                            Action
+        </button>
+         
+        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+            <ul class="manageList table-hover">
+                <li >
+                    <a [routerLink]="['/invoice/add']" [queryParams]="{ cId: model.id}"
+                        class="">
+                        <em class="fa fa-credit-card"></em>
+                        <span class=""> Create Invoice</span>
+                    </a>
+                </li>
+                <li >
+                    <a [routerLink]="['/customer/edit', model.id]" class="">
+                        <em class="fa fa-edit"></em>
+                        <span class=""> Edit</span>
+                    </a>
+                </li>
+                <li >
+                    <a href="javascript:;" class="" (click)="openDeleteModal(deleteModal)">
+                        <em class="fa fa-trash"></em>
+                        <span class=""> Delete</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+      </div>
+  </div>
+  
+  <div class="page-section ">
+   <div class="box">
+    <div class="row">
+      <div class="col-md-12" *blockUI="'container-blockui'">
+        <div class="" id="htmlData" #htmlData>
+            <div class="form-horizontal">
+                <div class="" *ngIf="isModelLoaded">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="detailHeading">Personal Detail : </span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 ">Name:</label>
+                                <div class="col-md-9">
+                                    <p class="">{{model.firstName}} {{model.middleName}}
+                                        {{model.lastName}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 ">Email:</label>
+                                <div class="col-md-9">
+                                    <p class="">{{model.email}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3  ">Phone:</label>
+                                <div class="col-md-9">
+                                    <p class="">{{model.phone | mask: '000-000-0000'}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group row">
+                                <label class="col-md-3  ">Discount:</label>
+                                <div class="col-md-9">
+                                    <p class="">{{ model.discount }}
+                                        <span *ngIf='model.discount'>%</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row detailHeading">
+                        <div class="col-md-12">
+                            <span class="">Address :</span>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 ">Street#:</label>
+                                <div class="col-md-9">
+                                    <p class="">{{model.address.streetNumber}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 ">Street Name:</label>
+                                <div class="col-md-9">
+                                    <p class="">{{model.address.streetName}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 ">Postal Code:</label>
+                                <div class="col-md-9">
+                                    <p class="">{{model.address.postalCode}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 ">City:</label>
+                                <div class="col-md-9">
+                                    <p class="">{{model.address.city}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 ">State:</label>
+                                <div class="col-md-9">
+                                    <p class="">{{model.address.state}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 ">Country:</label>
+                                <div class="col-md-9">
+                                    <p class="">{{model.address.countryName}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="detailHeading">Payment Details :</span>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 ">Bank Name:</label>
+                                <div class="col-md-9">
+                                    <p class="">{{model.bankName}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 ">Bank Branch:</label>
+                                <div class="col-md-9">
+                                    <p class="">{{model.bankBranch}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 ">Account#:</label>
+                                <div class="col-md-9">
+                                    <p class="">{{model.accountNumber}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-md-3 ">IFSC:</label>
+                                <div class="col-md-9">
+                                    <p class="">{{model.ifsc}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <ngb-tabset>
+                                <ngb-tab title="Invoices">
+                                    <ng-template ngbTabContent><br>
+                                        <app-invoice-list [customerId]="model.id"></app-invoice-list>
+                                    </ng-template>
+                                </ngb-tab>
+                                <ngb-tab title="Payments">
+                                    <ng-template ngbTabContent><br>
+                                        <app-invoice-payment-list [customerId]="model.id">
+                                        </app-invoice-payment-list>
+                                    </ng-template>
+                                </ngb-tab>
+                            </ngb-tabset>
+
+                        </div>
+                    </div>
+                </div>
+                   
+            </div>
+        </div>
+      </div>
+    </div>
+   </div>
+   <br>
+   <div class="text-right" *ngIf="isModelLoaded">
+    <a [routerLink]="['/customer/manage']" class="btn btn-success m-r-5">
+        <i class="fa fa-arrow-left"></i> Back
+    </a>
+</div>
+</div>
+
+  <ng-template #ConfirmationModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">Add Customer</h5>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="closeConfirmationModal()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      {{ ConfirmationMessage }}
+    </div>
+    <div class="modal-footer">
+      <div class="col-md-12 text-right">
+        <button type="button" class="btn btn-success" (click)="submit()">
+          <i class="fa fa-check"></i> Yes
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="closeConfirmationModal()"
+        >
+          <i class="fa fa-check"></i> Cancel
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #deleteModal class="delmodal" id="deleteModal" let-modal>
+           
+    <div class="modal-header">
+        <h4 class="blue-h heading">Delete Confirmation</h4>
+        <div class="close-btn btn-success" (click)="closeDeleteModal()">
+            <img src="assets/images/sidebar-close-icon.png" alt="close">
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="">
+            <span>Are you sure you want to delete the selected Customer?</span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="text-right">
+            <button type="button" class="btn btn-success" (click)="closeDeleteModal()">
+                <i class="fa fa-arrow-left"></i> Cancel
+            </button>&nbsp;
+            <button type="button" class="btn btn-success" (click)="delete()">
+                <i class="fa fa-trash"></i> Delete
+            </button>
+        </div>
+    </div>
+
+</ng-template>
+  

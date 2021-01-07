@@ -1,0 +1,129 @@
+<div class="">
+    <div class="" id="">
+        <div class="">
+            <div class="">
+                <a [routerLink]="['/']" class="">
+                    <em class="flaticon2-shelter"></em>
+                </a>
+                <span class=""></span>
+                <a [routerLink]="['/bank-account/manage']" class="">
+                    Accounts </a>
+                <span class=""></span>
+                <span>Add</span>
+            </div>
+        </div>
+        <div class="">
+            <div class="">
+            </div>
+        </div>
+    </div>
+    <div class="" id="">
+        <div class="row">
+            <div class="col-md-12" *blockUI="'container-blockui'">
+                <div class="">
+                    <div class="">
+                        <div class="">
+                            <h3 class="">
+                                Add User
+                            </h3>
+                        </div>
+                    </div>
+                    <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm"
+                        novalidate>
+                        <div class="">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row"
+                                        [ngClass]="{ 'validation-error' : f.submitted && firstName.invalid}">
+                                        <label class="col-md-3">First Name:*</label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="firstName" class="form-control height-38" maxlength="250"
+                                                autocomplete="off" [(ngModel)]="model.firstName" #firstName="ngModel"
+                                                required />
+                                            <div class="validation-error-message"
+                                                *ngIf="f.submitted && firstName.invalid">
+                                                First name is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row"
+                                        [ngClass]="{ 'validation-error' : f.submitted && lastName.invalid}">
+                                        <label class="col-md-3">Last Name:*</label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="lastName" class="form-controlheight-38" maxlength="250"
+                                                autocomplete="off" [(ngModel)]="model.lastName" #lastName="ngModel"
+                                                required />
+
+                                            <div class="validation-error-message"
+                                                *ngIf="f.submitted && lastName.invalid">
+                                                Last name is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row"
+                                        [ngClass]="{ 'validation-error' : f.submitted && email.invalid}">
+                                        <label class="col-md-3">Email or Username:*</label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="email" class="form-control height-38" maxlength="250"
+                                                autocomplete="off" [(ngModel)]="model.email" #email="ngModel"
+                                                required />
+                                            <div class="validation-error-message" *ngIf="f.submitted && email.invalid">
+                                                Email name is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row"
+                                        [ngClass]="{ 'validation-error' : f.submitted && password.invalid}">
+                                        <label class="col-md-3">Password:*</label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="password" class="form-control height-38" maxlength="250"
+                                                autocomplete="off" [(ngModel)]="model.password" #password="ngModel"
+                                                required />
+                                            <div class="validation-error-message"
+                                                *ngIf="f.submitted && password.invalid">
+                                                Password is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row"
+                                        [ngClass]="{ 'validation-error' : f.submitted && roleId.invalid}">
+                                        <label class="col-md-3">Role *</label>
+                                        <div class="col-md-9">
+                                            <select name="roleId" class="form-control height-38" [(ngModel)]="model.roleId" #roleId="ngModel" required>
+                                                <option value="" selected>[Select]</option>
+                                                <option *ngFor="let item of roles" [value]="item.keyString">
+                                                        {{item.value}}
+                                                </option>
+                                            </select>
+                                            <div class="validation-error-message" *ngIf="f.submitted && !roleId.valid">
+                                                Role is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="text-right">
+                                <a [routerLink]="['/bank-account/manage']" class="btn btn-secondary m-r-5">Cancel</a>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

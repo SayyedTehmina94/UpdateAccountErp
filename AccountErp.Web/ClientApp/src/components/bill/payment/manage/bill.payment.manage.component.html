@@ -1,0 +1,46 @@
+<div class="row">
+    <h3 class="blue-h heading col-md-12">
+        <span> Bill Payments</span>
+        <span>Manage</span>
+    </h3>
+       <div class="col-md-12">
+            <a [routerLink]="['/vend-payment/add-vendor-payment']" class="btn btn-primary" type="button"> 
+                <span class="glyphicon glyphicon-plus">New Payment</span>
+            </a>
+        </div>
+    </div>
+
+<div class="page-section">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <select class="form-control height-38" name="role" [(ngModel)]="filterModel.vendorId">
+                                            <option value="">[Select Vendor]</option>
+                                            <option *ngFor="let item of vendors" [value]="item.keyInt">
+                                                {{item.value}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control height-38" placeholder="Filter bill"
+                                            [(ngModel)]="filterModel.filterKey" autocomplete="Off" maxlength="50"
+                                            (keydown.enter)="doFilter()" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" class="btn btn-success btn-elevate btn-icon-sm"
+                                            (click)="doFilter()">
+                                            <i class="la la-search"></i> Filter
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-elevate btn-icon-sm m-l-5"
+                                            (click)="resetFilter()">
+                                            <i class="la la-close"></i> Reset
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 custom-table" *blockUI="'container-blockui'">
+                                <table datatable [dtOptions]="dtOptions" data-page="2" class="table table-sm table-striped table-hover">
+                                </table>
+                            </div>
+                        </div>
+</div>

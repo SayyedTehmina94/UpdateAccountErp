@@ -1,0 +1,249 @@
+<div class="row">
+    <h3 class="title-border col-md-12">
+        Add Expenses
+    </h3>
+  </div>
+<div class="page-section">
+        <div class="row">
+            <div class="col-md-12" *blockUI="'container-blockui'">
+                    <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm"
+                        novalidate>
+                        <div class="">
+                            <div class="row add-customer-form">
+                                <div class="col-6">
+                                    <div class="form-group row"
+                                        [ngClass]="{ 'validation-error' : f.submitted && paymentMode.invalid}">
+                                        <label class="col-md-3">Payment Mode:*</label>
+                                        <div class="col-md-9">
+                                            <!-- <select name="paymentMode" class="form-control"
+                                                (change)="chengePaymentMode()" [(ngModel)]="model.paymentMode"
+                                                #paymentMode="ngModel" required>
+                                                <option value="">[Select]</option>
+                                                <option *ngFor="let item of paymentModes" [value]="item.keyInt">
+                                                    {{item.value}}</option>
+                                            </select> -->
+                                            <ngx-select-dropdown  name="paymentMode" #paymentMode="ngModel" (change)="chengePaymentMode()" [multiple]="false" 
+                                            [(ngModel)]="selectedPaymentMode" [config]="config" [options]="paymentModes" required></ngx-select-dropdown>
+                                            <div class="validation-error-message"
+                                                *ngIf="f.submitted && !paymentMode.valid">
+                                                Please select payment mode
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                                <div class="col-6">
+                                    <div class="form-group row"
+                                        [ngClass]="{ 'validation-error' : f.submitted && bankAccountId.invalid}">
+                                        <label class="col-md-3">Cash/Bank:*</label>
+                                        <div class="col-md-9">
+                                            <!-- <select name="bankAccountId" class="form-control"
+                                                [(ngModel)]="model.bankAccountId" #bankAccountId="ngModel" required>
+                                                <option value="">[Select]</option>
+                                                <option *ngFor="let item of bankAccounts" [value]="item.keyInt">
+                                                    {{item.value}}</option>
+                                            </select> -->
+                                            <ngx-select-dropdown  name="bankAccountId" #bankAccountId="ngModel" (change)="getBankaccId()" [multiple]="false" 
+                                            [(ngModel)]="selectedBankAccount" [config]="config" [options]="bankAccounts" required></ngx-select-dropdown>
+                                            <div class="validation-error-message"
+                                                *ngIf="f.submitted && !bankAccountId.valid">
+                                                Please select Cash or Bank
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row add-customer-form">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Payment type:</label>
+                                        <div class="col-md-9">
+                                            <!-- <select name="paymentType" class="form-control"
+                                                 [(ngModel)]="model.paymentType"
+                                                #paymentMode="ngModel" required>
+                                                <option value="">[Select]</option>
+                                                <option value='2'>Advance payment</option>
+                                                <option value='3'>Bill payment</option>
+                                                <option value='5'>Account payment</option>
+                                               
+                                            </select> -->
+                                            <ngx-select-dropdown  name="paymentType" #paymentType="ngModel" (change)="getPaymentTypeid()" [multiple]="false" 
+                                            [(ngModel)]="selectedPaymentType" [config]="config" [options]="paymentTypes" required></ngx-select-dropdown>
+                                            <div class="validation-error-message"
+                                                *ngIf="f.submitted && !paymentType.valid">
+                                                Please select payment type
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3">Payment Date:</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <input class="form-control" name="paymentDate" #paymentDate="ngModel"
+                                                    [(ngModel)]="model.paymentDate" ngbDatepicker #d="ngbDatepicker"
+                                                    [autoClose]=" true" readonly />
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-success calendar"
+                                                        (click)="d.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6" *ngIf="model.paymentType==2">
+                                    <div class="form-group row">
+                                        <label class="col-md-3">Select Vendor:</label>
+                                        <div class="col-md-9">
+                                            <ngx-select-dropdown  name="vendorId" #vendorId="ngModel" (change)="getVendorDetail()" [multiple]="false" 
+                                            [(ngModel)]="selectedVendor" [config]="config" [options]="vendors"></ngx-select-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                                    <div class="col-6" *ngIf="model.paymentType==2">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 ">Vendor Details:</label>
+                                            <div class="col-md-9">
+                                                <p class="">{{vendor.name}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                              
+                                <div class="col-6" *ngIf="model.paymentType==3">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Select Bill/Expense:</label>
+                                        <div class="col-md-9">
+                                            <!-- <select name="bill" class="form-control"
+                                            (change)="chengeBill()" [(ngModel)]="model.billId"
+                                            #paymentMode="ngModel" required>
+                                            <option value="">[Select]</option>
+                                            <option *ngFor="let item of bills" value={{item.id}}>{{item.billNumber}}</option>
+                                        </select> -->
+                                        <ngx-select-dropdown  name="bill" #bill="ngModel" (change)="chengeBill()" [multiple]="false" 
+                                        [(ngModel)]="selectedBill" [config]="config2" [options]="bills"></ngx-select-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6" *ngIf="model.paymentType!=3">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">DrAccont:</label>
+                                        <div class="col-md-9">
+                                            <select name="draccount"  [(ngModel)]="model.debitBankAccountId" #draccount="ngModel" 
+                                                 (change)="selectDrAccount($event)" class="form-control" >
+                                                <optgroup *ngFor="let acchead of allAccounts" label="{{acchead.accountMasterName}}">
+                                                 <option *ngFor="let acc of acchead.bankAccount" value="{{acc.id}}">{{acc.accountName}}</option>
+                                            </optgroup>
+                                              </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6" *ngIf="model.paymentType==2  || model.paymentType==5">
+                                    <div class="form-group row">
+                                        <label class="col-md-3">Amount:</label>
+                                        <div class="col-md-9">
+                                            <input type="text"  name="amount" #amount="ngModel" [(ngModel)]="model.amount" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                          
+                                <div class="col-6" *ngIf="model.paymentType==3">
+                                    <div class="form-group row">
+                                        <label class="col-md-3">Amount:</label>
+                                        <div class="col-md-9">
+                                            <p class="auto-create">{{model.amount | currency}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6" *ngIf="model.paymentType==3">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Bill#:</label>
+                                        <div class="col-md-9">
+                                            <p class="auto-create">{{expenseSummaryModel.billNumber}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6" *ngIf="model.paymentType==3">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Vendor Name:</label>
+                                        <div class="col-md-9">
+                                            <p class="auto-create">{{expenseSummaryModel.vendorName}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6" *ngIf='model.paymentMode == 2'>
+                                    <div class="form-group row"
+                                        [ngClass]="{ 'validation-error' : f.submitted && chequeNumber.invalid}">
+                                        <label class="col-md-3">Cheque#:</label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="chequeNumber" class="form-control" maxlength="50"
+                                                autocomplete="off" [(ngModel)]="model.chequeNumber"
+                                                #chequeNumber="ngModel" appAlphaNumericsLevelThree required />
+                                            <div class="validation-error-message"
+                                                *ngIf="f.submitted && chequeNumber.invalid">
+                                                Cheque Number is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row"
+                                        [ngClass]="{ 'validation-error' : f.submitted && description.invalid}">
+                                        <label class="col-md-3">Description :</label>
+                                        <div class="col-md-9">
+                                            <textarea type="text" name="description" class="form-control" rows="2"
+                                                maxlength="250" autocomplete="off" [(ngModel)]="model.description"
+                                                #description="ngModel" appAlphaNumericsLevelThree></textarea>
+                                            <div class="validation-error-message"
+                                                *ngIf="f.submitted && description.invalid">
+                                                Description code is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                        
+                         
+                            <div class="row d-none">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Tax:</label>
+                                        <div class="col-md-9">
+                                            <p class="auto-create">{{expenseSummaryModel.tax | currency }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Discount:</label>
+                                        <div class="col-md-9">
+                                            <p class="auto-create">{{expenseSummaryModel.discount | currency}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        </div>
+                            <div class=" text-right">
+                                <button type="submit"[routerLink]="['/transaction/transaction']"
+                                    class="btn btn-success m-r-5">
+                                    <i class="fa fa-arrow-left"></i> Back</button>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa fa-save"></i> Submit</button>
+                            </div>
+                    </form>
+            </div>
+        </div>
+</div>

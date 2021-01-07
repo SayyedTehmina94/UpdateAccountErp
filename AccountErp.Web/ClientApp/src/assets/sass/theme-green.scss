@@ -1,0 +1,2602 @@
+$green: #009900;
+@font-face {
+          font-family: thin;
+          src: url(../fonts/myriad-set-pro_thin.ttf);
+}
+
+@font-face {
+          font-family: text;
+          src: url(../fonts/myriad-set-pro_text.ttf);
+}
+
+@font-face {
+          font-family: ultrathin;
+          src: url(../fonts/myriad-set-pro_ultralight.ttf);
+}
+
+@font-face {
+          font-family: semibold;
+          src: url(../fonts/myriad-set-pro_semibold.ttf);
+}
+
+@font-face {
+          font-family: bold;
+          src: url(../fonts/myriad-set-pro_bold.ttf);
+}
+
+html,
+body {
+          height: 100%;
+}
+
+p {
+          font-size: 14px;
+          color: gray;
+}
+
+h5.light-h {
+          font-size: 22px;
+          color: $green;
+          font-family: thin;
+}
+
+.form-check-input {
+          margin-top: .2rem;
+}
+
+.form-radio-label {
+          margin-bottom: 0;
+}
+
+.success-message-container {
+          padding: 20px;
+          h4 {
+                    color: $green !important;
+                    font-size: 23px !important;
+                    font-family: text !important;
+                    margin: 15px 0px;
+          }
+}
+
+.blue {
+          color: $green;
+}
+
+.hover-black {
+          cursor: pointer;
+          &:hover {
+                    color: #000;
+          }
+}
+
+.document-page {
+          padding: 15px;
+          max-height: calc(100vh - 440px);
+          overflow-y: auto;
+          border: solid 1px gray;
+          border-radius: 5px;
+          margin-bottom: 20px;
+}
+
+.custom-table {
+          max-height: 233px;
+          overflow-y: auto;
+          margin-bottom: 50px;
+          table {
+                    margin: 0;
+                    thead {
+                              th {
+                                        position: sticky;
+                                        top: -1px;
+                                        background: $green;
+                                        color: white;
+                                        font-weight: normal;
+                              }
+                    }
+          }
+}
+
+.small-text {
+          font-size: 14px;
+          color: gray;
+          margin-bottom: 15px;
+          line-height: 20px;
+          img {
+                    position: relative;
+                    bottom: 2px;
+                    margin-right: 5px;
+          }
+}
+
+.form-control {
+          display: block;
+          width: 100%;
+          padding: 2px 10px;
+          font-size: 13px;
+          line-height: 1.5;
+          height: 30px !important;
+          color: #000000;
+          background-color: #fff;
+          background-clip: padding-box;
+          border: 1px solid #000000;
+          border-radius: 0.25rem;
+}
+
+.detail-area {
+          padding: 30px 15px;
+          overflow: auto;
+          .blue-h {
+                    color: #009900;
+          }
+}
+
+.custom-container {
+          height: 100%;
+          >.row {
+                    height: 100%;
+                    .gray-sidebar {
+                              position: fixed;
+                              top: 0px;
+                              left: 50px;
+                              height: 100%;
+                              width: 220px;
+                    }
+                    .gray-area {
+                              background: #fafafa;
+                              padding: 37px 15px;
+                              overflow: auto;
+                              .close-btn {
+                                        position: absolute;
+                                        top: 10px;
+                                        right: 10px;
+                                        width: 19px;
+                                        height: 19px;
+                                        border-radius: 100px;
+                                        text-align: center;
+                                        background: #cccccc;
+                                        &:hover {
+                                                  background: $green;
+                                        }
+                                        img {
+                                                  position: relative;
+                                                  bottom: 3px;
+                                                  left: 0px;
+                                        }
+                              }
+                              .file-info {
+                                        h4 {
+                                                  margin: 0;
+                                                  color: $green;
+                                        }
+                                        h3 {
+                                                  margin: 0;
+                                                  font-size: 22px;
+                                        }
+                                        p {
+                                                  color: #000000;
+                                                  margin-bottom: 5px;
+                                                  font-family: thin;
+                                                  font-size: 15px;
+                                        }
+                                        span {
+                                                  font-size: 15px;
+                                                  color: white;
+                                                  border-radius: 3px;
+                                                  padding: 4px 9px;
+                                                  display: block;
+                                                  max-width: 140px;
+                                                  text-align: center;
+                                                  margin: 5px 0px;
+                                                  &.green {
+                                                            background-color: #009900;
+                                                  }
+                                                  &.red {
+                                                            background-color: #ff0000;
+                                                  }
+                                        }
+                              }
+                              .file-textual-info {
+                                        margin-top: 20px;
+                                        p {
+                                                  font-size: 13px;
+                                                  color: #000;
+                                                  margin-top: 15px;
+                                                  img {
+                                                            position: relative;
+                                                            bottom: 2px;
+                                                            margin-right: 3px;
+                                                  }
+                                        }
+                                        table {
+                                                  font-size: 15px;
+                                                  color: #000;
+                                                  border-radius: 3px;
+                                                  td {
+                                                            padding: 2px 5px;
+                                                  }
+                                        }
+                              }
+                              .form-area {
+                                        .glyph {
+                                                  font-size: 21px;
+                                                  line-height: 0;
+                                                  position: relative;
+                                                  top: 4px;
+                                                  margin-right: 4px;
+                                        }
+                                        .card-header {
+                                                  padding: 0px;
+                                        }
+                                        a {
+                                                  color: $green;
+                                                  padding: 5px 0px;
+                                                  display: block;
+                                                  font-family: text;
+                                                  font-size: 15px;
+                                                  &.collapsed {
+                                                            font-family: thin;
+                                                  }
+                                                  &:hover {
+                                                            color: black;
+                                                  }
+                                        }
+                                        .card,
+                                        .card-header {
+                                                  border: none;
+                                                  background-color: transparent;
+                                                  color: $green;
+                                                  img {
+                                                            position: relative;
+                                                            bottom: 2px;
+                                                            margin-right: 6px;
+                                                  }
+                                        }
+                                        .card-body {
+                                                  padding: 0px 0px 10px 30px;
+                                                  ul {
+                                                            padding: 0;
+                                                            margin: 0;
+                                                            >ul {
+                                                                      padding-left: 15px;
+                                                            }
+                                                            li {
+                                                                      list-style-type: none;
+                                                                      &.notification {
+                                                                                position: relative;
+                                                                                &.warning {
+                                                                                          a {
+                                                                                                    color: #f39d3a !important;
+                                                                                                    &.active {
+                                                                                                              color: white !important;
+                                                                                                              background-color: #f39d3a !important;
+                                                                                                    }
+                                                                                          }
+                                                                                          &::before {
+                                                                                                    content: "";
+                                                                                                    width: 15px;
+                                                                                                    height: 14px;
+                                                                                                    background-image: url(../images/warning-sm.png);
+                                                                                                    background-repeat: no-repeat;
+                                                                                                    position: absolute;
+                                                                                                    top: 50%;
+                                                                                                    transform: translateY(-50%);
+                                                                                                    left: -20px;
+                                                                                          }
+                                                                                }
+                                                                                &.complete {
+                                                                                          a {
+                                                                                                    color: green !important;
+                                                                                                    &.active {
+                                                                                                              color: white !important;
+                                                                                                              background-color: green !important;
+                                                                                                    }
+                                                                                          }
+                                                                                          &::before {
+                                                                                                    content: "";
+                                                                                                    width: 12px;
+                                                                                                    height: 10px;
+                                                                                                    background-image: url(../images/complete-sm.png);
+                                                                                                    background-repeat: no-repeat;
+                                                                                                    position: absolute;
+                                                                                                    top: 50%;
+                                                                                                    transform: translateY(-50%);
+                                                                                                    left: -20px;
+                                                                                          }
+                                                                                }
+                                                                      }
+                                                                      a {
+                                                                                display: block;
+                                                                                padding: 5px 10px;
+                                                                                text-decoration: none;
+                                                                                color: black;
+                                                                                font-size: 13px;
+                                                                                font-family: thin;
+                                                                                &:hover {
+                                                                                          background-color: #d9f3d9 !important;
+                                                                                }
+                                                                                &.active {
+                                                                                          background-color: $green;
+                                                                                          color: white;
+                                                                                }
+                                                                      }
+                                                            }
+                                                  }
+                                        }
+                              }
+                    }
+                    .form-container {
+                              margin: 35px 0px;
+                              border-bottom: solid 1px #e2e2e2;
+                              &:last-child {
+                                        border-bottom: 0 !important;
+                              }
+                    }
+                    .box-item {
+                              margin-bottom: 15px;
+                              label.upper-label {
+                                        font-size: 22px;
+                                        color: $green;
+                                        font-family: thin;
+                              }
+                              .box {
+                                        padding: 15px 30px;
+                                        border: solid 1px $green;
+                                        border-radius: 6px;
+                                        .box-label {
+                                                  color: $green;
+                                                  font-size: 16px;
+                                        }
+                                        h4 {
+                                                  font-size: 16px;
+                                                  font-family: semibold;
+                                                  color: #000;
+                                        }
+                                        p {
+                                                  font-size: 16px;
+                                                  color: gray;
+                                                  span.notification {
+                                                            position: relative;
+                                                            margin: 0px 18px;
+                                                            white-space: nowrap;
+                                                            &.warning {
+                                                                      &::before {
+                                                                                content: "";
+                                                                                width: 15px;
+                                                                                height: 12px;
+                                                                                background-image: url(../images/warning-sm.png);
+                                                                                background-repeat: no-repeat;
+                                                                                position: absolute;
+                                                                                top: 50%;
+                                                                                transform: translateY(-50%);
+                                                                                left: -18px;
+                                                                      }
+                                                            }
+                                                            &.complete {
+                                                                      &::before {
+                                                                                content: "";
+                                                                                width: 18px;
+                                                                                height: 15px;
+                                                                                background-image: url(../images/complete-sm-2.png);
+                                                                                background-repeat: no-repeat;
+                                                                                position: absolute;
+                                                                                top: 50%;
+                                                                                transform: translateY(-50%);
+                                                                                left: -18px;
+                                                                      }
+                                                            }
+                                                  }
+                                        }
+                              }
+                              .round-btn {
+                                        position: relative;
+                                        bottom: 20px;
+                                        border: solid 1px $green;
+                                        border-radius: 100px;
+                                        width: 40px;
+                                        height: 40px;
+                                        background-color: white;
+                                        cursor: pointer;
+                                        &:hover {
+                                                  background-color: #d9ecff;
+                                        }
+                                        img {
+                                                  position: absolute;
+                                                  top: 50%;
+                                                  left: 50%;
+                                                  transform: translate(-50%, -50%);
+                                        }
+                              }
+                    }
+                    .detail-area {
+                              padding: 30px 15px;
+                              overflow: auto;
+                              .blue-h {
+                                        color: $green;
+                              }
+                              .heading {
+                                        .glyph {
+                                                  cursor: pointer;
+                                                  &:hover {
+                                                            color: black;
+                                                  }
+                                        }
+                                        &.warning {
+                                                  &::before {
+                                                            content: "";
+                                                            width: 20px;
+                                                            height: 20px;
+                                                            background-image: url(../images/warning.png);
+                                                            background-repeat: no-repeat;
+                                                            display: inline-block;
+                                                            position: relative;
+                                                            top: 3px;
+                                                            margin-right: 10px;
+                                                  }
+                                        }
+                                        &.cancelled {
+                                                  &::before {
+                                                            content: "";
+                                                            width: 21px;
+                                                            height: 21px;
+                                                            background-image: url(../images/cancel-fill-icon.png);
+                                                            background-repeat: no-repeat;
+                                                            display: inline-block;
+                                                            position: relative;
+                                                            top: 2px;
+                                                            margin-right: 10px;
+                                                  }
+                                        }
+                                        &.complete {
+                                                  &::before {
+                                                            content: "";
+                                                            width: 21px;
+                                                            height: 21px;
+                                                            background-image: url(../images/complete-icon.png);
+                                                            background-repeat: no-repeat;
+                                                            display: inline-block;
+                                                            position: relative;
+                                                            top: 2px;
+                                                            margin-right: 10px;
+                                                  }
+                                        }
+                              }
+                              p {
+                                        &.cancelled {
+                                                  color: red;
+                                                  margin-top: 10px;
+                                                  &::before {
+                                                            content: "";
+                                                            width: 15px;
+                                                            height: 15px;
+                                                            background-image: url(../images/cancel-fill-icon-sm.png);
+                                                            background-repeat: no-repeat;
+                                                            display: inline-block;
+                                                            position: relative;
+                                                            top: 2px;
+                                                            margin-right: 10px;
+                                                  }
+                                        }
+                                        &.yellow {
+                                                  color: #f39d3a !important;
+                                        }
+                                        &.red {
+                                                  color: red !important;
+                                        }
+                                        &.warning {
+                                                  color: #f39d3a !important;
+                                                  margin-top: 10px;
+                                                  &::before {
+                                                            content: "";
+                                                            width: 15px;
+                                                            height: 15px;
+                                                            background-image: url(../images/warning-sm.png);
+                                                            background-repeat: no-repeat;
+                                                            display: inline-block;
+                                                            position: relative;
+                                                            top: 2px;
+                                                            margin-right: 10px;
+                                                  }
+                                        }
+                                        &.complete {
+                                                  color: green;
+                                                  margin-top: 10px;
+                                                  &::before {
+                                                            content: "";
+                                                            width: 15px;
+                                                            height: 15px;
+                                                            background-image: url(../images/complete-sm-2.png);
+                                                            background-repeat: no-repeat;
+                                                            display: inline-block;
+                                                            position: relative;
+                                                            top: 2px;
+                                                            margin-right: 10px;
+                                                  }
+                                        }
+                              }
+                              .heading.warning {}
+                              .detail-back-btn {
+                                        position: absolute;
+                                        top: 10px;
+                                        left: 0px;
+                                        padding: 10px 15px;
+                                        display: none;
+                              }
+                              h4 {
+                                        color: $green;
+                                        font-size: 40px;
+                                        font-family: thin;
+                              }
+                              .triggers-detail-area {
+                                        background-color: #fafafa;
+                                        margin: 20px 0px;
+                                        padding: 15px;
+                                        min-height: 170px;
+                                        .message {
+                                                  position: absolute;
+                                                  top: 50%;
+                                                  left: 50%;
+                                                  transform: translate(-50%, -50%);
+                                                  margin: 0;
+                                        }
+                                        ul {
+                                                  margin: 0;
+                                                  padding: 0;
+                                                  li {
+                                                            list-style-type: none;
+                                                            font-size: 14px;
+                                                            color: #000;
+                                                            padding: 5px 0px;
+                                                            font-family: semibold;
+                                                            .close-btn {
+                                                                      position: relative;
+                                                                      top: 1px;
+                                                                      display: inline-block;
+                                                                      width: 15px;
+                                                                      height: 15px;
+                                                                      border-radius: 100px;
+                                                                      text-align: center;
+                                                                      background: red;
+                                                                      margin-right: 6px;
+                                                                      &:hover {
+                                                                                background: #000;
+                                                                      }
+                                                                      img {
+                                                                                position: relative;
+                                                                                bottom: 3px;
+                                                                                left: 0px;
+                                                                      }
+                                                            } // img {
+                                                            //   position: relative;
+                                                            //   bottom: 1px;
+                                                            //   margin-right: 8px;
+                                                            //   cursor: pointer;
+                                                            //   &:hover {
+                                                            //     opacity: 0.7;
+                                                            //   }
+                                                            // }
+                                                  }
+                                        }
+                              }
+                              .modal {
+                                        position: absolute;
+                                        top: 0;
+                                        left: 50%;
+                                        transform: translateX(-50%);
+                                        padding: 40px;
+                                        width: 100%;
+                                        height: calc(100vh - 40px);
+                                        &.modal-sm {
+                                                  max-width: 500px;
+                                                  height: auto;
+                                                  max-height: calc(100vh - 40px);
+                                                  .modal-dialog {
+                                                            height: auto;
+                                                            position: absolute;
+                                                            top: 50%;
+                                                            left: 50%;
+                                                            transform: translate(-50%, -50%);
+                                                            .modal-footer {
+                                                                      input[type="checkbox"] {
+                                                                                bottom: 6px;
+                                                                      }
+                                                            }
+                                                  }
+                                        }
+                                        .modal-dialog {
+                                                  width: 100%;
+                                                  height: 100%;
+                                                  margin: 0;
+                                                  max-width: none;
+                                                  .modal-content {
+                                                            width: 100%;
+                                                            height: 100%;
+                                                            .modal-header {
+                                                                      h4 {
+                                                                                color: $green;
+                                                                                font-size: 23px;
+                                                                                font-family: text;
+                                                                      }
+                                                                      .close-btn {
+                                                                                width: 19px;
+                                                                                height: 19px;
+                                                                                border-radius: 100px;
+                                                                                text-align: center;
+                                                                                background: #676767;
+                                                                                &:hover {
+                                                                                          background: $green;
+                                                                                }
+                                                                                img {
+                                                                                          position: relative;
+                                                                                          bottom: 3px;
+                                                                                          left: 0px;
+                                                                                }
+                                                                      }
+                                                            }
+                                                            .modal-body {
+                                                                      overflow: auto;
+                                                                      .devider-right {
+                                                                                border-right: 1px solid rgba(0, 0, 0, 0.1);
+                                                                      }
+                                                                      .blue-checkbox {
+                                                                                label {
+                                                                                          color: $green;
+                                                                                }
+                                                                      }
+                                                            }
+                                                            label {
+                                                                      font-size: 14px;
+                                                                      color: gray;
+                                                            }
+                                                  }
+                                        }
+                              }
+                              .modal-backdrop {
+                                        position: absolute;
+                                        top: 0;
+                                        right: 0;
+                                        bottom: 0;
+                                        left: 0;
+                                        z-index: 1040;
+                                        background-color: #000;
+                                        opacity: 0.7;
+                                        height: calc(100vh - 40px);
+                              }
+                              &.modal-open {
+                                        overflow: hidden !important;
+                              }
+                    }
+          }
+}
+
+body {
+          font-family: text;
+          background: white;
+          height: 100%;
+          padding-left: 250px;
+          padding-bottom: 40px;
+          &.sidebar-collapse {
+                    padding-left: 270px;
+          }
+}
+
+.no-padding {
+          padding: 0 !important;
+}
+
+.sidebar {
+          background: $green;
+          height: 100%;
+          width: 250px;
+          position: fixed;
+          top: 0px;
+          left: 0px;
+          padding: 15px;
+          text-align: center;
+          z-index: 1;
+          hr {
+                    border-top: solid 1px #006d00;
+          }
+          .user-circle {
+                    width: 80px;
+                    height: 80px;
+                    background: white;
+                    border-radius: 300px;
+                    position: relative;
+                    span {
+                              font-size: 35px;
+                              color: $green;
+                              position: absolute;
+                              top: 50%;
+                              left: 50%;
+                              transform: translate(-50%, -50%);
+                    }
+          }
+          .username-area {
+                    h4 {
+                              text-align: center;
+                              font-family: bold;
+                              font-size: 18px;
+                              color: white;
+                              margin: 15px 0px 0px 0px;
+                    }
+                    h3 {
+                              text-align: center;
+                              font-family: text;
+                              font-size: 16px;
+                              color: white;
+                              margin: 0;
+                    }
+          }
+          .help-div {
+                    span {
+                              color: white;
+                              display: inline-block;
+                              width: 25px;
+                              height: 25px;
+                              border: solid 1px white;
+                              border-radius: 100px;
+                              padding: 1px;
+                              cursor: pointer;
+                              transition: 0.3s;
+                              &:hover {
+                                        background-color: white;
+                                        color: $green;
+                              }
+                    }
+          }
+          .logo-div {
+                    bottom: 30px;
+                    color: white;
+                    font-family: semibold;
+                    position: absolute;
+                    font-size: 20px;
+                    span {
+                              font-family: thin;
+                    }
+          }
+          .nav-area {
+                    text-align: left;
+                    height: 100%;
+                    ul {
+                              padding: 0px;
+                              li {
+                                        list-style-type: none;
+                                        padding: 0px;
+                                        white-space: nowrap;
+                                        cursor: pointer;
+                                        position: relative;
+                                        a {
+                                                  font-family: text;
+                                                  font-size: 14px;
+                                                  color: white;
+                                                  display: block;
+                                                  padding: 10px 30px;
+                                                  text-decoration: none;
+                                                  .glyph {
+                                                            font-size: 23px;
+                                                            position: relative;
+                                                            top: 4px;
+                                                            margin-right: 5px;
+                                                            opacity: 0.5;
+                                                  }
+                                        }
+                                        .dropdown-menu a:hover,
+                                        &:hover {
+                                                  background: #038603;
+                                                  a .glyph {
+                                                            opacity: 1;
+                                                  }
+                                        }
+                                        .intake-form-dropdown {
+                                                  border: none;
+                                                  left: -2px !important;
+                                                  border-radius: 0px;
+                                                  box-shadow: #0000001a 0px 0px 70px;
+                                                  &::before {
+                                                            content: "";
+                                                            width: 12px;
+                                                            height: 16px;
+                                                            background-image: url(../images/dropdown-tip.png);
+                                                            position: absolute;
+                                                            top: 12px;
+                                                            left: -12px;
+                                                  }
+                                        }
+                                        &.active {
+                                                  background: #006d00;
+                                                  a {
+                                                            .glyph {
+                                                                      opacity: 1;
+                                                            }
+                                                            font-family: bold;
+                                                            color: white;
+                                                  }
+                                                  &::after {
+                                                            content: "";
+                                                            width: 0px;
+                                                            height: 0px;
+                                                            position: absolute;
+                                                            top: 50%;
+                                                            transform: translateY(-50%);
+                                                            background: transparent;
+                                                            right: 0px;
+                                                            border: solid 10px transparent;
+                                                            border-right-color: #f4f8f9;
+                                                  }
+                                        }
+                              }
+                    }
+          }
+}
+
+footer {
+          background-color: $green;
+          height: 40px;
+          position: fixed;
+          bottom: 0px;
+          left: 0px;
+          width: 100%;
+          padding: 5px 30px;
+          z-index: 1;
+          line-height: 30px;
+          .footer-chat-container {
+                    .glyph {
+                              color: white;
+                              font-size: 22px;
+                              position: relative;
+                              top: 4px;
+                    }
+          }
+          .footer-icons {
+                    .glyph {
+                              color: white;
+                              font-size: 28px;
+                              line-height: 0;
+                              position: relative;
+                              top: 8px;
+                    }
+          }
+          .chat-area {
+                    color: white;
+                    span.chat-status {
+                              position: relative;
+                              top: -2px;
+                              .status-color {
+                                        width: 10px;
+                                        height: 10px;
+                                        background-color: #6bf16b;
+                                        border-radius: 100px;
+                                        display: inline-block;
+                                        top: 0px;
+                              }
+                    }
+          }
+          .notify {
+                    position: relative;
+                    padding: 0px 11px;
+                    span.count {
+                              position: absolute;
+                              top: 0px;
+                              right: 0px;
+                              background-color: red;
+                              width: 18px;
+                              height: 18px;
+                              border-radius: 100px;
+                              display: inline-block;
+                              color: white;
+                              font-size: 12px;
+                              text-align: center;
+                              line-height: 20px;
+                              font-family: semibold;
+                              z-index: 1;
+                    }
+          }
+          .chat-box {
+                    background: white;
+                    width: 30px;
+                    height: 30px;
+                    margin: 0px 10px;
+                    &.notify {
+                              span.count {
+                                        right: -10px;
+                              }
+                    }
+          }
+}
+
+input[type="checkbox"] {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          box-sizing: border-box;
+          width: 13px;
+          height: 13px;
+          margin-right: 0px !important;
+          cursor: pointer;
+          background-image: url("../images/checkbox.png") !important;
+          background-repeat: no-repeat !important;
+          border: none !important;
+          outline: 0;
+          transition: 0.3s;
+}
+
+input[type="checkbox"]:checked {
+          background-image: url("../images/checkbox-checked.png") !important;
+          background-repeat: no-repeat !important;
+}
+
+input[type="checkbox"]:focus {
+          outline: 0;
+          border: none;
+}
+
+input[type="radio"] {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          box-sizing: border-box;
+          width: 13px;
+          height: 13px;
+          margin-right: 0;
+          cursor: pointer;
+          background-image: url("../images/radio.png") !important;
+          background-repeat: no-repeat !important;
+          border: none !important;
+          outline: 0;
+          transition: 0.3s;
+}
+
+input[type="radio"]:checked {
+          background-image: url("../images/radio-checked.png") !important;
+          background-repeat: no-repeat !important;
+}
+
+input[type="radio"]:focus {
+          outline: 0;
+          border: none;
+}
+
+input[type="radio"]+span,
+input[type="checkbox"]+span {
+          font-family: semibold;
+          font-size: 14px;
+          color: #808080;
+          position: relative;
+          bottom: 6px;
+}
+
+.btn-primary {
+          background-color: $green;
+          border-color: $green;
+          margin-bottom: 5px;
+          height: 38px;
+          &:hover {
+                    background-color: #058605;
+                    border-color: #058605;
+          }
+}
+
+.btn-outline-primary {
+          color: $green;
+          background-color: transparent;
+          background-image: none;
+          border-color: $green;
+          margin-bottom: 5px;
+          height: 38px;
+          &:hover {
+                    border-color: #058605;
+                    background-color: $green;
+          }
+}
+
+.nav-collapse-btn {
+          display: none;
+          background-color: #2b77c7;
+          border-color: #2b77c7;
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          z-index: 10;
+          &:hover,
+          &:active {
+                    background-color: #2b77c7 !important;
+                    border-color: #2b77c7;
+          }
+}
+
+.nav-collapse-btn-lg {
+          background-color: $green;
+          border-color: $green;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          z-index: 10;
+          &:hover,
+          &:active {
+                    background-color: #038603 !important;
+                    border-color: #038603;
+          }
+}
+
+.border-left {
+          border-left: solid 1px #dceaee;
+}
+
+.content-area {
+          padding: 20px 30px 20px 0px;
+          .title-area {
+                    h2 {
+                              font-family: semibold;
+                              margin-top: 3px;
+                              color: #404752;
+                              font-size: 22px;
+                    }
+                    .back-icon {
+                              cursor: pointer;
+                              position: relative;
+                              top: 4px;
+                    }
+                    .add-btn {
+                              padding: 6px 13px;
+                              background-color: #73ba5d;
+                              border: none;
+                              border-radius: 100px;
+                              color: white;
+                              font-family: semibold;
+                              font-size: 13px;
+                              outline: 0;
+                              cursor: pointer;
+                              &:active {
+                                        background-color: #67a953;
+                              }
+                              img {
+                                        position: relative;
+                                        bottom: 2px;
+                                        padding-right: 5px;
+                              }
+                    }
+                    .search-bar {
+                              width: 300px;
+                              border: solid 1px #d6e5e9;
+                              background-color: white !important;
+                              border-radius: 100px;
+                              height: 30px;
+                              outline: 0;
+                              background-image: url(../images/search-grey.svg);
+                              background-repeat: no-repeat;
+                              background-position: 9px 7px;
+                              padding-left: 28px;
+                              font-size: 13px;
+                              font-family: thin;
+                              background-size: 14px 14px;
+                              &:focus {
+                                        border-color: $green;
+                                        background-image: url(../images/search-green.svg);
+                                        background-repeat: no-repeat;
+                                        background-size: 14px 14px;
+                                        transition: 0.7s;
+                              }
+                    }
+                    .filter-icon {
+                              cursor: pointer;
+                              position: relative;
+                              top: 4px;
+                              opacity: 0.7;
+                              &:hover {
+                                        opacity: 1;
+                              }
+                    }
+          }
+          .custom-table tbody tr {
+                    background: white;
+                    box-shadow: #00000005 0px 0px 40px;
+                    cursor: pointer;
+          }
+          .custom-table tbody tr:hover {
+                    background: #ffffff61;
+          }
+          .custom-table tbody tr td:first-child img {
+                    position: relative;
+                    bottom: 2px;
+                    margin-right: 5px;
+          }
+          .custom-table tbody tr td a {
+                    text-decoration: none;
+          }
+          .custom-table tbody tr td img {
+                    margin-right: 10px;
+          }
+          .custom-table tbody tr td .action-item {
+                    position: relative;
+                    cursor: pointer;
+                    img {
+                              opacity: 0.5;
+                              &:hover {
+                                        opacity: 1;
+                              }
+                    }
+                    .number {
+                              display: inline-block;
+                              position: absolute;
+                              top: -6px;
+                              right: 6px;
+                              background-color: red;
+                              width: 14px;
+                              height: 14px;
+                              border-radius: 100px;
+                              color: white;
+                              font-family: semibold;
+                              font-size: 9px;
+                              padding: 1px;
+                              z-index: 1;
+                    }
+          }
+          .custom-table tbody tr td {
+                    font-family: text;
+                    color: #8f8f8f;
+                    font-size: 14px;
+                    text-align: center;
+                    .blue-span {
+                              color: #2dc5c9;
+                              font-family: semibold;
+                              font-size: 13px;
+                              background-color: #d7f4f5;
+                              border-radius: 100px;
+                              padding: 8px 15px;
+                    }
+                    .yellow-span {
+                              color: #d1af29;
+                              font-family: semibold;
+                              font-size: 13px;
+                              background-color: #ffefaf;
+                              border-radius: 100px;
+                              padding: 8px 15px;
+                    }
+          }
+          .custom-table.table-sm td,
+          .table-sm th {
+                    padding: 15px 10px;
+          }
+          .custom-table.table-sm td {
+                    border-top: none;
+                    border-bottom: solid 10px #f4f8f9;
+                    white-space: nowrap;
+          }
+          .custom-table thead th {
+                    vertical-align: bottom;
+                    text-align: center;
+                    border: none;
+                    font-weight: normal;
+                    font-family: semibold;
+                    color: #a6babf;
+                    font-size: 14px;
+                    white-space: nowrap;
+          }
+          .grid-area {
+                    margin-top: 30px;
+          }
+          .white-box {
+                    background: white;
+                    border-radius: 3px;
+                    padding: 20px 0px;
+                    margin: 15px 0px;
+                    &.purchase-area {
+                              overflow: hidden;
+                              padding: 0;
+                              .heading-area {
+                                        border-bottom: solid 1px #f2f6f7;
+                                        margin-bottom: 0 !important;
+                                        .steps-info {
+                                                  font-family: semibold;
+                                                  font-size: 14px;
+                                                  color: #808080;
+                                                  .steps-menu {
+                                                            display: none;
+                                                  }
+                                        }
+                              }
+                              .purchase-content {
+                                        padding: 0px 15px;
+                                        .steps-list {
+                                                  .step-row {
+                                                            cursor: pointer;
+                                                            &:first-child {
+                                                                      // margin-top: 0px !important;
+                                                                      .step-count {
+                                                                                &::before {
+                                                                                          display: none;
+                                                                                }
+                                                                      }
+                                                            }
+                                                            &:last-child {
+                                                                      .step-count {
+                                                                                &::after {
+                                                                                          display: none;
+                                                                                }
+                                                                      }
+                                                            }
+                                                            margin: 25px 0px;
+                                                            .step-title {
+                                                                      padding-left: 35px;
+                                                                      font-family: semibold;
+                                                                      font-size: 14px;
+                                                                      color: #808080;
+                                                            }
+                                                            .step-count {
+                                                                      width: 25px;
+                                                                      height: 25px;
+                                                                      background-color: white;
+                                                                      color: #999999;
+                                                                      border: solid 1px #bcbcbc;
+                                                                      border-radius: 100px;
+                                                                      font-family: semibold;
+                                                                      font-size: 13px;
+                                                                      display: block;
+                                                                      text-align: center;
+                                                                      padding: 3px 0px;
+                                                                      bottom: 4px;
+                                                                      position: absolute;
+                                                                      top: 50%;
+                                                                      left: 0px;
+                                                                      transform: translateY(-50%);
+                                                                      &::before {
+                                                                                content: "";
+                                                                                width: 1px;
+                                                                                height: 13px;
+                                                                                border-left: solid 4px #ececec;
+                                                                                position: absolute;
+                                                                                top: -14px;
+                                                                                left: 50%;
+                                                                                transform: translateX(-50%);
+                                                                      }
+                                                                      &::after {
+                                                                                content: "";
+                                                                                width: 1px;
+                                                                                height: 13px;
+                                                                                border-left: solid 4px #ececec;
+                                                                                position: absolute;
+                                                                                bottom: -14px;
+                                                                                left: 50%;
+                                                                                transform: translateX(-50%);
+                                                                      }
+                                                            }
+                                                            &.complete {
+                                                                      .step-count {
+                                                                                background: $green;
+                                                                                color: white;
+                                                                                border-color: $green;
+                                                                                &::before,
+                                                                                &::after {
+                                                                                          border-color: $green;
+                                                                                }
+                                                                      }
+                                                                      .step-title {
+                                                                                color: $green;
+                                                                      }
+                                                            }
+                                                            &.in-complete {
+                                                                      .step-count {
+                                                                                background: #ff4a4a;
+                                                                                color: white;
+                                                                                border-color: #ff4a4a;
+                                                                                &::before,
+                                                                                &::after {
+                                                                                          border-color: #ff4a4a;
+                                                                                }
+                                                                      }
+                                                                      .step-title {
+                                                                                color: #ff4a4a;
+                                                                      }
+                                                            }
+                                                            &.optional {
+                                                                      .step-count {
+                                                                                background: #fcb938;
+                                                                                color: white;
+                                                                                border-color: #fcb938;
+                                                                                &::before,
+                                                                                &::after {
+                                                                                          border-color: #fcb938;
+                                                                                }
+                                                                      }
+                                                                      .step-title {
+                                                                                color: #fcb938;
+                                                                      }
+                                                            }
+                                                            &.active {
+                                                                      .step-count {
+                                                                                background: white;
+                                                                                color: $green;
+                                                                                border-color: $green;
+                                                                      }
+                                                                      .step-title {
+                                                                                color: black;
+                                                                      }
+                                                            }
+                                                  }
+                                        }
+                                        .messages-detail {
+                                                  background-color: #f8fafb;
+                                                  padding: 15px;
+                                                  .form-check-inline {
+                                                            margin-right: 20px;
+                                                  }
+                                                  .step-title {
+                                                            padding-left: 50px;
+                                                            font-family: semibold;
+                                                            font-size: 14px;
+                                                            color: black;
+                                                            margin-bottom: 15px;
+                                                  }
+                                                  .step-count {
+                                                            width: 25px;
+                                                            height: 25px;
+                                                            background: white;
+                                                            color: #73ba5d;
+                                                            border: solid 1px #73ba5d;
+                                                            border-radius: 100px;
+                                                            font-family: semibold;
+                                                            font-size: 13px;
+                                                            display: block;
+                                                            text-align: center;
+                                                            padding: 3px 0px;
+                                                            bottom: 4px;
+                                                            position: absolute;
+                                                            top: 50%;
+                                                            left: 15px;
+                                                            transform: translateY(-50%);
+                                                  }
+                                                  label {
+                                                            font-family: semibold;
+                                                            font-size: 12px;
+                                                            color: #9d9d9d;
+                                                            margin-bottom: 3px;
+                                                  }
+                                                  .form-control {
+                                                            border: solid 1px #ededed;
+                                                            font-family: semibold;
+                                                            font-size: 14px;
+                                                            color: #808080;
+                                                            &:focus {
+                                                                      box-shadow: 0 0 0 1px rgb(115, 186, 93);
+                                                            }
+                                                  }
+                                                  .form-group {
+                                                            &.error {
+                                                                      .form-control {
+                                                                                border: solid 1px red;
+                                                                                font-family: semibold;
+                                                                                font-size: 14px;
+                                                                                color: #808080;
+                                                                                &:focus {
+                                                                                          box-shadow: 0 0 0 1px red;
+                                                                                }
+                                                                      }
+                                                                      small {
+                                                                                font-family: semibold;
+                                                                                font-size: 10px;
+                                                                                color: red;
+                                                                      }
+                                                            }
+                                                  }
+                                                  .custom-btn {
+                                                            width: 112px;
+                                                            height: 35px;
+                                                            background: $green;
+                                                            color: white;
+                                                            font-family: semibold;
+                                                            font-size: 13px;
+                                                            border-radius: 100px;
+                                                            line-height: 35px;
+                                                            text-align: center;
+                                                            cursor: pointer;
+                                                            &:hover {
+                                                                      background: #5da049;
+                                                            }
+                                                  }
+                                        }
+                              }
+                    }
+                    &.intake-area {
+                              overflow: hidden;
+                              padding: 0;
+                              .intake-content {
+                                        padding: 15px;
+                              }
+                              .intake-box {
+                                        width: 100%;
+                                        height: auto;
+                                        padding: 65px 15px 15px;
+                                        background-repeat: no-repeat;
+                                        background-position: center 15px;
+                                        text-align: center;
+                                        font-family: text;
+                                        font-size: 18px;
+                                        color: #a1a1a1;
+                                        margin-bottom: 30px;
+                                        border: solid 1px #e1e1e1;
+                                        cursor: pointer;
+                                        cursor: pointer;
+                                        &:hover {
+                                                  color: $green;
+                                                  border: solid 1px $green;
+                                                  &.purchase {
+                                                            background-image: url(../images/purchase-active.png);
+                                                  }
+                                                  &.sale {
+                                                            background-image: url(../images/sale-active.png);
+                                                  }
+                                                  &.mortgage {
+                                                            background-image: url(../images/mortgage-active.png);
+                                                  }
+                                                  &.title-transfer {
+                                                            background-image: url(../images/title-transfer-active.png);
+                                                  }
+                                        }
+                                        &.purchase {
+                                                  background-image: url(../images/purchase.png);
+                                        }
+                                        &.sale {
+                                                  background-image: url(../images/sale.png);
+                                        }
+                                        &.mortgage {
+                                                  background-image: url(../images/mortgage.png);
+                                        }
+                                        &.title-transfer {
+                                                  background-image: url(../images/title-transfer.png);
+                                        }
+                              }
+                    }
+                    &.to-do-list-area {
+                              overflow: auto;
+                              padding: 0;
+                              &.reminders-area,
+                              &.documents-area,
+                              &.events-area {
+                                        .heading-area {
+                                                  margin-bottom: 5px !important;
+                                        }
+                                        .nav-tabs {
+                                                  border-bottom: none;
+                                                  padding: 0px 15px;
+                                        }
+                                        .nav-tabs .nav-item.show .nav-link,
+                                        .nav-tabs .nav-link.active {
+                                                  padding: 0px 8px 2px !important;
+                                                  border-bottom: solid 2px $green;
+                                                  border-top: none;
+                                                  border-left: none;
+                                                  border-right: none;
+                                                  color: $green;
+                                                  font-family: bold;
+                                                  font-size: 14px;
+                                        }
+                                        .nav-tabs .nav-link {
+                                                  padding: 0px 8px 2px !important;
+                                                  color: #a6babf;
+                                                  font-family: text;
+                                                  font-size: 14px;
+                                                  border: none;
+                                        }
+                              }
+                    }
+                    .heading-area {
+                              margin: 15px 0px !important;
+                              &.messages-area {
+                                        border-bottom: solid 1px #f2f6f7;
+                                        margin-bottom: 0 !important;
+                              }
+                    }
+                    .warning-container {
+                              .empty {
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 50%;
+                                        transform: translate(-50%, -50%);
+                                        font-size: 13px;
+                                        color: #a6babf;
+                              }
+                    }
+                    .reminders-list-container {
+                              padding: 0px 15px;
+                              min-height: 166px;
+                              max-height: 166px;
+                              overflow: auto;
+                    }
+                    .events-list-container {
+                              padding: 0px 15px;
+                              min-height: 210px;
+                              max-height: 210px;
+                              overflow: auto;
+                    }
+                    .document-container {
+                              .document-item {
+                                        cursor: pointer;
+                                        padding: 15px;
+                                        &:hover {
+                                                  border-radius: 5px;
+                                                  background-color: #73ba5d24;
+                                        }
+                              }
+                              img {
+                                        padding-bottom: 10px;
+                              }
+                              p {
+                                        font-size: 13px;
+                                        color: #9d9d9d;
+                                        margin: 0;
+                              }
+                    }
+                    .document-container {
+                              padding: 0px 15px;
+                              min-height: 210px;
+                              max-height: 210px;
+                              overflow: auto;
+                    }
+                    .to-do-list-container,
+                    .warning-container {
+                              padding: 0px 15px;
+                              min-height: 180px;
+                              max-height: 180px;
+                              overflow: auto;
+                    }
+                    .messages-container {
+                              padding: 0px 15px;
+                              .messages-detail {
+                                        background-color: #f8fafb;
+                                        padding: 15px 15px 0px;
+                                        min-height: 400px;
+                                        max-height: 400px;
+                                        overflow: auto;
+                                        .message-detail-header-area {
+                                                  .search,
+                                                  .menu {
+                                                            width: 30px;
+                                                            height: 30px;
+                                                            padding: 3px 7px;
+                                                            position: relative;
+                                                            bottom: 10px;
+                                                            border-radius: 100px;
+                                                            right: 10px;
+                                                            cursor: pointer;
+                                                            text-align: center;
+                                                            &:hover {
+                                                                      background: #f1f1f1;
+                                                            }
+                                                  }
+                                        }
+                                        .message-detail-chat-area {
+                                                  padding: 15px;
+                                                  min-height: 300px;
+                                                  max-height: 300px;
+                                                  overflow: auto;
+                                                  .incoming {
+                                                            .chat-text {
+                                                                      background-color: white;
+                                                                      color: #9d9d9d;
+                                                                      &::after {
+                                                                                content: "";
+                                                                                width: 9px;
+                                                                                height: 12px;
+                                                                                position: absolute;
+                                                                                top: 0px;
+                                                                                left: -9px;
+                                                                                background: url(../images/white-chat-tip.png);
+                                                                      }
+                                                            }
+                                                  }
+                                                  .outgoing {
+                                                            .chat-text {
+                                                                      background-color: $green;
+                                                                      color: white;
+                                                                      float: right;
+                                                                      &::after {
+                                                                                content: "";
+                                                                                width: 9px;
+                                                                                height: 12px;
+                                                                                position: absolute;
+                                                                                top: 0px;
+                                                                                right: -9px;
+                                                                                background: url(../images/green-chat-tip.png);
+                                                                      }
+                                                                      span {
+                                                                                color: white;
+                                                                      }
+                                                            }
+                                                  }
+                                                  .chat-text {
+                                                            box-shadow: #0000000a 0px 3px 7px;
+                                                            font-family: text;
+                                                            font-size: 12px;
+                                                            padding: 12px 12px 30px;
+                                                            position: relative;
+                                                            display: inline-block;
+                                                            span {
+                                                                      font-family: text;
+                                                                      font-size: 10px;
+                                                                      color: #bec4c5;
+                                                                      position: absolute;
+                                                                      bottom: 9px;
+                                                                      left: 12px;
+                                                            }
+                                                  }
+                                        }
+                                        .message-type-area {
+                                                  border-top: solid 1px #e6ebed;
+                                                  position: relative;
+                                                  input {
+                                                            width: 100%;
+                                                            padding: 10px 45px 10px 15px;
+                                                            border: none;
+                                                            background: transparent;
+                                                            outline: 0;
+                                                  }
+                                                  .send-btn {
+                                                            position: absolute;
+                                                            top: 5px;
+                                                            right: 0px;
+                                                            padding: 7px 0px;
+                                                            border-radius: 100px;
+                                                            width: 35px;
+                                                            height: 35px;
+                                                            text-align: center;
+                                                            cursor: pointer;
+                                                            transition: 0.3s;
+                                                            &:hover {
+                                                                      background: white;
+                                                                      transform: rotateZ(30deg);
+                                                            }
+                                                  }
+                                        }
+                                        .user-name {
+                                                  h3 {
+                                                            font-family: semibold;
+                                                            color: #404752;
+                                                            font-size: 18px;
+                                                  }
+                                        }
+                              }
+                              .messages-list {
+                                        min-height: 400px;
+                                        max-height: 400px;
+                                        overflow: auto;
+                                        padding: 0px 15px;
+                                        .message-row {
+                                                  padding: 10px 0px;
+                                                  cursor: pointer;
+                                                  &:hover {
+                                                            background-color: #f8fafb;
+                                                  }
+                                                  &.active {
+                                                            background-color: #f8fafb;
+                                                            h4 {
+                                                                      color: #569d40 !important;
+                                                            }
+                                                  }
+                                        }
+                                        .user-detail {
+                                                  h4 {
+                                                            font-size: 14px;
+                                                            color: black;
+                                                            font-family: semibold;
+                                                            margin-bottom: 0px;
+                                                  }
+                                                  p {
+                                                            font-size: 13px;
+                                                            color: #9d9d9d;
+                                                            font-family: text;
+                                                            margin-bottom: 0px;
+                                                            white-space: nowrap;
+                                                            text-overflow: ellipsis;
+                                                            overflow: hidden;
+                                                  }
+                                                  small {
+                                                            font-size: 10px;
+                                                            color: #a6babf;
+                                                            font-family: semibold;
+                                                  }
+                                        }
+                                        .message-count {
+                                                  .count {
+                                                            width: 18px;
+                                                            height: 18px;
+                                                            font-size: 10px;
+                                                            padding: 2px 0px;
+                                                            bottom: 7px;
+                                                  }
+                                        }
+                              }
+                    }
+                    h1 {
+                              font-family: bold;
+                              font-size: 27px;
+                              color: black;
+                    }
+                    h2 {
+                              font-family: semibold;
+                              font-size: 18px;
+                              color: #404752;
+                    }
+                    .count {
+                              width: 25px;
+                              height: 25px;
+                              background-color: $green;
+                              color: white;
+                              border-radius: 100px;
+                              font-family: semibold;
+                              font-size: 13px;
+                              display: block;
+                              text-align: center;
+                              padding: 4px 0px;
+                              position: relative;
+                              bottom: 4px;
+                    }
+                    small {
+                              font-family: semibold;
+                              font-size: 17px;
+                              color: #a6babf;
+                    }
+                    .add-btn-green {
+                              width: 30px;
+                              height: 30px;
+                              padding: 3px 7px;
+                              position: relative;
+                              bottom: 10px;
+                              border-radius: 100px;
+                              right: 10px;
+                              cursor: pointer;
+                              &:hover {
+                                        background: #f1f1f1;
+                              }
+                    }
+                    .to-do-list {
+                              &.complete {
+                                        .task {
+                                                  border-color: $green;
+                                                  p {
+                                                            text-decoration: line-through;
+                                                  }
+                                                  &::after {
+                                                            background-color: $green;
+                                                  }
+                                        }
+                              }
+                              .date {
+                                        font-family: text;
+                                        color: #a6babf;
+                                        font-size: 14px;
+                                        line-height: 16px;
+                              }
+                              &:last-child {
+                                        .task {
+                                                  border-left-color: white;
+                                        }
+                              }
+                              .task {
+                                        line-height: 18px;
+                                        border-left: solid 2px #e1e1e1;
+                                        padding-bottom: 20px;
+                                        position: relative;
+                                        &::after {
+                                                  content: "";
+                                                  width: 10px;
+                                                  height: 10px;
+                                                  border-radius: 100px;
+                                                  background-color: #e1e1e1;
+                                                  display: block;
+                                                  position: absolute;
+                                                  top: 0px;
+                                                  left: -6px;
+                                        }
+                                        p {
+                                                  font-family: semibold;
+                                                  color: black;
+                                                  font-size: 14px;
+                                                  margin-bottom: 0px;
+                                        }
+                              }
+                              small {
+                                        font-family: semibold;
+                                        color: #9d9d9d;
+                                        font-size: 12px;
+                              }
+                    }
+                    .events-list {
+                              padding-bottom: 20px;
+                              .event-date {
+                                        span {
+                                                  display: block;
+                                                  color: $green;
+                                                  text-align: center;
+                                                  line-height: 20px;
+                                                  &:first-child {
+                                                            font-size: 13px;
+                                                            text-transform: uppercase;
+                                                  }
+                                                  &:last-child {
+                                                            font-family: bold;
+                                                            font-size: 23px;
+                                                  }
+                                        }
+                              }
+                              .event {
+                                        p {
+                                                  font-family: text;
+                                                  color: black;
+                                                  font-size: 16px;
+                                                  margin-bottom: 0;
+                                                  line-height: 21px;
+                                        }
+                                        small {
+                                                  font-family: text;
+                                                  color: #9d9d9d;
+                                                  font-size: 13px;
+                                                  line-height: 17px !important;
+                                                  display: block;
+                                        }
+                              }
+                    }
+                    .reminder-list {
+                              padding-top: 20px;
+                              &.complete {
+                                        .task {
+                                                  p {
+                                                            text-decoration: line-through;
+                                                  }
+                                                  small {
+                                                            .bell-icon {
+                                                                      opacity: 0.5;
+                                                            }
+                                                  }
+                                        }
+                              }
+                              .date {
+                                        font-family: text;
+                                        color: #a6babf;
+                                        font-size: 14px;
+                                        line-height: 16px;
+                              }
+                              &:last-child {
+                                        .task {
+                                                  border-left-color: white;
+                                        }
+                              }
+                              .task {
+                                        line-height: 18px;
+                                        position: relative;
+                                        p {
+                                                  font-family: semibold;
+                                                  color: black;
+                                                  font-size: 14px;
+                                                  margin-bottom: 0px;
+                                        }
+                              }
+                              small {
+                                        position: relative;
+                                        top: 3px;
+                                        span {
+                                                  font-family: text;
+                                                  color: #9d9d9d;
+                                                  font-size: 13px;
+                                                  padding: 0px 5px;
+                                                  border-right: solid 1px #dceaee;
+                                                  &:last-child {
+                                                            border-right: none;
+                                                  }
+                                        }
+                              }
+                    }
+          }
+}
+
+.parentTabs {
+          .tabbable {
+                    padding: 20px 20px;
+                    border-top: 1px solid #dee2e6;
+          }
+          .tab-pane {
+                    padding-top: 15px;
+          }
+          a {
+                    font-family: semibold;
+                    font-size: 14px;
+                    color: #9d9d9d;
+          }
+          .nav-tabs .nav-item.show .nav-link,
+          .nav-tabs .nav-link.active {
+                    color: $green;
+          }
+}
+
+::-webkit-scrollbar {
+          width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+          border-width: 1px 1px 1px 2px;
+}
+
+::-webkit-scrollbar-track {
+          border-width: 0;
+}
+
+::-webkit-scrollbar {
+          height: 11px;
+          overflow: visible;
+          width: 11px;
+}
+
+::-webkit-scrollbar-button {
+          height: 0;
+          width: 0;
+}
+
+::-webkit-scrollbar-track {
+          background-clip: padding-box;
+          border: solid transparent;
+          border-width: 0 0 0 4px;
+}
+
+::-webkit-scrollbar-track:horizontal {
+          border-width: 4px 0 0;
+}
+
+::-webkit-scrollbar-track:hover {
+          background-color: rgba(205, 238, 255, 0.32);
+}
+
+::-webkit-scrollbar-track:active {
+          background-color: rgba(205, 238, 255, 0.32);
+}
+
+::-webkit-scrollbar-thumb {
+          background-color: $green;
+          background-clip: padding-box;
+          border: solid transparent;
+          border-width: 1px 1px 1px 6px;
+          min-height: 28px;
+          padding: 100px 0 0;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+          border-width: 6px 1px 1px;
+          padding: 0 0 0 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+          background-color: $green;
+}
+
+::-webkit-scrollbar-thumb:active {
+          background-color: $green;
+}
+
+::-webkit-scrollbar-track {
+          border-width: 0 1px 0 6px;
+}
+
+::-webkit-scrollbar-track:horizontal {
+          border-width: 6px 0 1px;
+}
+
+::-webkit-scrollbar-track:hover {
+          background-color: #ccf5bf;
+}
+
+::-webkit-scrollbar-thumb {
+          border-width: 0 1px 0 6px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+          border-width: 6px 0 1px;
+}
+
+::-webkit-scrollbar-corner {
+          background: transparent;
+}
+
+@media (min-width: 767px) {
+          .sidebar.bar-collapse {
+                    width: 50px;
+                    padding: 5px;
+                    overflow: hidden;
+                    .user-area,
+                    .username-area,
+                    .logo-div,
+                    .help-div,
+                    hr {
+                              display: none;
+                    }
+                    .nav-area {
+                              padding-top: 100px;
+                              li.active::after {
+                                        right: 6px;
+                              }
+                              ul li a {
+                                        padding: 10px 25px;
+                                        .glyph {
+                                                  margin-right: 30px;
+                                        }
+                              }
+                    }
+                    .nav-collapse-btn-lg {
+                              right: 3px;
+                    }
+          }
+}
+
+.tab-box {
+          background-color: transparent;
+          border-radius: 5px;
+          height: 30px;
+          max-width: 130px;
+          max-height: 30px;
+          position: relative;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          transition: 0.3s;
+          padding: 0px 10px;
+          line-height: 30px;
+          font-size: 15px;
+          color: white;
+          border: solid 1px white;
+          cursor: default;
+          margin: 0px 3px;
+          &:first-child {
+                    margin-left: 15px;
+          }
+          &:last-child {
+                    margin-right: 15px;
+          }
+          &:hover {
+                    background-color: #ffffff26;
+                    transition: 0.3s;
+          }
+          .close-btn {
+                    position: relative;
+                    top: 5px;
+                    right: -4px;
+                    cursor: pointer;
+                    float: right;
+          }
+          &.tab-active {
+                    background-color: white;
+                    transition: 0.3s;
+                    padding-right: 25px;
+                    color: black;
+                    font-family: semibold;
+                    .close-btn {
+                              position: absolute;
+                              right: 6px;
+                              left: unset;
+                              top: 50%;
+                              transform: translateY(-50%);
+                    }
+          }
+}
+
+.cheque {
+          border: solid 1px gray;
+          padding: 10px;
+          border-radius: 5px;
+          max-width: 640px;
+          width: 100%;
+          margin-bottom: 20px;
+          background-image: url(../images/logo.png);
+          background-repeat: no-repeat;
+          background-position: center;
+          .row {
+                    margin-bottom: 15px;
+                    &:last-child {
+                              margin-bottom: 0 !important;
+                    }
+          }
+          h5 {
+                    font-size: 15px;
+                    color: black;
+                    margin-bottom: 0;
+          }
+          p {
+                    margin-bottom: 0;
+                    &.small {
+                              font-size: 11px;
+                    }
+          }
+          .uppercase {
+                    text-transform: uppercase;
+          }
+          .cheque-body {
+                    margin-top: 20px;
+          }
+}
+
+.devider-right {
+          border-right: solid 1px #016901;
+}
+
+.green-border {
+          border: solid 1px $green;
+}
+
+.green-table {
+          margin-bottom: 0 !important;
+          .table-hover tbody tr:hover {
+                    background-color: $green !important;
+                    color: white;
+          }
+}
+
+.widgets-area {
+          margin-top: 30px;
+          margin-bottom: 30px;
+          .box {
+                    padding: 15px 15px 0px;
+                    margin-bottom: 30px;
+                    border-radius: 3px;
+                    max-height: calc(100vh - 200px);
+                    overflow: auto;
+                    .custom-table {
+                              max-height: 408px
+                    }
+                    .box-header {
+                              padding-bottom: 6px;
+                              border-bottom: solid 1px $green;
+                    }
+                    .content-row {
+                              padding: 10px 0px;
+                              border-bottom: solid 1px #cccccc;
+                              cursor: pointer;
+                              &:last-child {
+                                        border-bottom: none;
+                              }
+                              &:hover {
+                                        background: #efefef;
+                              }
+                    }
+                    .action-items {
+                              img {
+                                        padding: 0px 5px;
+                                        cursor: pointer;
+                                        &:hover {
+                                                  opacity: 0.7;
+                                        }
+                              }
+                    }
+                    .message-row {
+                              padding: 0px;
+                              h6,
+                              p {
+                                        margin-bottom: 0;
+                                        overflow: hidden;
+                                        white-space: nowrap;
+                                        text-overflow: ellipsis;
+                              }
+                    }
+          }
+}
+
+@media (max-width: 1199px) {
+          .content-area .white-box h1 {
+                    font-size: 20px;
+          }
+}
+
+@media (max-width: 991px) {
+          .add-btn-area.border-left {
+                    border-left: none !important;
+          }
+}
+
+@media (max-width: 768px) {
+          .custom-container>.row .detail-area .modal-backdrop {
+                    height: calc(100vh - 49px);
+          }
+          .custom-container>.row .detail-area .modal {
+                    max-height: calc(100vh - 49px);
+          }
+          .custom-table {
+                    max-height: 100vh;
+          }
+          .steps-list {
+                    display: none;
+          }
+          .steps-list.show {
+                    display: block;
+          }
+          .steps-menu {
+                    display: inline-block !important;
+                    margin: 0px 5px;
+                    position: relative;
+                    bottom: 1px;
+          }
+}
+
+.footer-items {
+          display: none;
+          .chat-area {
+                    color: white;
+                    span.chat-status {
+                              position: relative;
+                              top: -2px;
+                              .status-color {
+                                        width: 10px;
+                                        height: 10px;
+                                        background-color: #6bf16b;
+                                        border-radius: 100px;
+                                        display: inline-block;
+                                        top: 0px;
+                              }
+                    }
+          }
+          .notify {
+                    position: relative;
+                    span.count {
+                              position: absolute;
+                              top: 0px;
+                              right: 0px;
+                              background-color: red;
+                              width: 18px;
+                              height: 18px;
+                              border-radius: 100px;
+                              display: inline-block;
+                              color: white;
+                              font-size: 12px;
+                              text-align: center;
+                              line-height: 20px;
+                              font-family: semibold;
+                    }
+          }
+}
+
+.layout-creator {
+          .row {
+                    margin: 0;
+          }
+          .box {
+                    min-height: 200px;
+                    border: solid 1px transparent;
+                    padding: 15px;
+                    border-radius: 5px;
+                    background-color: white;
+                    z-index: 1;
+                    &.box-row {
+                              border-color: blue;
+                              z-index: 2;
+                              margin-bottom: 15px;
+                              &:last-child {
+                                        margin-bottom: 0;
+                              }
+                              .delete-row {
+                                        position: absolute;
+                                        bottom: -13px;
+                                        left: 50%;
+                                        transform: translateX(-50%);
+                              }
+                    }
+                    &.box-col {
+                              border-color: green;
+                              z-index: 3;
+                              margin-right: 15px;
+                              &:last-child {
+                                        margin-right: 0;
+                              }
+                              .delete-col {
+                                        position: absolute;
+                                        right: -11px;
+                                        top: 50%;
+                                        transform: translateY(-50%);
+                              }
+                    }
+                    &.add {
+                              text-align: center;
+                              .add-row {
+                                        color: blue;
+                                        &:hover {
+                                                  color: black !important;
+                                        }
+                              }
+                              .add-col {
+                                        color: green;
+                                        &:hover {
+                                                  color: black !important;
+                                        }
+                              }
+                              span.add-row {
+                                        .glyph {
+                                                  font-size: 27px;
+                                                  top: 5px;
+                                                  left: 3px;
+                                                  position: relative;
+                                        }
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 50%;
+                                        transform: translate(-50%,
+                                        -50%);
+                                        cursor: pointer;
+                              }
+                              span.add-col {
+                                        position: absolute;
+                                        top: 50%;
+                                        left: 50%;
+                                        transform: translate(-50%, -50%);
+                                        cursor: pointer;
+                                        .glyph {
+                                                  font-size: 27px;
+                                                  top: 5px;
+                                                  left: 3px;
+                                                  position: relative;
+                                        }
+                              }
+                    }
+          }
+          .add-widget {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    cursor: pointer;
+                    text-align: center;
+                    color: orange;
+                    &:hover {
+                              color: #000;
+                    }
+                    .glyph {
+                              font-size: 27px;
+                    }
+          }
+          .widget-selection {
+                    width: 100%;
+                    height: 100%;
+                    background: #000000b0;
+                    margin: -15px;
+                    position: absolute;
+                    border-radius: 5px;
+                    z-index: 4;
+                    padding: 15px;
+                    text-align: center;
+                    .search {
+                              width: 100%;
+                              height: 30px;
+                              line-height: 30px;
+                              border-radius: 100px;
+                              padding-left: 33px;
+                              border: none;
+                              background-color: white;
+                              background-image: url(../images/search-gray.png);
+                              background-repeat: no-repeat;
+                              background-position: 8px;
+                              outline: 0;
+                              font-size: 13px;
+                    }
+                    .select-option {
+                              width: 100%;
+                              background: white;
+                              max-height: 100px;
+                              margin-top: 15px;
+                              overflow: auto;
+                              text-align: left;
+                              ul {
+                                        padding-left: 0;
+                                        width: 100%;
+                                        li {
+                                                  list-style-type: none;
+                                                  padding: 2px 10px;
+                                                  font-size: 13px;
+                                                  &:hover {
+                                                            background-color: $green;
+                                                            color: white;
+                                                  }
+                                        }
+                              }
+                    }
+                    .btn {
+                              padding: 2px 10px;
+                              font-size: 13px;
+                              margin-top: 6px;
+                              &.btn-white {
+                                        background-color: white;
+                                        color: $green;
+                              }
+                              &.btn-blue {
+                                        background-color: $green;
+                                        color: white;
+                              }
+                    }
+          }
+          .drag {
+                    position: absolute;
+                    top: 20px;
+                    left: 20px;
+                    cursor: grab;
+          }
+}
+
+@media (max-width: 767px) {
+          .card-header {
+                    a {
+                              font-size: 17px !important;
+                    }
+          }
+          .card-body {
+                    ul {
+                              li {
+                                        a {
+                                                  font-size: 15px !important;
+                                                  &.active {
+                                                            background-color: transparent !important;
+                                                            color: gray !important;
+                                                  }
+                                                  &:active {
+                                                            background-color: $green !important;
+                                                            color: white !important;
+                                                  }
+                                        }
+                              }
+                    }
+          }
+          .custom-container .detail-area {
+                    display: none;
+                    padding: 60px 15px 30px !important;
+                    .detail-back-btn {
+                              display: block !important;
+                    }
+                    .modal {
+                              padding: 5px !important;
+                    }
+          }
+          body {
+                    padding-left: 0px !important;
+                    height: auto !important;
+                    padding-bottom: 50px !important;
+          }
+          .custom-container {
+                    height: auto !important;
+          }
+          .gray-sidebar {
+                    position: static !important;
+                    width: 100% !important;
+          }
+          .gray-area {
+                    .close-btn {
+                              display: none;
+                    }
+                    .file-textual-info {
+                              p,
+                              table {
+                                        font-size: 15px !important;
+                              }
+                    }
+          }
+          .footer-items {
+                    display: block;
+                    margin-bottom: 20px;
+                    .glyph {
+                              color: white;
+                              font-size: 22px;
+                              position: relative;
+                              top: 4px;
+                    }
+          }
+          .tabs-outer-col {
+                    padding: 0;
+          }
+          .tabs-container {
+                    display: block;
+                    white-space: nowrap;
+                    overflow-x: auto;
+                    overflow-y: hidden;
+                    margin: 0;
+          }
+          .tab-box {
+                    max-width: 100px;
+                    display: inline-block;
+                    line-height: 40px;
+                    height: 40px;
+                    max-height: 40px;
+                    &:hover {
+                              bottom: 0px;
+                    }
+                    &.tab-active {
+                              bottom: 0px;
+                    }
+          }
+          footer {
+                    height: 50px;
+                    line-height: 50px;
+                    padding: 5px 15px;
+                    .chat-box-container,
+                    .chat-area {
+                              display: none;
+                    }
+                    .footer-chat-container,
+                    .footer-icons {
+                              display: none;
+                    }
+          }
+          .nav-collapse-btn-lg {
+                    display: none;
+          }
+          .help-div span {
+                    margin-bottom: 40px;
+          }
+          .container-fluid {
+                    padding-left: 15px;
+          }
+          .sidebar {
+                    width: 100%;
+                    position: static;
+                    text-align: left;
+                    padding: 0px 45px;
+                    z-index: 10;
+                    .logo {
+                              width: 180px;
+                    }
+                    .nav-container {
+                              padding: 30px 0px !important;
+                              ul li {
+                                        border-radius: 200px;
+                                        &.active {
+                                                  &::after {
+                                                            display: none;
+                                                  }
+                                        }
+                              }
+                    }
+                    .nav-collapse-btn {
+                              display: block;
+                              &.notify {
+                                        &::after {
+                                                  content: "";
+                                                  width: 8px;
+                                                  height: 8px;
+                                                  background-color: red;
+                                                  border-radius: 100px;
+                                                  position: absolute;
+                                                  top: -3px;
+                                                  right: -3px;
+                                        }
+                              }
+                    }
+                    .username-area {
+                              margin-bottom: 20px;
+                    }
+                    hr {
+                              display: none;
+                    }
+          }
+          .table-container {
+                    overflow: auto;
+          }
+          .content-area {
+                    padding: 15px;
+                    .title-area {
+                              .title-row {
+                                        margin-bottom: 10px;
+                              }
+                              h2 {
+                                        font-size: 15px !important;
+                              }
+                              .search-bar {
+                                        width: 230px;
+                              }
+                              .add-share-icon {
+                                        display: none;
+                              }
+                              .add-btn-area.border-left {
+                                        border-left: none !important;
+                              }
+                    }
+                    .white-box h1 {
+                              font-family: bold;
+                              font-size: 22px;
+                    }
+                    .grid-area {
+                              margin-top: 10px;
+                    }
+                    .white-box .reminders-list-container {
+                              max-height: 500px;
+                    }
+                    .white-box .to-do-list-container {
+                              max-height: 500px;
+                    }
+          }
+}

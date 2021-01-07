@@ -1,0 +1,38 @@
+
+  .collapsible {
+
+    background-color:  #026902;
+    color:  #026902;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+  
+  .active, .collapsible:hover {
+    background-color: #026902;
+  }
+  
+  .collapsible:after {
+    content: '›';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+  }
+  
+  .active:after {
+    content: "ˇ";
+  }
+  
+  .content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #009900;
+  }
+
+  

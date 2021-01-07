@@ -1,0 +1,164 @@
+<div class="row">
+    <h3 class=" blue-h  col-md-6 title-border">  Purchases by vendors </h3>
+        <div class="col-md-6 text-right title-border">
+            <div class="btn-group ">
+                <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle"
+                        data-toggle="dropdown">
+                        Action
+                    </button>
+                <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+                    <ul class="manageList table-hover">
+                            <li class="list">
+                                <a href="javascript:;"  (click)="openPDF()">
+                                    <em class=" fa fa-print"></em>
+                                    <span class=""> Preview </span>
+                                </a>
+                            </li>
+                            <li class="list">
+                                <a href="javascript:;" (click)="downloadPDF()">
+                                    <em class="fa fa-print"></em>
+                                    <span class=""> Print</span>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+</div>
+  <div  id="htmlData" #htmlData></div>
+
+  <div class="page-section report">
+    <div class="row">
+        <form name="form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+                    <div class="col-md-12" *blockUI="'container-blockui'">
+                    
+                                
+                       <div class="row">
+                           <div class="form-group col-md-3 row" >
+                                                <label class="col-md-3">Vendor</label>
+                                                        <div class="col-md-12">
+                                                            <ngx-select-dropdown  name="vendorId" #vendorId="ngModel" (change)="getVendorDetail()" 
+                                                            [multiple]="false" [(ngModel)]="selectedVendor"
+                                                            [config]="config" [options]="vendors"></ngx-select-dropdown> 
+                                                        </div>
+                            </div>
+                           <div class="form-group col-md-3"id="htmlData" #htmlData>
+                                                    <label class="col-md-3">from:</label>
+                                                    <div class="col-md-12">
+                                                        <div class="input-group">
+                                                            <input class="form-control height-38" name="invoiceStartDate" id="invoiceStartDate"
+                                                                #invoiceStartDate="ngModel" [(ngModel)]="startDate"
+                                                                ngbDatepicker #d="ngbDatepicker" (dateSelect)="changeStartDate()"  readonly />
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-success calendar"
+                                                                    (click)="d.toggle()" type="button">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                             </div>
+                                        
+                             <div class="form-group col-md-3" id="htmlData" #htmlData>
+                                                    <label class="col-md-3">to:</label>
+                                                    <div class="col-md-12">
+                                                        <div class="input-group">
+                                                            <input class="form-control height-38" name="invoiceDueDate" id="invoiceDueDate"
+                                                                #invoiceDueDate="ngModel" (dateSelect)="changeEnddate()"
+                                                                [(ngModel)]="endDate" ngbDatepicker
+                                                                #d1="ngbDatepicker" [autoClose]=" true" readonly />
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-success calendar"
+                                                                    (click)="d1.toggle()" type="button">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                             </div>
+                             <div class="form-group col-md-3 row">
+                                                    <div class="col-md-11" style="position:absolute; left:360; top:31px;">
+                                        
+                                                        <button type="submit" class="btn btn-success btn-elevate btn-icon-sm"
+                                                        (click)="showpurchasebyVendor()">
+                                                        <i class="fa fa-search"></i> View Report
+                                                        </button>
+                                                    </div>
+                              </div>
+                          </div>
+                    </div>
+
+
+                    <div class="col-md-12" *blockUI="'container-blockui'">
+                                        <div class="row justify-content-center">  
+                                            <div class="col-12"> 
+                                                    <table class="table table-striped" id="my-table">
+                                                        <thead>
+                                                            <tr >
+                                                                <th style="width:15%">S.No.</th>
+                                                                <th style="width:15%">Vendors</th>
+                                                                <th style="width:15%">All Purchases </th>
+                                                                <th scope="col" style="width:20%"> Paid Purchases  </th>
+                                                                <!-- <th scope="col" style="width:20%">  Due Date       </th>
+                                                                <th scope="col" style="width: 15%;">Total</th>
+                                                                <th scope="col "style="width:10%">  Paid         </th>
+                                                                <th scope="col" style="width: 10%;"> Due</th> -->
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr >
+                                                                <td>
+                                                                    Expenses
+                                                                </td><td></td><td></td><td></td>
+                                                            </tr>
+                                                            <tr *ngFor="let item of purchaseVendortData.vendorReportsList; index as $index;">
+                                                                <td scope="row">
+                                                                    {{($index + 1)}}
+                                                                </td>
+                                                                <td scope="row">
+                                                                    {{item.vendorName}}
+                                                                </td>
+                                                                <td scope="row">
+                                                                    <!-- {{model.allPurchases| currency}} -->
+                                                                    <!-- ₹ {{getAllPurchases(item)}} -->
+                                                                    <!-- ₹ {{item.allPurchases}} -->
+                                                                    {{item.totalAmount | currency}}
+                                                                </td>
+                                                                <td scope="row">
+                                                                    <!-- {{model.paidPurchases| currency}}
+                                                                    ₹ {{getPaidPurchases(item)}} -->
+                                                                    <!-- ₹ {{item.paidPurchases}} -->
+                                                                    {{item.totalPaidAmount | currency}}
+                                                                </td>
+                                                            </tr>
+                                                <tr>
+                                                    <td  class="Bold">Total Purchases</td>
+                                                    <td></td>
+                                                    <td  class="Bold">{{allPurchase | currency}}</td>
+                                                    <td  class="Bold">{{paidPurchase | currency}}</td>
+                                                </tr>
+                                                        </tbody>
+                                                    </table>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row">
+                                            <div class="col-md-12 c setting-btns">
+                                              <a [routerLink]="['/reports/report-menu']" class="btn btn-success">
+                                                <i class="fa fa-arrow-left"></i> Back</a>
+                                                &nbsp;
+                                            </div>
+                                          </div> -->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 reportback text-right">
+                          <a [routerLink]="['/reports/report-menu']" class="btn btn-success">
+                            <i class="fa fa-arrow-left"></i> Back</a>
+                            &nbsp;
+                        </div>
+                      </div>
+        </form>
+    </div>
+</div>
+
+
+

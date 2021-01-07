@@ -1,0 +1,263 @@
+
+<div class="container-fluid custom-container">
+  <div class="row">
+<div class="sidebar">
+  <button type="button" class="btn btn-primary nav-collapse-btn notify" data-toggle="collapse" data-target="#demo">
+    <img src="assets/images/toggle-btn.png" alt="toggle button" />
+  </button>
+  <!-- <button type="button" class="btn btn-primary nav-collapse-btn-lg">
+    <img src="assets/images/toggle-btn.png" alt="toggle button" />
+  </button> -->
+
+  <div class="row nav-area">
+    <div id="demo" class="nav-container col-md-12 no-padding">
+      <div class="row justify-content-center user-area">
+        <div class="user-circle">
+          <span>JD</span>
+        </div>
+      </div>
+      <div class="row username-area">
+        <div class="col-md-12">
+          <h4>Jane Doe</h4>
+          <h3>Real Estate Lawyers.ca</h3>
+        </div>
+      </div>
+      <hr/>
+    
+      <div class="col-md-12 no-padding">
+        <ul>
+          <li class="customMenu1" [ngClass]="{ 'active' : currentUrl.indexOf('/dashboard') !== -1 }">
+            <a href="#" [routerLink]="['/dashboard']">
+              <img class="icon-img" src="assets/icons/dashboard.png"> 
+            Dashboard</a>
+          </li>
+
+          <li [ngClass]="{ 'active' : currentUrl.indexOf('/sales-tax/') !== -1 || 
+          currentUrl.indexOf('/item/') !== -1 ||
+          currentUrl.indexOf('/customer/') !== -1||
+          currentUrl.indexOf('/Quotation/') !== -1||
+          currentUrl.indexOf('/recurring-invoice/') !== -1 ||
+          currentUrl.indexOf('/customerStatement') !== -1 ||
+          currentUrl.indexOf('/cust-payment/') !== -1
+        || currentUrl.indexOf('/invoice/') !== -1}">
+            <a class="customMenu" (click)="setSubMenu('Sales')" [routerLink]="['/sales-tax/manage']">
+              <img class="icon-img" src="assets/icons/sales.png"> 
+              Sales</a>
+          </li>
+          <li [ngClass]="{ 'active' : currentUrl.indexOf('/vendor/') !== -1 || 
+          currentUrl.indexOf('/bill/') !== -1 ||
+          currentUrl.indexOf('/vend-payment/') !== -1 ||
+          currentUrl.indexOf('/credit-card/') !== -1}">
+            <a class="customMenu" (click)="setSubMenu('Purchase')" [routerLink]="['/vendor/manage']">
+              <img class="icon-img" src="assets/icons/purchase.png"> 
+              Purchase</a>
+          </li>
+          <li [ngClass]="{ 'active' : currentUrl.indexOf('/bank-account/') !== -1 || 
+          currentUrl.indexOf('/transaction/') !== -1 ||
+          currentUrl.indexOf('/chart-of-account/') !== -1}">
+            <a class="customMenu" (click)="setSubMenu('Account')" [routerLink]="['/transaction/transaction']">
+              <img class="icon-img" src="assets/icons/account.png"> 
+              Account</a>
+          </li>
+          <li class="customMenu1" [ngClass]="{ 'active' : currentUrl.indexOf('/reports/') !== -1 }">
+            <a href="#" [routerLink]="['/reports/report-menu']">
+              <img class="icon-img" src="assets/icons/report.png"> 
+              Reports</a>
+          </li>
+          <li class="customMenu1" [ngClass]="{ 'active' : currentUrl.indexOf('/setting') !== -1 }">
+            <a href="#" [routerLink]="['/setting']">
+              <img class="icon-img" src="assets/icons/setting.png"> 
+              Settings</a>
+          </li>
+          <li>
+            <a href="#" [routerLink]="['/account/logout']">
+              <img class="icon-img" src="assets/icons/sign-out.png"> 
+              Sign Out</a>
+          </li>
+        </ul>
+      </div>
+      <hr />
+      <!-- <div class="col no-padding text-center help-div">
+        <span>
+          ?
+        </span>
+      </div> -->
+      <div class="col no-padding text-center logo-div">
+        <div class="col no-padding text-center help-div">
+          <span>
+            ?
+          </span>
+        </div>
+        <!-- <span>
+          ?
+        </span><br> -->
+        iClose<span>Ontario</span>
+      </div>
+
+     
+    </div>
+    
+
+    </div>
+  </div>
+
+<div class="gray-sidebar gray-area">
+  <div class="close-btn btn-close">
+    <img src="assets/images/sidebar-close-icon.png" alt="close">
+  </div>
+  <!-- <div class="row file-info">
+    <div class="col">
+      <h3>
+        John Smith
+      </h3>
+      <p>Purchase File #33318</p>
+      <span class="green">Currently active</span>
+      <span class="red">In funds</span>
+    </div>
+  </div> -->
+ 
+  <div class="row form-area">
+    <div class="col">
+      <div id="accordion">
+
+        <div id="status" data-parent="#accordion" *ngIf="currentMenu == 'Sales'">
+          <div class="card-body">
+            <ul>      
+              <!-- <span class="submenu-title"></span> Sales -->
+              <h4 class="sub-menu-heading">Sales</h4>
+            <li  [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/sales-tax/') !== -1 }">
+                <a [routerLink]="['/sales-tax/manage']" >
+                    <i class="fa fa-calculator text-color-white"></i>
+                    <span class="text-color-white">Sales Taxes</span>
+                </a>
+            </li>
+
+            <li  [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/item/') !== -1 }">
+                <a [routerLink]="['/item/manage']" >
+                    <i class="fa fa-tag text-color-white"></i>
+                    <span class="text-color-white">Items & Services</span>
+                </a>
+            </li>
+
+            <li  [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/customer/manage') !== -1 
+          || currentUrl.indexOf('/customer/add') !== -1
+        ||currentUrl.indexOf('/customer/edit') !== -1
+      || currentUrl.indexOf('/customer/detail') !== -1}">
+                <a [routerLink]="['/customer/manage']">
+                    <i class="fa fa-users text-color-white"></i>
+                    <span class="text-color-white">Customers</span>
+                </a>
+            </li>
+
+            <li  [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/Quotation/') !== -1 }">
+                <a [routerLink]="['/Quotation/quotation-manage']">
+                    <i class="fa fa-file text-color-white"></i>
+                    <span class="text-color-white">Quotation</span>
+                </a>
+            </li>
+
+            <li  [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/invoice/') !== -1 }">
+                <a [routerLink]="['/invoice/manage']">
+                    <i class="fa fa-sticky-note-o text-color-white"></i>
+                    <span class="text-color-white">Invoices</span>
+                </a>
+            </li>
+
+            <li  [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/cust-payment/add-customer-payment') !== -1 }">
+                <a [routerLink]="['/cust-payment/add-customer-payment']">
+                    <i class="fa fa-credit-card text-color-white"></i>
+                    <span class="text-color-white">Add Incomes</span>
+                </a>
+            </li>
+
+            <!-- <li  [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/recurring-invoice/') !== -1 }">
+                <a [routerLink]="['recurring-invoice/manage']">
+                    <i class="fa fa-clock-o text-color-white"></i>
+                    <span class="text-color-white">Recurring Invoices</span>
+                </a>
+            </li> -->
+
+            <li  [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/customerStatement') !== -1 }">
+                <a [routerLink]="['/customerStatement']">
+                    <i class="fa fa-users text-color-white"></i>
+                    <span class="text-color-white">Customers Statement</span>
+                </a>
+            </li>
+        </ul>
+          </div>
+        </div>
+
+        <div id="status" data-parent="#accordion" *ngIf="currentMenu == 'Purchase'">
+          <div class="card-body">
+            <ul>
+              <h4 class="sub-menu-heading">Purchase</h4>
+            <li  [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/vendor/manage') !== -1 
+            || currentUrl.indexOf('/vendor/add') !== -1
+          || currentUrl.indexOf('/vendor/edit') !== -1
+        || currentUrl.indexOf('/vendor/detail') !== -1}">
+                <a [routerLink]="['/vendor/manage']">
+                    <i class="fa fa-users text-color-white"></i>
+                    <span class="text-color-white">Vendors</span>
+                </a>
+            </li>
+
+            <li [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/bill/') !== -1 }">
+                <a [routerLink]="['/bill/manage']">
+                    <i class="fa fa-sticky-note-o text-color-white"></i>
+                    <span class=" text-color-white">Bills & Expenses</span>
+                </a>
+            </li>
+
+            <li [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/vend-payment/add-vendor-payment') !== -1}">
+                <a [routerLink]="['/vend-payment/add-vendor-payment']">
+                    <i class="fa fa-credit-card text-color-white"></i>
+                    <span class="text-color-white">Add Expenses</span>
+                </a>
+            </li>
+
+            <li [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/credit-card/') !== -1 }">
+                <a [routerLink]="['/credit-card/manage']">
+                    <i class="fa fa-credit-card text-color-white"></i>
+                    <span class="text-color-white">Credit Cards</span>
+                </a>
+            </li>
+
+        </ul>
+          </div>
+        </div>
+
+        <div id="status" data-parent="#accordion" *ngIf="currentMenu == 'Account'">
+          <div class="card-body">
+            <ul>
+              <h4 class="sub-menu-heading">Account</h4>
+            <!-- <li [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/bank-account/') !== -1 }">
+                <a [routerLink]="['/bank-account/manage']">
+                    <i class="fa fa-bank text-color-white"></i>
+                    <span class="text-color-white">Accounts</span>
+                </a>
+            </li> -->
+  
+            <li [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/transaction/') !== -1 }">
+                <a [routerLink]="['/transaction/transaction']">
+                    <i class="fa fa-bank text-color-white"></i>
+                    <span class="text-color-white">Transaction</span>
+                </a>
+            </li>
+  
+            <li [ngClass]="{ 'sub-menu-active' : currentUrl.indexOf('/chart-of-account/') !== -1 }">
+            <a [routerLink]="['/chart-of-account/chart-of-account']">
+                <i class="fa fa-bank text-color-white"></i>
+                <span class="text-color-white">Chart of Accounts</span>
+            </a>
+        </li>
+  
+        </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+

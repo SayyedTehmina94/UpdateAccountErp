@@ -1,0 +1,12 @@
+<div class="m-t-15">
+    <button type="button" class="btn btn-success btn-md btn-tall m-r-10" (click)="prev()"
+        [disabled]="wizardStep === 1">
+        <i class="fa fa-arrow-left"></i> Previous
+    </button>
+    <button type="submit" class="btn btn-success btn-md btn-tall" *ngIf="wizardStep < 5">
+        Next <i class="fa fa-arrow-right"></i>
+    </button>
+    <button type="submit" class="btn btn-success btn-md btn-tall" *ngIf="wizardStep === 5">
+        <i class="fa fa-check"></i> Finish
+    </button>
+</div>

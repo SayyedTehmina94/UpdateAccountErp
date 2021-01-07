@@ -1,0 +1,329 @@
+<div class="row">
+  <h3 class="title-border col-md-12">
+    Bill & Expenses
+  </h3>
+</div>
+
+
+<div class="page-section">
+
+  <div class="row">
+      <div class="col-md-12" *blockUI="'container-blockui'">
+          <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm"
+            novalidate>
+            <div class="">
+              <div class="row">
+                <div class="col-4">
+                <div class="form-group row"
+                [ngClass]="{ 'validation-error' : f.submitted && billNumber.invalid}">
+                <label class="col-md-3 label-col">Bill#:</label>
+                <div class="col-md-9">
+                  <input type="text" name="billNumber"  #billNumber="ngModel" class="form-control height-38" autocomplete="off"
+                  [(ngModel)]="model.billNumber" maxlength="100" placeholder=""
+                  appAlphaNumericsLevelTwo readonly />
+                  <div class="validation-error-message" *ngIf="f.submitted && !billNumber.valid">
+                    Bill No. is required
+                  </div>
+                </div>
+                </div>
+
+                <div class="form-group row disableDiv" [ngClass]="{ 'validation-error' : f.submitted && vendorId.invalid}">
+                  <label class="col-md-3 label-col">Vendor name:*</label>
+                  <div class="col-md-9">
+                    <ngx-select-dropdown  name="vendorId" #vendorId="ngModel" (change)="getVendorDetail()" [multiple]="false" [(ngModel)]="selectedVendor" [config]="config" [options]="vendors"></ngx-select-dropdown>
+                    <div class="validation-error-message" *ngIf="f.submitted && !vendorId.valid">
+                      Vendor is required
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-9">
+                    <select name="vendorId" class="form-control" [(ngModel)]="model.vendorId"
+                      (change)="onVendorSelected()" #vendorId="ngModel" required>
+                      <option value="" selected>[Select]</option>
+                      <option *ngFor="let item of vendors" [value]="item.keyInt">
+                        {{item.value}}
+                      </option>
+                    </select>
+                    <div class="validation-error-message" *ngIf="f.submitted && !vendorId.valid">
+                      Vendor is required
+                    </div>
+                  </div> -->
+                </div>
+             
+
+              </div>
+                <div class="col-4">
+                  <div class="form-group row"
+                  [ngClass]="{ 'validation-error' : f.submitted && billingDate.invalid}">
+                  <label class="col-md-3 label-col">Date:*</label>
+                  <div class="col-md-9">
+                      
+                      <div class="input-group">
+                          <input class="form-control height-38" name="billingDate"
+                              #billingDate="ngModel" [(ngModel)]="billDate" (dateSelect)="changeBillDate()"
+                              ngbDatepicker #d="ngbDatepicker"  readonly />
+                          <div class="input-group-append">
+                              <button class="btn btn-success calendar"
+                                  (click)="d.toggle()" type="button">
+                                  <i class="fa fa-calendar"></i>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="form-group row">
+                  <label class="col-md-3 label-col">Expires on:</label>
+                  <div class="col-md-9">
+                      <div class="input-group">
+                          <input class="form-control height-38" name="BillExpireDate" (dateSelect)="changeDuedate()"
+                              #BillExpireDate="ngModel"
+                              [(ngModel)]="dueDate" ngbDatepicker
+                              #d1="ngbDatepicker" [autoClose]=" true" readonly />
+                          <div class="input-group-append">
+                              <button class="btn btn-success calendar"
+                                  (click)="d1.toggle()" type="button">
+                                  <i class="fa fa-calendar"></i>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+                </div>
+                <div class="col-4">
+
+                  <div class="form-group row">
+                      <label class="col-md-3 label-col">P.O/S.O:</label>
+                      <div class="col-md-9">
+                          <input type="text" name="poso" class="form-control height-38" autocomplete="off"
+                              [(ngModel)]="model.poSoNumber" maxlength="100" placeholder=""
+                              appNumbersOnly />
+
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                      <label class="col-md-3 label-col">Notes:</label>
+                      <div class="col-md-9">
+                          <textarea name="notes" class="form-control height-38" rows="2" maxlength="250"
+                              autocomplete="off" [(ngModel)]="model.notes" #remark="ngModel"
+                              appAlphaNumericsLevelTwo></textarea>
+                      </div>
+                  </div>
+
+              </div>
+                <div class="col-4">
+                  <!-- <div class="form-group row">
+                    <label class="col-md-3 label-col">Regn#:</label>
+                    <div class="col-md-9">
+                      <p class="">{{vendor.refrenceNumber}}</p>
+                      <input type="text" name="refrenceNumber" #refrenceNumber="ngModel" class="form-control height-38" autocomplete="off"
+                      [(ngModel)]="model.refrenceNumber" maxlength="100" placeholder="Reference No."
+                      appAlphaNumericsLevelTwo  />
+                    </div>
+                  </div> -->
+                  <div class="form-group row"  [ngClass]="{ 'validation-error' : f.submitted && refrenceNumber.invalid}">
+                    <label class="col-md-3 label-col">Reference no #:</label>
+                    <div class="col-md-9">
+                      <input type="text" name="refrenceNumber" #refrenceNumber="ngModel" class="form-control height-38" autocomplete="off"
+                      [(ngModel)]="model.refrenceNumber" maxlength="100" placeholder="Reference No."
+                      appAlphaNumericsLevelTwo required />
+                      <div class="validation-error-message" *ngIf="f.submitted && !refrenceNumber.valid">
+                        Reference No. is required
+                      </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group row">
+                    <label class="col-md-3 label-col">Phone:</label>
+                    <div class="col-md-9">
+                      <p class="">{{vendor.phone | mask: '000-000-0000'}}</p>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group row">
+                  <label class="col-md-3 label-col">Email:</label>
+                  <div class="col-md-9">
+                    <p class="">{{vendor.email}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group row">
+                  <label class="col-md-4 label-col">Vendor Discount:</label>
+                  <div class="col-md-8">
+                    <p class="" *ngIf="vendor.discount">{{vendor.discount}}%</p>
+                  </div>
+                </div>
+              </div>
+              
+                
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <span class="">Items/Services</span>
+             
+                  <div class="m-t-5">
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <app-item-selected [customerDiscount]="customerDiscount" [isForSale]="isForSale"  [selectedItems]="selectedItems" [itemId]="itemId" [selectedTax]="selectedTax" [readOnly]="false" (deleteItem)="deleteItem($event)" (updateTotalAmount)="updateTotalAmount()">
+                  </app-item-selected>
+                  <div class="row">
+                    <div class="col-12">
+                        <div class="form-group text-right">
+                            <button type="button" class="btn btn-sm btn-outline-success"
+                                (click)="newRow()">
+                                <i class="fa fa-plus"></i> Add More</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+              </div>
+              <br>
+              <div *ngIf='model.totalAmount'>
+                <div class="row">
+                  <h3 class="blue-h heading col-md-12">Summary</h3>
+                  <div class="col-md-8">
+                    <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && remark.invalid}">
+                      <label class="col-md-2">Description :</label>
+                      <div class="col-md-9">
+                        <textarea name="remark" class="form-control height-28" rows="2" maxlength="250" autocomplete="off"
+                          [(ngModel)]="model.remark" #remark="ngModel" appAlphaNumericsLevelTwo></textarea>
+                        <div class="validation-error-message" *ngIf="f.submitted && remark.invalid">
+                          Description is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                      <table class="table" id="my-table">
+                        <tbody>
+                          <tr><td>Sub Total:</td><td class="Bold"><p class="">{{model.subTotal | currency}} </p></td></tr>
+                          <tr><td>Total Discount:</td><td class="Bold"><p class="">{{model.discount | currency}} </p></td></tr>
+                          <tr><td>Tax:</td><td class="Bold"><p class="">{{model.tax | currency}} </p></td></tr>
+                          <tr class="Bold totaoblock"><td>Total Amount:</td><td>{{model.totalAmount | currency}} </td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                 
+              </div>
+              </div>
+              <!-- <div class="row">
+                                <div class="col-6">
+                                  <div class="form-group row">
+                                    <label class="col-md-3">Due Date:</label>
+                                    <div class="col-md-9">
+                                      <div class="input-group">
+                                        <input class="form-control" name="dueDate" #dueDate="ngModel" [(ngModel)]="model.dueDate"
+                                          ngbDatepicker #d="ngbDatepicker" [autoClose]=" true" readonly />
+                                        <div class="input-group-append">
+                                          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+                                            <i class="la la-calendar"></i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div> -->
+                              <div class="row">
+                                <h3 class="blue-h heading col-md-12">Attachments</h3>
+                              </div>
+              <div class="row" *ngFor="let item of model.attachments; index as $index">
+                <div class="col-md-12 inv-attach">
+                  <div class="form-group row">
+                    <!-- <div class="col-md-5">
+                      <input type="text" name="title_{{$index}}" class="form-control height-38" autocomplete="off"
+                        [(ngModel)]="item.title" maxlength="250" placeholder="Title *" />
+                    </div> -->
+                    <div class="col-md-6">
+                      <div class="custom-file attach-sel-file">
+                        <input type="file" class="custom-file-input" id="billAttachment"
+                          (change)="onSelectFile($event, $index)" />
+                        <!-- <label class="custom-file-label" for="billAttachment">Select file</label> -->
+                        <label class="custom-file-label" for="invoiceAttachment"  name="title_{{$index}}" 
+                        [(ngModel)]="item.title">{{item.title}}</label>
+                      </div>
+                      <ngb-progressbar class="m-t-2" type="info" [value]="item.uploadedPercent" height="5px"
+                        *ngIf="item.uploadedPercent < 100"></ngb-progressbar>
+                    </div>
+                    <div class="col-1">
+                      <div class="text-right">
+                        <i class="fa fa-trash m-t-7 fs-20 cursor-pointer" (click)="removeAttachment(item)"
+                          *ngIf="model.attachments.length > 1 "></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group text-right">
+                    <button type="button" class="btn btn-sm btn-outline-success" (click)="addNewAttachment()">
+                      <i class="fa fa-plus"></i> Add More</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="">
+              <div class="text-right">
+                <button type="submit" class="btn btn-success" [routerLink]="['/bill/manage']">
+                  <i class="fa fa-arrow-left"></i> Back</button> &nbsp;
+                <button type="button" class="btn btn-success" (click)="openAddModal(addModal)">
+                  <i class="fa fa-save"></i> Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+<ng-template #itemesModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Select Items/Services</h5>
+    <button type="button" class="close" aria-label="Close" (click)="closeItemesModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-item-selector [selectedItems]='selectedItems'></app-item-selector>
+  </div>
+  <div class="modal-footer">
+    <div class="col-md-12 text-right">
+      <button type="button" class="btn btn-success" (click)="closeItemesModal()">
+        <i class="la la-check"></i> Done
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #addModal class="delmodal" id="addModal" let-modal>
+           
+  <div class="modal-header">
+      <h4 class="blue-h heading">Edit Confirmation</h4>
+      <div class="close-btn btn-success" (click)="closeAddModal()">
+          <img src="assets/images/sidebar-close-icon.png" alt="close">
+      </div>
+  </div>
+  <div class="col-md-12">
+      <div class="">
+          <span>Are you sure you want to add Bill & Expense?</span>
+      </div>
+  </div>
+  <div class="modal-footer">
+      <div class="text-right">
+          <button type="button" class="btn btn-success" (click)="closeAddModal()">
+              <i class="fa fa-arrow-left"></i> Cancel
+          </button>&nbsp;
+          <button type="button" class="btn btn-success" (click)="submit()">
+              <i class="fa fa-save"></i> Save
+          </button>
+      </div>
+  </div>
+
+</ng-template>

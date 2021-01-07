@@ -1,0 +1,20 @@
+<!--<app-header-mobile></app-header-mobile>-->
+
+<ng-template [ngIf]="layoutType === 0">
+    <router-outlet></router-outlet>
+</ng-template>
+<ng-template [ngIf]="layoutType === 1">
+    <div class="container-fluid">
+        <div class="row justify-content-end">
+            <!-- Side bar Nav-->
+            <app-side-nav></app-side-nav>
+            <!-- End of Side bar Nav-->
+
+           <div class="col detail-area">
+               <!-- <app-header></app-header> -->
+                <router-outlet></router-outlet>
+           </div>
+        </div>
+            <app-footer></app-footer>
+     </div>
+</ng-template>

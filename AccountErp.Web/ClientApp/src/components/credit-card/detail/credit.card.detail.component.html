@@ -1,0 +1,76 @@
+
+        <div class="row">
+                         <h3 class="title-border col-md-6">Credit Card Detail</h3>
+
+                        <div class="col-md-6 text-right title-border">
+                            <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle"
+                                data-toggle="dropdown">
+                                Action
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+                                <ul class="manageList table-hover">
+                                    <li class="list">
+                                        <a [routerLink]="['/credit-card/edit', model.id]" class="">
+                                            <em class=" fa fa-edit"></em>
+                                            <span class=""> Edit</span>
+                                        </a>
+                                    </li>
+                                    <li class="list">
+                                        <a href="javascript:;" class="" (click)="delete()">
+                                            <em class="fa fa-trash"></em>
+                                            <span class="">
+                                                Delete
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+        </div>
+
+        <div class="page-section">
+        <div class="box">
+            <div class="row">
+                <div class="col-md-12" *blockUI="'container-blockui'">
+                        <div class="" id="htmlData" #htmlData>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-md-4">Card#:</label>
+                                            <div class="col-md-6">
+                                                <p class="">{{model.creditCardNumber}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-md-4">Bank Name:</label>
+                                            <div class="col-md-6">
+                                                <p class="">{{model.bankName}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-md-4 ">Card Holder Name:</label>
+                                            <div class="col-md-6">
+                                                <p class="">{{model.cardHolderName}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+
+                    </div>
+             </div>
+         </div>
+        <br>
+         <div class="text-right" *ngIf="isModelLoaded">
+             <a [routerLink]="['/credit-card/manage']" class="btn btn-success m-r-5">
+               <i class="fa fa-arrow-left"></i> Back
+              </a>
+         </div>
+                   
+        </div>

@@ -1,0 +1,226 @@
+<div class="row">
+    <h3 class="title-border blue-h  col-md-6"> Account Balances  </h3>
+       <div class="col-md-6 text-right title-border"> 
+       <div class="btn-group">
+           <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle"
+           data-toggle="dropdown">
+           Action
+           </button>
+           <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+               <ul class="manageList table-hover">
+                   <li class="list">
+                       <a href="javascript:;"  (click)="openPDF()">
+                           <em class=" fa fa-print"></em>
+                           <span class=""> Preview </span>
+                       </a>
+                   </li>
+                   <li class="list">
+                       <a href="javascript:;" (click)="downloadPDF()">
+                           <em class="fa fa-print"></em>
+                           <span class=""> Print</span>
+                       </a>
+                   </li>
+           </ul>
+
+           </div>
+       </div>
+   </div>  
+</div>  
+<div  id="htmlData" #htmlData></div>
+
+<div class="page-section report">
+    <div class="row">
+
+        <form name="form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <div class="col-md-12" *blockUI="'container-blockui'">
+            
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="form-group col-md-2 row" >
+                                    <label class="col-md-5"> </label>
+                                    <label class="col-md-3"> </label>
+                                    <label class="col-md-5"> </label>
+                                    <div class="col-md-10">
+                                        <label>Date range :</label>
+                                    </div>
+                                </div>
+                        <div class="form-group col-md-3 row">
+                            <label class="col-md-3">from:</label>
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <input class="form-control height-38" name="invoiceStartDate" id="invoiceStartDate"
+                                        #invoiceStartDate="ngModel" [(ngModel)]="startDate"
+                                        ngbDatepicker #d="ngbDatepicker" (dateSelect)="changeStartDate()"  readonly />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success calendar"
+                                            (click)="d.toggle()" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="form-group col-md-3 row">
+                            <label class="col-md-3">to:</label>
+                            <div class="col-md-12">
+                                <div class="input-group">
+                                    <input class="form-control height-38" name="invoiceDueDate" id="invoiceDueDate"
+                                        #invoiceDueDate="ngModel" (dateSelect)="changeEnddate()"
+                                        [(ngModel)]="endDate" ngbDatepicker
+                                        #d1="ngbDatepicker" [autoClose]=" true" readonly />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success calendar"
+                                            (click)="d1.toggle()" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group row updat-rpt-btn">
+                                <div class="col-md-12" style="position:absolute; left:360; top:31px;">
+                                    <button type="submit" class="btn btn-success" (click)="showAccountBalance()">
+                                        <i class="fa fa-search"></i> View Report</button>
+                                </div>
+                            </div>
+                        </div>
+
+                            <!-- <div class="form-group col-md-3 row">
+                                <div class="col-md-11" style="position:absolute; left:360; top:31px;">
+                    
+                                    <button type="submit" class="btn btn-success btn-elevate btn-icon-sm"
+                                    (click)="showpurchasebyVendor()">
+                                    <i class="fa fa-search"></i> View Report
+                                    </button>
+                                </div>
+                            </div> -->
+
+                        </div>
+                    </div>
+                </div>                   
+            
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12" *blockUI="'container-blockui'">
+                   
+                        <div class="row justify-content-center">  
+                        <div class="row-12"></div> <br>
+                            <div class="col-12"> 
+                                <table class="table table-striped" id="my-table">
+                                        <thead>
+                                            <tr >
+
+                                                <td colspan="4">
+                                                    ACCOUNT
+                                                </td>
+                                                <td colspan="2" >
+                                                    STARTING BALANCE
+                                                </td>
+                                                <td colspan="2" >
+                                                    DEBIT
+                                                </td>
+                                                <td colspan="2" > 
+                                                    CREDIT
+                                                </td>
+                                                <td colspan="2" class="c">
+                                                    NET MOVEMENT
+                                                </td>
+                                                <td colspan="2" class="c">
+                                                    ENDING BALANCE
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let head of statement.accountBalanceReportDtoList">
+                                            <!-- <tr *ngFor="let item of salesTaxData.invoiceList; index as $index;"> -->
+                                            <tr>
+                                                <!-- <td colspan="4" class="acchead"></td> -->
+                                                <td  colspan="14" style="background-color:rgb(0, 153, 0, 0.3)" >
+                                                    {{head.accountMasterName}}
+                                                </td >
+                                                
+                                            </tr>
+                                            <tr *ngFor="let item of head.bankAccount ; index as $index"  class="accline">
+                                                <td colspan="4" *ngIf="item.id!=0">
+                                                    <a [routerLink]="['/reports/account-transactions/',item.id]" class="external-link">{{item.accountName}}</a>
+                                                </td>
+                                                <td colspan="2" *ngIf="item.id!=0">
+                                                    {{item.startingBalance | currency}}
+                                                </td>
+                                                <td colspan="2" *ngIf="item.id!=0">
+                                                    {{item.debitAmount | currency}}
+                                                </td>
+                                                <td colspan="2" *ngIf="item.id!=0" > 
+                                                    {{item.creditAmount | currency}}
+                                                </td>
+                                                <td colspan="2" *ngIf="item.id!=0" class="c">
+                                                    {{item.netMovement | currency}}
+                                                </td>
+                                                <td colspan="2" *ngIf="item.id!=0" class="c">
+                                                    {{item.endingBalance | currency}}
+                                                </td>
+
+
+                                                <!-- total -->
+
+                                                <td colspan="4" class="Bold" *ngIf="item.id==0">
+                                                    <a>{{item.accountName}}</a>
+                                                </td>
+                                                <td colspan="2" class="Bold" *ngIf="item.id==0">
+                                                    {{item.startingBalance | currency}}
+                                                </td>
+                                                <td colspan="2" class="Bold" *ngIf="item.id==0">
+                                                    {{item.debitAmount | currency}}
+                                                </td>
+                                                <td colspan="2"class="Bold" *ngIf="item.id==0" > 
+                                                    {{item.creditAmount | currency}}
+                                                </td>
+                                                <td colspan="2" class="Bold c" *ngIf="item.id==0" >
+                                                    {{item.netMovement | currency}}
+                                                </td>
+                                                <td colspan="2" class="Bold c" *ngIf="item.id==0" >
+                                                    {{item.endingBalance | currency}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                            <tbody>
+                                            <tr >
+
+                                                <td colspan="4" class="Bold">
+                                                    Total for all accounts
+                                                </td>
+                                                <td colspan="2" > </td>
+                                                <td colspan="2" class=" Bold" > {{statement.totalDebitAmount | currency}} </td>
+                                                <td colspan="2"  class=" Bold" >{{statement.totalCreditAmount | currency}} </td>
+                                                <td colspan="2" class="c"></td>
+                                                <td colspan="2" class="c"></td>
+                                            </tr>
+
+                                            <!-- yeh mujhe last mein add karna hai -->
+                                        </tbody>
+                            </table>
+
+                            </div>
+                        </div>        
+    
+                </div>
+               
+            </div>
+                    
+            <div class="row">
+                <div class="col-md-12 reportback text-right">
+                  <a [routerLink]="['/reports/report-menu']" class="btn btn-success">
+                    <i class="fa fa-arrow-left"></i> Back</a>
+                    &nbsp;
+                </div>
+              </div>
+        </form>
+    </div>
+</div>
+    
+    
+    

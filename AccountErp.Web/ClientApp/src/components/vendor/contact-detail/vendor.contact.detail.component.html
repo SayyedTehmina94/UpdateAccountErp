@@ -1,0 +1,207 @@
+<form name="form" (ngSubmit)="f.form.valid && next()" #f="ngForm" novalidate>
+        <div class="cust-add-title">Contact Details</div>
+                <div *ngFor="let item of model.contacts; index as $index">
+                    <div class="row add-customer-form">
+                        <div class="col-xl-12">
+                            <span class="">Contact {{($index + 1)}}
+                                <button type="button" class="btn btn-outline-danger btn-elevate btn-sm btn-icon m-l-50"
+                                    *ngIf="model.contacts.length > 1" (click)="removeContact($index)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </span>
+                            <div class="">
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row add-customer-form">
+                        <div class="col-xl-6">
+                            <div class="form-group row"
+                                [ngClass]="{ 'validation-error' : f.submitted && !firstName.valid}">
+                                <label class="col-md-3">First Name:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="firstName_{{$index}}" class="form-control"
+                                        [(ngModel)]="item.firstName" #firstName="ngModel" autocomplete="off"
+                                        maxlength="20" />
+                                    <div class="validation-error-message" *ngIf="f.submitted && !firstName.valid">
+                                        First name is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="form-group row"
+                                [ngClass]="{ 'validation-error' : f.submitted && !middleName.valid}">
+                                <label class="col-md-3">Middle Name:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="middleName_{{$index}}" class="form-control"
+                                        [(ngModel)]="item.middleName" #middleName="ngModel" autocomplete="off"
+                                        maxlength="20" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row add-customer-form">
+                        <div class="col-xl-6">
+                            <div class="form-group row"
+                                [ngClass]="{ 'validation-error' : f.submitted && !lastName.valid}">
+                                <label class="col-md-3">Last Name:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="lastName_{{$index}}" class="form-control"
+                                        [(ngModel)]="item.lastName" #lastName="ngModel" autocomplete="off"
+                                        maxlength="20" />
+                                    <div class="validation-error-message" *ngIf="f.submitted && !lastName.valid">
+                                        Last name is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="form-group row"
+                                [ngClass]="{ 'validation-error' : f.submitted && jobTitle.invalid}">
+                                <label class="col-md-3">Job Title:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="jobTitle_{{$index}}" class="form-control" maxlength="20"
+                                        autocomplete="off" [(ngModel)]="item.jobTitle" #jobTitle="ngModel" />
+                                    <div class="validation-error-message" *ngIf="f.submitted && jobTitle.invalid">
+                                        Job title is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row add-customer-form">
+                        <div class="col-xl-6">
+                            <div class="form-group row"
+                                [ngClass]="{ 'validation-error' : f.submitted && phone.invalid}">
+                                <label class="col-md-3">Phone:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="phone_{{$index}}" class="form-control" maxlength="15"
+                                        autocomplete="off" [(ngModel)]="item.phone" #phone="ngModel"
+                                        mask="000-000-0000" />
+                                    <div class="validation-error-message" *ngIf="f.submitted && phone.invalid">
+                                        Phone number is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="form-group row"
+                                [ngClass]="{ 'validation-error' : f.submitted && email.invalid}">
+                                <label class="col-md-3">Email:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="email_{{$index}}" class="form-control" maxlength="20"
+                                        autocomplete="off" [(ngModel)]="item.email" #email="ngModel"
+                                        appEmailAddressOnly />
+                                    <div class="validation-error-message" *ngIf="f.submitted && email.invalid">
+                                        Email is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row add-customer-form">
+                        <div class="col-xl-6">
+                            <div class="form-group row"
+                                [ngClass]="{ 'validation-error' : f.submitted && streetNumber.invalid}">
+                                <label class="col-md-3">Street#:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="streetNumber_{{$index}}" class="form-control"
+                                        maxlength="15" autocomplete="off" [(ngModel)]="item.address.streetNumber"
+                                        #streetNumber="ngModel" />
+                                    <div class="validation-error-message" *ngIf="f.submitted && streetNumber.invalid">
+                                        Street number is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="form-group row"
+                                [ngClass]="{ 'validation-error' : f.submitted && streetName.invalid}">
+                                <label class="col-md-3">Street Name:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="streetName_{{$index}}" class="form-control" maxlength="20"
+                                        autocomplete="off" [(ngModel)]="item.address.streetName"
+                                        #streetName="ngModel" />
+                                    <div class="validation-error-message" *ngIf="f.submitted && streetName.invalid">
+                                        Street Name is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row add-customer-form">
+                        <div class="col-xl-6">
+                            <div class="form-group row"
+                                [ngClass]="{ 'validation-error' : f.submitted && postalCode.invalid}">
+                                <label class="col-md-3">Postal Code:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="postalCode_{{$index}}" class="form-control" maxlength="15"
+                                        autocomplete="off" [(ngModel)]="item.address.postalCode"
+                                        #postalCode="ngModel" />
+                                    <div class="validation-error-message" *ngIf="f.submitted && postalCode.invalid">
+                                        Postal code is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && city.invalid}">
+                                <label class="col-md-3">City:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="city_{{$index}}" class="form-control" maxlength="20"
+                                        autocomplete="off" [(ngModel)]="item.address.city" #city="ngModel" />
+                                    <div class="validation-error-message" *ngIf="f.submitted && city.invalid">
+                                        City is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row add-customer-form">
+                        <div class="col-xl-6">
+                            <div class="form-group row"
+                                [ngClass]="{ 'validation-error' : f.submitted && state.invalid}">
+                                <label class="col-md-3">State:</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="state_{{$index}}" class="form-control" maxlength="15"
+                                        autocomplete="off" [(ngModel)]="item.address.state" #state="ngModel" />
+                                    <div class="validation-error-message" *ngIf="f.submitted && state.invalid">
+                                        State number is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="form-group row"
+                                [ngClass]="{ 'validation-error' : f.submitted && countryId.invalid}">
+                                <label class="col-md-3">Country:</label>
+                                <div class="col-md-9">
+                                    <!-- <select name="countryId_{{$index}}" class="form-control"
+                                        [(ngModel)]="item.address.countryId" #countryId="ngModel">
+                                        <option value="" selected>[Select]</option>
+                                        <option *ngFor="let item of countries" [value]="item.keyInt">
+                                            {{item.value}}
+                                        </option>
+                                    </select> -->
+                                    <ngx-select-dropdown  name="countryId" #countryId="ngModel"  (change)="getCustomerAdd($index)" [multiple]="false" 
+                                    [(ngModel)]="selectedCountry" [config]="config" [options]="countries"></ngx-select-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row add-customer-form">
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-outline-success" (click)="addContact()"><i
+                                class="fa fa-plus"></i> Add More</button>
+                    </div>
+                    <br><br><br>
+                    <div class="col-md-6">
+                        <app-vendor-form-wizard-navigator (moveBackward)="prev()" [wizardStep]="wizardStep">
+                        </app-vendor-form-wizard-navigator>
+                    </div>
+                </div>
+    
+</form>

@@ -1,0 +1,20 @@
+<form name="form" (ngSubmit)="f.form.valid && next()" #f="ngForm" novalidate>
+    <div class="cust-add-title">Send</div>
+        <div class="row add-customer-form">
+            <div class="col-md-5 box send-box">
+                <a href="#" class="">Automatic sending
+                </a>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5 box send-box">
+                <a href="#" class="">
+                    Manual sending
+                </a>
+           </div>
+                      
+        </div>
+
+
+<app-customer-form-wizard-navigator (moveBackward)="prev()" [wizardStep]="wizardStep">
+</app-customer-form-wizard-navigator>
+</form>

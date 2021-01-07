@@ -1,0 +1,331 @@
+<div class="row ">
+  <h3 class="blue-h  col-md-6 title-border">
+    Profit And Loss 
+  </h3>
+  <div class="col-md-6 text-right title-border">
+    <div class="btn-group">
+      <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle" data-toggle="dropdown">
+        Action
+      </button>
+      <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+
+        <ul class="manageList table-hover">
+          <li>
+            <a href="javascript:;" (click)="openPDF()">
+              <i class="fa fa-print"></i>
+              <span> Preview</span>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;" (click)="downloadPDF()">
+              <i class="fa fa-print"></i>
+              <span> Print</span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+</div>
+</div>
+
+<div  id="htmlData" #htmlData></div>
+
+<div class="page-section report">
+  <div class="row">
+
+      <form name="form" (ngSubmit)="onSubmit(f)" #f="ngForm" class="add-inv-form form-horizontal">
+
+        <div class="col-md-12" *blockUI="'container-blockui'">
+          <!-- <div class="row"> -->
+            <!-- <h3 class="title-border col-md-6">Profit & Loss</h3> -->
+              <!-- <div class="col-md-6 text-right title-border">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                      Action
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+
+                      <ul class="manageList table-hover">
+                        <li>
+                          <a href="javascript:;" (click)="openPDF()">
+                            <i class="fa fa-print"></i>
+                            <span> Preview</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="javascript:;" (click)="downloadPDF()">
+                            <i class="fa fa-print"></i>
+                            <span> Print</span>
+                          </a>
+                        </li>
+                      </ul>
+
+                    </div>
+                  </div>
+            </div> -->
+          <!-- </div> -->
+          <div class="">
+            
+                <div class="row">
+                  <div class="form-group col-md-3 row">
+                    <label class="col-md-3">from:</label>
+                    <div class="col-md-12">
+                      <div class="input-group">
+                        <input class="form-control height-38" name="invoiceStartDate" id="invoiceStartDate"
+                          #invoiceStartDate="ngModel" [(ngModel)]="startDate" ngbDatepicker #d="ngbDatepicker"
+                          (dateSelect)="changeStartDate()" readonly />
+                        <div class="input-group-append">
+                          <button class="btn btn-success calendar" (click)="d.toggle()" type="button">
+                            <i class="fa fa-calendar"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-3 row">
+                    <label class="col-md-3">to:</label>
+                    <div class="col-md-12">
+                      <div class="input-group">
+                        <input class="form-control height-38" name="invoiceDueDate" id="invoiceDueDate"
+                          #invoiceDueDate="ngModel" (dateSelect)="changeEnddate()" [(ngModel)]="endDate" ngbDatepicker
+                          #d1="ngbDatepicker" [autoClose]=" true" readonly />
+                        <div class="input-group-append">
+                          <button class="btn btn-success calendar" (click)="d1.toggle()" type="button">
+                            <i class="fa fa-calendar"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-md-3 row">
+                    <label class="col-md-9">Report Type :</label>
+                    <div class="col-md-12">
+                     <!-- <select class="form-control height-38" id="statementType" [(ngModel)]="selectedstType"
+                        name="statementType" #statementType="ngModel">
+                        <option value="0">Accural (Paid & Unpaid)</option>
+                        <option value="1">Cash Basis (Paid)</option>
+                      </select> -->
+                      <ngx-select-dropdown  name="statementType" #statementType="ngModel" (change)="getStatementType()" [multiple]="false" 
+                                            [(ngModel)]="selectedstType" [config]="config" [options]="reportTypeList"></ngx-select-dropdown>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group col-md-3 row text-right"></div> -->
+                  <div class="form-group row col-md-3 updat-rpt-btn">
+                   
+                      <div class="input-group">
+                        <button class="btn btn-success " type="submit" (click)="showProfitLoss()">
+                          <i class="fa fa-search"></i>  View  Report</button>
+                      </div>
+                  </div>
+
+                </div>
+          </div>
+          
+          <div class="row report-calculation box">
+            
+            <div class="col-md-4">
+              <span>Income &nbsp; -</span>
+              <div>{{statement.income | currency}}</div>
+            </div>
+            <div class="col-md-4">
+              <span>Operating Expenses &nbsp; =</span>
+              <div>{{statement.operatingExpenses| currency}}</div>
+            </div>
+            <div class="col-md-4">
+              <span>Net Profit </span>
+              <div>{{statement.netProfit | currency}}</div>
+            </div>
+
+          </div>
+            
+                <div class="container">
+                  <div class="row center">
+                    <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons" >
+
+                      <label class="btn btn-outline-success active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked (click)="toggleSummary()">
+                        Summary
+                      </label>
+
+                      <label class="btn btn-outline-success">
+                        <input type="radio" name="options" id="option2" autocomplete="off" (click)="toggleDetail()"> Details
+                      </label>
+                      <br/>
+                    </div>
+                  </div>
+                </div><br>
+             
+            
+                  <div class="row">
+                    <div class="col-md-12" *blockUI="'container-blockui'">
+                         
+                                <table class="table table-striped" id="my-table">
+                                  <thead *ngIf="showSummary">
+                                    <tr>
+                                      <th colspan="4">ACCOUNTS</th>
+                                      <!-- <th style="width:15%"  style="font-size:15px"></th> -->
+                                      <!-- <th></th> -->
+                                      <!-- <th colspan="2"></th> -->
+                                      <th colspan="8" style="text-align:right" class="c" style="font-size:15px">
+                                        {{fromDate | date}} to {{toDate | date}}</th>
+                                      <!-- <th style="width:15%">{{fromDate | date}} to {{toDate | date}}</th> -->
+                                    </tr>
+                                  </thead>
+
+
+                                  <!-- SHOW SUMMARY STARTS -->
+
+                                  <tbody *ngIf="showSummary">
+                                    <tr>
+                                      <td>Income
+                                        <!-- <div  class="lblOverdue">As a percentage of Total Income</div> -->
+                                      </td>
+                                      <td class="Bold"></td>
+                                      <td scope="row"> </td>
+                                      <td scope="row" class="Bold"> </td>
+                                      <td scope="row"> </td>
+                                      <td scope="row" class="Bold c">
+                                        {{statement.income | currency}}
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td class="Bold" style="background-color:rgb(0, 153, 0, 0.3)">Gross Profit</td>
+                                      <td class="Bold" style="background-color:rgb(0, 153, 0, 0.3)"></td>
+                                      <td scope="row" style="background-color:rgb(0, 153, 0, 0.3)"> </td>
+                                      <td scope="row" class="Bold" style="background-color:rgb(0, 153, 0, 0.3)"> </td>
+                                      <td scope="row" style="background-color:rgb(0, 153, 0, 0.3)"> </td>
+                                      <td scope="row" class="Bold c" style="background-color:rgb(0, 153, 0, 0.3)">
+                                        {{statement.grossProfit | currency}}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>Operating Expenses </td>
+                                      <td class="Bold"></td>
+                                      <td scope="row"> </td>
+                                      <td scope="row" class="Bold"> </td>
+                                      <td scope="row"> </td>
+                                      <td scope="row" class="Bold c">
+                                        {{statement.operatingExpenses| currency}}
+
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="Bold" style="background-color:rgb(0, 153, 0, 0.3)">Net Profit</td>
+                                      <td class="Bold" style="background-color:rgb(0, 153, 0, 0.3)"></td>
+                                      <td scope="row" style="background-color:rgb(0, 153, 0, 0.3)"> </td>
+                                      <td scope="row" class="Bold" style="background-color:rgb(0, 153, 0, 0.3)"> </td>
+                                      <td scope="row" style="background-color:rgb(0, 153, 0, 0.3)"> </td>
+                                      <td scope="row" class="Bold c" style="background-color:rgb(0, 153, 0, 0.3)">
+                                        {{statement.netProfit | currency}}
+
+                                      </td>
+                                    </tr>
+                                  </tbody>
+
+
+                                  <thead *ngIf="showDetail">
+                                    <tr>
+                                      <th colspan="8">ACCOUNTS</th>
+                                      <th colspan="4" style="text-align:right" class="c" style="font-size:15px">
+                                        {{fromDate | date}} to {{toDate | date}}</th>
+                                      <!-- <th style="width:15%">{{fromDate | date}} to {{toDate | date}}</th> -->
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td colspan="14" style="background-color:rgb(0, 153, 0, 0.3)" class="Bold"
+                                        *ngIf="showDetail ">Income
+                                      </td>
+                                    </tr>
+
+                                    <tr *ngFor="let item of statement.incomeAccount">
+                                      <td scope="row" *ngIf="showDetail && item.id!=0" colspan="8">
+                                        <a [routerLink]="['/reports/account-transactions/',item.id]"
+                                          class="external-link">{{item.accountName}}</a>
+                                      </td>
+
+                                      <td scope="row" class="c" *ngIf="showDetail  && item.id!=0" colspan="4">
+                                        {{item.amount | currency}}
+                                      </td>
+
+                                      <td scope="row" *ngIf="showDetail && item.id==0" class="Bold " colspan="8">
+                                        {{item.accountName}}</td>
+                                      <td scope="row" *ngIf="showDetail && item.id==0" class="c Bold"
+                                        colspan="8">
+                                        {{item.amount | currency}} 
+                                      </td>
+                                    </tr>
+
+                                    <tr *ngIf="showDetail" colspan="4">
+                                      <td class="Bold" colspan="10" style="background-color:rgb(0, 153, 0, 0.3)">Gross Profit</td>
+                                      <td  class="Bold c" colspan="10"  style="background-color:rgb(0, 153, 0, 0.3)">
+                                        {{statement.grossProfit | currency}}
+                                      </td>
+                                    </tr>
+                                  
+
+                                  
+
+                                    <tr >
+                                      <td colspan="14" style="background-color:rgb(0, 153, 0, 0.3)" class="Bold"
+                                        *ngIf="showDetail ">Operating Expense
+                                      </td>
+                                    </tr>
+
+                                    <tr *ngFor="let item of statement.expenseAccount">
+
+                                      <td scope="row" *ngIf="showDetail && item.id!=0 " colspan="8">
+                                        <a [routerLink]="['/reports/account-transactions/',item.id]"
+                                          class="external-link">{{item.accountName}}</a>
+                                      </td>
+
+                                      <td scope="row" class="c" *ngIf="showDetail && item.id!=0 " colspan="4">
+                                        {{item.amount | currency}}
+                                      </td>
+                                    
+
+
+
+                                      <td scope="row" *ngIf="showDetail && item.id==0" class="Bold " colspan="8">
+                                        {{item.accountName}}</td>
+                                      <td scope="row" *ngIf="showDetail && item.id==0" class="c Bold"
+                                        colspan="8">
+                                        {{item.amount | currency}}
+                                      </td>
+                                      <!-- <td scope="row" *ngIf="showDetail && item.id==0 && head.id==3" class="Bold"> Gross Profit </td> -->
+                                  
+                                    </tr>
+
+                                    <tr *ngIf="showDetail" colspan="4">
+                                      <td class="Bold" colspan="10" style="background-color:rgb(0, 153, 0, 0.3)">Net Profit</td>
+                                      <td scope="row" colspan="10" class="Bold c" style="background-color:rgb(0, 153, 0, 0.3)">
+                                        {{statement.netProfit | currency}}
+
+                                      </td>
+                                    </tr>
+                                  </tbody>
+
+                                
+                                </table>
+                    
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 reportback text-right">
+                      <a [routerLink]="['/reports/report-menu']" class="btn btn-success">
+                        <i class="fa fa-arrow-left"></i> Back</a>
+                        &nbsp;
+                    </div>
+                  </div>
+
+        </div>
+     
+      </form>
+     
+  </div>
+</div>

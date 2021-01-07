@@ -1,0 +1,93 @@
+<div class="row">
+    <h3 class="blue-h heading col-md-12">
+        <span>Sales Taxes  </span>
+        <span>Manage</span>
+    </h3>
+       <div class="col-md-12">
+            <!-- <a [routerLink]="['/sales-tax/add']" class="btn btn-primary" type="button"> 
+                <span class="glyphicon glyphicon-plus">New Sales Tax</span>
+            </a> -->
+            <button type="button" class="btn btn-success" [routerLink]="['/sales-tax/add']">
+                <i class="fa fa-plus"></i> New  Sales Tax
+         </button>
+        </div>
+</div>
+    
+        <div class="page-section">
+            <div class="row">
+               
+                <div class="col-md-12">
+                    <div class="row">
+                        <!-- <div class="col-md-3">
+                            <select class="form-control height-38" name="role" [(ngModel)]="filterModel.customerId">
+                                <option value="">[Select Customer]</option>
+                                <option *ngFor="let item of customers" [value]="item.keyInt">
+                                    {{item.value}}</option>
+                            </select>
+                        </div> -->
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                            <label class="col-md-3 label-col">Search SalesTax:</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control height-38" placeholder="Filter SalesTax"
+                                [(ngModel)]="filterModel.filterKey" autocomplete="Off" maxlength="50"
+                                (keydown.enter)="doFilter()"/>
+                            </div>
+                        </div>
+                                    
+                               
+                            </div>
+                      
+                        
+                        <div class="col-md-6 align-rgt filt-rest">
+                            <button type="button" class="btn btn-success"
+                                (click)="doFilter()">
+                                <span class="glyph icon-icon_search"></span> Filter
+                            </button>
+
+                            <button type="button" class="btn btn-success"
+                                (click)="resetFilter()">
+                                <i class="fa fa-close"></i> Reset
+                            </button>
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+          
+            <div class="row bottom">
+               
+                                
+                                <div class="col-md-12 custom-table" *blockUI="'container-blockui'">
+                                    <table datatable [dtOptions]="dtOptions" data-page="2" class="table table-sm table-striped table-hover">
+                                    </table>
+                                </div>
+                            
+            </div>
+        </div>
+
+        <ng-template #deleteModal class="delmodal" id="deleteModal" let-modal>
+           
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Confirmation</h4>
+                    <div class="close-btn btn-success" (click)="closeDeleteModal()">
+                        <img src="assets/images/sidebar-close-icon.png" alt="close">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="">
+                        <span>Are you sure you want to delete the selected sales tax?</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="text-right">
+                        <button type="button" class="btn btn-success" (click)="closeDeleteModal()">
+                            <i class="fa fa-arrow-left"></i> Cancel
+                        </button>&nbsp;
+                        <button type="button" class="btn btn-success" (click)="delete()">
+                            <i class="fa fa-trash"></i> Delete
+                        </button>
+                    </div>
+                </div>
+           
+        </ng-template>

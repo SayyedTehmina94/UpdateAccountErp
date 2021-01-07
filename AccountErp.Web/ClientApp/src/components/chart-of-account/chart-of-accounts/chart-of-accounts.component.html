@@ -1,0 +1,67 @@
+<div class="row">
+    <h3 class="blue-h heading col-md-12">
+        <span>Chart of Accounts  </span> 
+    </h3>
+</div>
+    <div class="page-section">
+        <div class="">
+
+            <ul class="nav nav-tabs nav-tabs-line nav-tabs-line-primary" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#tabs_3_1" role="tab"
+                        aria-selected="false">Assets</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tabs_3_2" role="tab"
+                        aria-selected="true">Liabilities and credit cards
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tabs_3_3" role="tab" aria-selected="true">Income
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tabs_3_4" role="tab" aria-selected="true">Expenses
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#tabs_3_5" role="tab" aria-selected="true">Equity
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tabs_3_1" role="tabpanel">
+                  <app-assets  (openAddAccountModal)="openAddAccountModal(addAccountModal,'1',$event)"></app-assets>
+                </div>
+
+                <div class="tab-pane" id="tabs_3_2" role="tabpanel">
+                  <app-liabilities-and-credit-cards (openAddAccountModal)="openAddAccountModal(addAccountModal,'2',$event)"></app-liabilities-and-credit-cards>
+                </div>
+
+                <div class="tab-pane" id="tabs_3_3" role="tabpanel">
+                   <app-income (openAddAccountModal)="openAddAccountModal(addAccountModal,'3',$event)"></app-income>
+                </div>
+
+                <div class="tab-pane" id="tabs_3_4" role="tabpanel">
+                   <app-expenses (openAddAccountModal)="openAddAccountModal(addAccountModal,'4',$event)"></app-expenses>
+                </div>
+
+                <div class="tab-pane" id="tabs_3_5" role="tabpanel">
+                   <app-equity (openAddAccountModal)="openAddAccountModal(addAccountModal,'5',$event)"></app-equity>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+<ng-template #addAccountModal let-modal>
+   <app-add-new-account (closeAddAccountModal)="closeAddAccountModal()" (reloadAccounts)="reloadAccounts()" [accType]="accType" [accId]="accId"></app-add-new-account>
+  </ng-template>
+
+  
+

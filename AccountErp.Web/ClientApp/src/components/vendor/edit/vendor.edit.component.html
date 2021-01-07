@@ -1,0 +1,57 @@
+<div class="row">
+  <h3 class="blue-h   title-border col-md-6">
+    Edit Vendor
+  </h3>
+  <div class="col-md-6 title-border text-right">
+    <a [routerLink]="['/vendor/manage']" class="btn btn-success m-r-5" >
+      <i class="fa fa-arrow-left"></i> Back
+ </a>
+  </div>
+</div>
+<!-- <div class="row">
+  <div class="col">
+    <h3 class="blue-h heading col-md-12">
+    <h3 class="blue-h heading"> Edit Vendor</h3>
+  </h3></div>
+  <div class="col" style="text-align: right;"> 
+  <button type="button" class="btn btn-primary" [routerLink]="['/vendor/manage']">
+    <i class="fa fa-arrow-left"></i> Back
+</button>
+  </div>
+  
+ 
+</div> -->
+ 
+  <div class="page-section">
+    <div class="row">
+      <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-4">
+              <app-vendor-form-wizard-aside [wizardStep]="wizardStep" (setWizardStep)="setWizardStep($event)">
+              </app-vendor-form-wizard-aside>
+            </div>  
+              <div class="col-md-8" *blockUI="'container-blockui'">
+                  <app-vendor-personal-detail [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+                    *ngIf="wizardStep === 1">
+                  </app-vendor-personal-detail>
+                  <app-vendor-billing-address-detail [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+                    *ngIf="wizardStep === 2">
+                  </app-vendor-billing-address-detail>
+                  <app-vendor-shipping-address-detail [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+                    *ngIf="wizardStep === 3">
+                  </app-vendor-shipping-address-detail>
+                  <app-vendor-contact-detail [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+                    *ngIf="wizardStep === 4">
+                  </app-vendor-contact-detail>
+                  <app-vendor-payment-detail [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+                    *ngIf="wizardStep === 5">
+                  </app-vendor-payment-detail>
+                  <app-vendor-discount-detail [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+                    *ngIf="wizardStep === 6">
+                  </app-vendor-discount-detail>
+              </div>
+            
+          </div>
+      </div>
+    </div>
+  </div>

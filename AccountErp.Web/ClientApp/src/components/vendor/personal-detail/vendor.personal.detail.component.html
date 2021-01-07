@@ -1,0 +1,99 @@
+<form name="form" (ngSubmit)="f.form.valid && next()" #f="ngForm" novalidate>
+        <div  class="cust-add-title">Vendor Information</div>
+                <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && name.invalid}">
+                            <label class="col-md-3">Name:*</label>
+                            <div class="col-md-9">
+                                <input type="text" name="name" class="form-control" maxlength="250" autocomplete="off"
+                                    [(ngModel)]="model.name" #name="ngModel" required  appAlphabatesWithSpaceOnly/>
+                                    <!-- appAlphaNumericsLevelThree -->
+                                <div class="validation-error-message" *ngIf="f.submitted && name.invalid">
+                                    Vendor name is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row">
+                            <label class="col-md-3">HST#:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="registrationNumber" class="form-control" maxlength="100"
+                                    autocomplete="off" [(ngModel)]="model.hstNumber"
+                                    #registrationNumber="ngModel" appAlphaNumericsLevelThree />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && phone.invalid}">
+                            <label class="col-md-3">Phone:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="phone" class="form-control" maxlength="15" autocomplete="off"
+                                    [(ngModel)]="model.phone" #phone="ngModel" mask="000-000-0000" required >
+                                <!-- <div class="validation-error-message" *ngIf="f.submitted && phone.invalid">
+                                    Phone number is required pattern="^[7-9][0-9]{9}$"/   && phone.touched
+                                </div> -->
+                                <div class="validation-error-message" *ngIf="f.submitted && !phone.valid">
+                                    <span class="tag" *ngIf="phone.errors.required">Phone Number is required. 
+                                    </span>
+                                    <span  class="tag" *ngIf=" phone.errors.mask">Invaild Phone Number</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && fax.invalid}">
+                            <label class="col-md-3">Fax:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="fax" class="form-control" maxlength="15" autocomplete="off"
+                                    [(ngModel)]="model.fax" #fax="ngModel" mask="000-000-0000" required/>
+                                <div class="validation-error-message" *ngIf="f.submitted && fax.invalid">
+                                    Fax is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && email.invalid}">
+                            <label class="col-md-3">Email:*</label>
+                            <div class="col-md-9">
+                                <input type="text" name="email" class="form-control" maxlength="250" autocomplete="off"
+                                    [(ngModel)]="model.email" #email="ngModel" [pattern]="appUtils.emailRegexPattern"
+                                    appEmailAddressOnly required />
+                                <div class="validation-error-message" *ngIf="f.submitted && email.invalid">
+                                    <span *ngIf="email.errors.required">
+                                        Email is required
+                                    </span>
+                                    <span *ngIf="email.errors.pattern">
+                                        Invalid email address
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && website.invalid}">
+                            <label class="col-md-3">Website:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="website" class="form-control" maxlength="250"
+                                    autocomplete="off" [(ngModel)]="model.website" #website="ngModel"
+                                    [pattern]="appUtils.urlRegexPattern" appWebUrlOnly />
+                                <div class="validation-error-message" *ngIf="f.submitted && website.invalid">
+                                    <span *ngIf="website.errors.required">
+                                        Website is required
+                                    </span>
+                                    <span *ngIf="website.errors.pattern">
+                                        Invalid website URL
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    <app-vendor-form-wizard-navigator (moveBackward)="prev()" [wizardStep]="wizardStep">
+    </app-vendor-form-wizard-navigator>
+</form>

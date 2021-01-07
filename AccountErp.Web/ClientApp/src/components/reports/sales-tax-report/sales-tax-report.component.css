@@ -1,0 +1,54 @@
+.select2-offscreen {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+#RecordFilters .control-group {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.control-group {
+    margin-bottom: 50px;
+}
+
+#RecordFilters .control-group .controls {
+    display: inline-block;
+}
+
+.wdp-input-wrap {
+    position: relative;
+    display: inline-block;
+}
+.wdp-input-wrap input, .wdp-input-wrap .input-small, .wdp-input-wrap .date {
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 4px 0;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid #b2c2cd;
+    border-radius: 4px;
+    cursor: text;
+    padding: 8px 10px 6px;
+    transition: border .1s linear;
+    min-height: 40px;
+    height: auto;
+    width: 140px;
+    margin: 0;
+}
+
+.Bold { font-weight: bold; }
+
+.c {
+    text-align: right;
+  } 

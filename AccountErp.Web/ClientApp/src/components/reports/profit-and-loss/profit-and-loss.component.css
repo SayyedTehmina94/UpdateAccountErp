@@ -1,0 +1,65 @@
+
+.profit-and-loss-report__toggle-group {
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+
+
+.wv-button-group--segmented {
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    -webkit-align-items: baseline;
+    align-items: baseline;
+}
+
+mark { 
+    background-color: grey;
+    color: black;
+  }
+
+  .lblOverdue{
+    color: rgb(161, 153, 153);
+    font-weight: bold;
+}
+
+.Bold { font-weight: bold; }
+
+.c {
+    text-align: right;
+  } 
+
+  .myDiv {  
+    text-align: center;
+  }
+
+  .acchead{
+    font-weight: bold;
+    background-color:#d2d2d4;
+}
+.accline{
+    
+    background-color:white;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: white;
+}
+
+.totaoblock{
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+.hidden {
+    display: none;
+}
+
+.disabled-field {
+    pointer-events: none;
+    display: none;
+}
+

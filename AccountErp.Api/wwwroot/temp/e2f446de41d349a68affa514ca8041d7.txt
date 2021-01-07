@@ -1,0 +1,6 @@
+customer
+	add & edit (both client side email valdiation not work)
+	add & edit (email existing not work)
+
+invoices 
+	attachment problem when adding multiple

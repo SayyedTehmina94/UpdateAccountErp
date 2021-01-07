@@ -1,0 +1,33 @@
+
+    <div class="" id="">
+      
+     
+            <div class="">
+              <div class="">
+                <app-customer-form-wizard-aside [wizardStep]="wizardStep" (setWizardStep)="setWizardStep($event)">
+                </app-customer-form-wizard-aside>
+                <div class="" *blockUI="'container-blockui'">
+                  <div class="p-t-50" id="">
+                    <app-customer-personal-detail [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+                      *ngIf="wizardStep === 1">
+                    </app-customer-personal-detail>
+                    <app-customer-address-detail [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+                      *ngIf="wizardStep === 2">
+                    </app-customer-address-detail>
+                    <app-customer-shippingaddress [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+                    *ngIf="wizardStep === 3">
+                  </app-customer-shippingaddress>
+                    <app-customer-payment-detail [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+                      *ngIf="wizardStep === 4">
+                    </app-customer-payment-detail>
+                    <app-customer-discount-detail [model]="model" (moveBackward)="prev()" (moveForward)="next()"
+                      *ngIf="wizardStep === 5">
+                    </app-customer-discount-detail>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+         
+    </div>
+  

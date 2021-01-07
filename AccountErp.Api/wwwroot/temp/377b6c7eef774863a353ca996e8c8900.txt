@@ -1,0 +1,15 @@
+customer
+	add & edit (both client side email valdiation not work)
+	add & edit (email existing not work)
+
+invoices 
+	attachment problem when adding multiple files
+	and adding files with same file name
+
+invoice payment 
+	top title rename(change it)
+
+bill & expenses 
+	side navigation (rename bill => bills)
+	add (write Reference Number)
+	attachments problem while adding more files 

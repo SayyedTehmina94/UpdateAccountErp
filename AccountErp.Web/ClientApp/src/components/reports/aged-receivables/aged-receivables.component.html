@@ -1,0 +1,202 @@
+<div class="row">
+    <h3 class="title-border blue-h  col-md-6"> Aged Receiveables Report  </h3>
+    <div class="col-md-6 text-right title-border">
+        <div class="btn-group ">
+                <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle"
+                        data-toggle="dropdown">
+                        Action
+                </button>
+                <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+                    <ul class="manageList table-hover">
+                            <li class="list">
+                                <a href="javascript:;"  (click)="openPDF()">
+                                    <em class=" fa fa-print"></em>
+                                    <span class=""> Preview </span>
+                                </a>
+                            </li>
+                            <li class="list">
+                                <a href="javascript:;" (click)="downloadPDF()">
+                                    <em class="fa fa-print"></em>
+                                    <span class=""> Print</span>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+        </div>
+  </div>
+</div>
+  <div  id="htmlData" #htmlData></div>
+<div class="page-section report">
+    <div class="row">
+    <form name="form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+                <div class="col-md-12" *blockUI="'container-blockui'">                
+                                        <div class="row">
+                                                <div class="form-group col-md-3 row" >
+                                                      <label class="col-md-9">Customer :</label>
+                                                      <div class="col-md-12"  style="position:absolute; left:405; top:23px;">
+                                                        <ngx-select-dropdown  name="customerId" #customerId="ngModel" (change)="getCustomerDetail()"  id="customerId"
+                                                        [multiple]="false" [(ngModel)]="selectedCustomer" [config]="config" [options]="customers"></ngx-select-dropdown>
+                                                      </div>
+                                                </div>
+                                      
+                                                <div class="form-group col-md-3 ">
+                                                    <label class="col-md-3"></label>
+                                                    <div class="col-md-12">
+                                                        <div class="input-group" id="htmlData" #htmlData>
+                                                            <input class="form-control height-38" name="agedReceivablesOfDate" id="agedReceivablesOfDate"
+                                                                #agedReceivablesOfDate="ngModel" (dateSelect)="changeAsOfdate()"
+                                                                [(ngModel)]="asOfDate" ngbDatepicker
+                                                                #d1="ngbDatepicker" [autoClose]=" true" readonly />
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-success calendar"
+                                                                    (click)="d1.toggle()" type="button">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                      
+                                        <div class="form-group col-md-2 ">
+                                            <div class="col-md-16" style="position:absolute; left:405; top:23px;">
+                                                <button type="submit" class="btn btn-success" (click)="showAgedReceivablesReport()">
+                                                    <i class="fa fa-search"></i> View Report</button>
+                                            </div>
+                                        </div>
+                                        </div>
+                
+               
+    
+                <div class="row">
+                <div class="col-md-12" *blockUI="'container-blockui'">
+                                    <div class="row justify-content-center">  
+                                          <div class="col-12"> 
+                                                <table class="table table-striped" id="my-table">
+                                                    <thead>
+                                                        <tr >
+                                                            <th></th>
+                                                            <th ></th>
+                                                            <th></th>
+                                                            <th></th>
+                                                            <th colspan="2"  style="width:15%" style="text-align:right" style="font-size:15px">Number of Days Overdue</th>
+                                                            <th></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                             <td  >
+                                                                 S.NO.
+                                                            </td>
+                                                            <td>
+                                                                Customer Name
+                                                            </td>
+                                                            <td >
+                                                                Not Yet Overdue
+                                                            </td >
+                                                            <td scope="row" style="background-color:rgb(0, 153, 0, 0.3)">
+                                                                30 or Less
+                                                            </td>
+                                                            <td scope="row" style="background-color:rgb(0, 153, 0, 0.3)">
+                                                                31 to 60
+                                                            </td>
+                                                            <td style="background-color:rgb(0, 153, 0, 0.3)" >
+                                                                61 to 90
+                                                            </td>
+                                                            <td style="background-color:rgb(0, 153, 0, 0.3)" >
+                                                                91 or More
+                                                            </td>
+                                                            <td >
+                                                                Total Unpaid
+                                                            </td>
+                                                        </tr>
+                                                        <tr *ngFor="let item of agedReceivablesData.agedReceivablesReportDtoList; index as $index;">
+                                                            <!-- <tr> -->
+                                                                <td scope="row">
+                                                                    {{($index + 1)}} 
+                                                                </td>
+                                                                <td scope="row">
+                                                                    {{(item.customerName)}} 
+                                                                </td>
+                                                                <td scope="row">
+                                                                    {{(item.notYetOverDue | currency)}} 
+                                                                    <div  class="lblOverdue">{{(item.countNotYetOverDue)}} invoices  </div>
+                                                                </td>
+                                                                <td scope="row" style="background-color:rgb(0, 153, 0, 0.3)">
+                                                                    {{item.lessThan30 | currency}}
+                                                                    <div class="lblOverdue">{{item.countLessThan30}} invoices</div>
+                                                                </td>
+                                                                <td scope="row" style="background-color:rgb(0, 153, 0, 0.3)">
+                                                                    {{item.thirtyFirstToSixty | currency}}
+                                                                    <div class="lblOverdue">{{item.countThirtyFirstToSixty}} invoices</div>
+                                                                </td>
+                                                                <td scope="row" style="background-color:rgb(0, 153, 0, 0.3)">
+                                                                    {{item.sixtyOneToNinety | currency}}
+                                                                    <div class="lblOverdue">{{item.countSixtyOneToNinety }} invoices</div>
+                                                                </td>
+                                                                <td scope="row" style="background-color:rgb(0, 153, 0, 0.3)">
+                                                                       {{item.moreThanNinety | currency}}
+                                                                       <div class="lblOverdue"> {{item.countMoreThanNinety}} invoices</div>
+                                                                </td>
+                                                                <td scope="row">
+                                                                    {{item.totalAmount | currency}}
+                                                                    <div  class="lblOverdue">{{item.totalUnpaid | currency}} </div>
+                                                                    <div class="lblOverdue">Overdue</div>
+                                                                </td>
+                                                                
+    
+                                                            </tr>
+                                                            <tr >
+                                                               <td></td>
+                                                                <td class="Bold">
+                                                                    Total Unpaid
+                                                                </td>
+                                                                <td scope="row" class="Bold">
+                                                                    {{allNotYetOverdue | currency}}
+                                                                    <div  class="lblOverdue">{{allCountNotOverdue}} invoices</div>
+                                                                </td>
+                                                                <td scope="row" class="Bold"style="background-color:rgb(0, 153, 0, 0.3)" > 
+                                                                    {{all30OrLess | currency}}
+                                                                    <div class="lblOverdue">{{allCountLessThan30}} invoices</div>
+                                                                </td>
+                                                                <td scope="row" style="background-color:rgb(0, 153, 0, 0.3)" class="Bold">
+                                                                    {{all31To60 | currency}}
+                                                                    <div class="lblOverdue">{{allCount31To60}} invoices</div>
+                                                                </td>
+        
+                                                                <td scope="row" class="Bold" style="background-color:rgb(0, 153, 0, 0.3)">
+                                                                    {{all61To90 | currency}}
+                                                                    <div class="lblOverdue">{{allCount61To90}} invoices</div>
+                                                                </td>
+                                                                <td scope="row" style="background-color:rgb(0, 153, 0, 0.3)" class="Bold">
+                                                                    {{all91OrMore | currency}}
+                                                                    <div class="lblOverdue">{{allCount91OrMore}} invoices</div>
+                                                                </td>
+                                                                <td scope="row" class="Bold">
+                                                                    {{allTotalAmount | currency}}
+                                                                    <div  class="lblOverdue">{{allTotalUnpaid | currency}} </div>
+                                                                    <div class="lblOverdue">Overdue</div> 
+                                                                </td>
+                                                            </tr>
+                                                    </tbody>
+                                                 </table>
+                                           </div>
+                                     </div>
+                                  
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 reportback text-right">
+                  <a [routerLink]="['/reports/report-menu']" class="btn btn-success">
+                    <i class="fa fa-arrow-left"></i> Back</a>
+                    &nbsp;
+                </div>
+              </div>
+    </form>
+    </div>
+ </div>
+    
+    
+    

@@ -1,0 +1,260 @@
+<div class="row">
+  <h3 class="title-border col-md-12">
+      <span>
+        <a [routerLink]="['/recurring-invoice/manage']" class="">
+          Recurring Invoices </a>
+      </span>
+      <span>Edit</span>
+  </h3>
+</div>
+<div class="page-section">
+
+  <div class="row">
+      <div class="col-md-12" *blockUI="'container-blockui'">
+        
+              <h3 class="blue-h heading">
+                Edit recurring Invoice
+              </h3>
+           
+          <form class="form-horizontal add-inv-form" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm"
+            novalidate>
+            <div class="">
+              <div class="row">
+
+
+                <div class="col-md-4">
+
+                  <div class="form-group row"
+                        [ngClass]="{ 'validation-error' : f.submitted && customerId.invalid}">
+                        <label class="col-md-3">Invoice#:</label>
+                        <div class="col-md-9">
+                          <input type="text" name="invNumber" class="form-control height-38" autocomplete="off"
+                          [(ngModel)]="model.recInvoiceNumber" maxlength="100" placeholder=""
+                          appAlphaNumericsLevelTwo readonly />
+                        </div>
+                </div>
+                    <div class="form-group row"
+                        [ngClass]="{ 'validation-error' : f.submitted && customerId.invalid}">
+                        <label class="col-md-3 label-col">Customer Name:*</label>
+                        <div class="col-md-9">
+                          <ngx-select-dropdown  name="customerId" #customerId="ngModel" (change)="getCustomerDetail()" [multiple]="false" 
+                          [(ngModel)]="selectedCustomer" [config]="config" [options]="customers"></ngx-select-dropdown>
+                          <div class="validation-error-message" *ngIf="f.submitted && customerId.invalid">
+                            Customer name is required
+                          </div>
+                        </div>
+                    </div>
+                  
+
+                </div>
+
+                <div class="col-4">
+                        <div class="form-group row"
+                        [ngClass]="{ 'validation-error' : f.submitted && invoiceStartDate.invalid}">   
+                        <label class="col-md-3 label-col">Date:*</label>
+                        <div class="col-md-9">
+                          <div class="input-group">
+                            <input class="form-control height-38" name="invoiceStartDate"
+                                #invoiceStartDate="ngModel" [(ngModel)]="invDate"
+                                ngbDatepicker #d="ngbDatepicker" (dateSelect)="changeInvoiceDate()"  readonly />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar"
+                                    (click)="d.toggle()" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </div>
+                            <div class="validation-error-message" *ngIf="f.submitted && invoiceStartDate.invalid">
+                              Please select a start date.
+                            </div>
+                        </div>
+                      </div>
+                        
+                    </div>
+
+                      <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && invoiceDueDate.invalid}">
+
+                        <label class="col-md-3 label-col">Expires on:</label>
+                        <div class="col-md-9">
+                          <div class="input-group">
+                            <input class="form-control height-38" name="invoiceDueDate"
+                                #invoiceDueDate="ngModel" (dateSelect)="changeDuedate()"
+                                [(ngModel)]="dueDate" ngbDatepicker
+                                #d1="ngbDatepicker" [autoClose]=" true" readonly />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar"
+                                    (click)="d1.toggle()" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </div>
+                            <div class="validation-error-message" *ngIf="f.submitted && invoiceDueDate.invalid">
+                              Please select a end date.
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+
+                  <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && poSoNumber.invalid}">
+                    <label class="col-md-3 label-col">P.O/S.O:</label>
+                        <div class="col-md-9">
+                          <input type="text" name="poSoNumber" class="form-control height-38" autocomplete="off"
+                          [(ngModel)]="model.poSoNumber" maxlength="100" placeholder=""  #poSoNumber="ngModel"
+                          appNumbersOnly />
+                          <div class="validation-error-message" *ngIf="f.submitted && poSoNumber.invalid">
+                            P.O/S.O is required
+                          </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group row">
+                      <label class="col-md-3 ">Phone:</label>
+                      <div class="col-md-9">
+                          <p class="auto-create">{{model.phone | mask: '000-000-0000'}}</p>
+                      </div>
+                    </div>
+                  </div>
+                    
+                    <div class="col-md-4">
+                      <div class="form-group row">
+                      <label class="col-md-3 ">Email:</label>
+                      <div class="col-md-9">
+                          <p class="auto-create">{{model.email}}</p>
+                      </div>
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                      <div class="form-group row">
+                      <label class="col-md-3 ">Discount:</label>
+                      <div class="col-md-9">
+                          <p class="auto-create" *ngIf="customer.discount">{{customer.discount}}%
+                          </p>
+                      </div>
+                    </div>
+                      
+                  </div>
+            </div>
+              
+              <div class="row">
+                <h3 class="blue-h heading col-md-12">Items/Services</h3>
+                <!-- <div class="col-12 acc-table" [ngClass]="{'disableDiv': customerDiscount==undefined}"> -->
+                  <div class="col-12 acc-table">
+               
+                  <app-item-selected [selectedItems]="selectedItems" [itemId]="itemId" [selectedTax]="selectedTax" (updateTotalAmount)="updateTotalAmount()" [readOnly]="false" (deleteItem)="deleteItem($event)">
+                  </app-item-selected>
+                  <div class="row">
+                    <div class="col-12">
+                        <div class="form-group text-right">
+                            <button type="button" class="btn btn-sm btn-outline-success"
+                                (click)="newRow()">
+                                <i class="la la-plus"></i> Add More</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+              </div>
+             
+              <div *ngIf='model.totalAmount'>
+               <div class="row">
+                  <h3 class="blue-h heading col-md-12">Summary</h3>
+                  <div class="col-md-8">
+                    <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && remark.invalid}">
+                      <label class="col-md-3">Description :</label>
+                      <div class="col-md-9">
+                        <textarea name="remark" class="form-control height-38" rows="2" maxlength="250" autocomplete="off"
+                        [(ngModel)]="model.remark" #remark="ngModel" appAlphaNumericsLevelTwo></textarea>
+                      <div class="validation-error-message" *ngIf="f.submitted && remark.invalid">
+                        Description is required
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <table class="table" id="my-table">
+                      <tbody>
+                        <!-- <tr><td>Sub Total:</td><td class="Bold"><p class="">{{model.subTotal | currency}} </p></td></tr> -->
+                        <tr><td>Tax:</td><td class="Bold"><p class="">{{model.tax | currency}} </p></td></tr>
+                        <tr><td>Total Discount:</td><td class="Bold"><p class="">{{model.discount | currency}} </p></td></tr>
+                        <tr class="Bold totaoblock"><td>Total Amount:</td><td><p class="">{{model.totalAmount | currency}} </p></td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row" *ngFor="let item of model.attachments; index as $index">
+                <h3 class="blue-h heading col-md-12">Attachments</h3>
+                <div class="col-12 inv-attach">
+                  <div class="form-group row">
+                    <div class="col-5">
+                      <input type="text" name="title_{{$index}}" class="form-control height-38" autocomplete="off"
+                        [(ngModel)]="item.title" maxlength="100" placeholder="Title *" appAlphaNumericsLevelTwo />
+                    </div>
+                    <div class="col-6">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="invoiceAttachment"
+                          (change)="onSelectFile($event, $index)" />
+                        <label class="custom-file-label" for="invoiceAttachment">Select file</label>
+                      </div>
+                      <ngb-progressbar class="m-t-2 btn btn-outline-primary" type="info" [value]="item.uploadedPercent" height="5px"
+                        *ngIf="item.uploadedPercent < 100"></ngb-progressbar>
+                    </div>
+                    <div class="col-1">
+                      <div class="text-right">
+                        <i class="la la-trash m-t-7 fs-20 cursor-pointer" (click)="removeAttachment(item)"
+                          *ngIf="model.attachments.length > 1 "></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group text-right">
+                    <button type="button" class="btn btn-sm btn-outline-success" (click)="addNewAttachment()">
+                      <i class="la la-plus"></i> Add More</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="">
+              <div class="text-right">
+                <a [routerLink]="['/recurring-invoice/manage']" class="btn btn-outline-secondary m-r-5">
+                  <i class="la la-arrow-left"></i> Back</a>
+                <button type="submit" class="btn btn-success">
+                  <i class="la la-save"></i> Submit</button>
+              </div>
+            </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+<!-- old code starts-->
+
+  
+  
+  <ng-template #itemesModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">Select Items/Services</h5>
+      <button type="button" class="close" aria-label="Close" (click)="closeItemesModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <app-item-selector [selectedItems]='selectedItems'></app-item-selector>
+    </div>
+    <div class="modal-footer">
+      <div class="col-md-12 text-right">
+        <button type="button" class="btn btn-success" (click)="closeItemesModal()">
+          <i class="la la-check"></i> Done
+        </button>
+      </div>
+    </div>
+  </ng-template>

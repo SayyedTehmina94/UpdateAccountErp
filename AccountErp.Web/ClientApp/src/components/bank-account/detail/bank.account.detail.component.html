@@ -1,0 +1,98 @@
+<div class="row">
+    <h3 class="title-border col-md-12">
+        <span>
+          <a [routerLink]="['/bank-account/manage']" class="">
+            Bank Accounts </a>
+        </span>
+        <span>Detail</span>
+    </h3>
+  </div>
+<div class="page-section">
+        <div class="row">
+            <div class="col-md-7" *blockUI="'container-blockui'">
+                    <div class="row">
+                            <h3 class="title-border col-md-6">   Bank Account Detail  </h3>
+                        <div class="col-md-6 text-right title-border">
+                            <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle"
+                                data-toggle="dropdown">
+                                Action
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+                                <ul class="manageList table-hover">
+                                    <li class="list">
+                                        <a [routerLink]="['/bank-account/edit', model.id]" class="">
+                                            <em class="fa fa-edit"></em>
+                                            <span class=""> Edit</span>
+                                        </a>
+                                    </li>
+                                    <li class="list">
+                                        <a href="javascript:;" class="" (click)="delete()">
+                                            <em class="fa fa-trash"></em>
+                                            <span class="">
+                                                Delete
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="" *ngIf="isModelLoaded">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Account#:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.accountNumber}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Bank Name:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.bankName}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-3  ">Account Holder Name:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.accountHolderName}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">Branch Name:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.branchName}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 ">IFSC:</label>
+                                        <div class="col-md-9">
+                                            <p class="">{{model.ifsc}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="text-right" *ngIf="isModelLoaded">
+                                <a [routerLink]="['/bank-account/manage']" class="btn btn-outline-secondary m-r-5">
+                                    <i class="la la-arrow-left"></i> Back</a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+</div>

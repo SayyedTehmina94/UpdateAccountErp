@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ReportManager.cs~RF47dd51be.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AccountErp.DataLayer\AccountErp.DataLayer.csproj" />
+    <ProjectReference Include="..\AccountErp.Dtos\AccountErp.Dtos.csproj" />
+    <ProjectReference Include="..\AccountErp.Factories\AccountErp.Factories.csproj" />
+    <ProjectReference Include="..\AccountErp.Infrastructure\AccountErp.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

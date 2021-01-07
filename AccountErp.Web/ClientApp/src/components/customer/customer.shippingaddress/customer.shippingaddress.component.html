@@ -1,0 +1,140 @@
+<form name="form" (ngSubmit)="f.form.valid && next()" #f="ngForm" novalidate>
+   
+        <div class="cust-add-title">Shipping Address</div>
+
+                <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row"
+                            [ngClass]="{ 'validation-error' : f.submitted && shipTo.invalid}">
+                            <label class="col-md-3">Ship to#:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="shipTo" class="form-control height-38" maxlength="15"
+                                    autocomplete="off" [(ngModel)]="model.shippingAddress.shipTo" #shipTo="ngModel"
+                                    appAlphaNumericsOnly />
+                                <div class="validation-error-message" *ngIf="f.submitted && shipTo.invalid">
+                                    Ship to is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row"
+                            [ngClass]="{ 'validation-error' : f.submitted && address1.invalid}">
+                            <label class="col-md-3">Address Line1:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="address1" class="form-control height-38" maxlength="15"
+                                    autocomplete="off" [(ngModel)]="model.shippingAddress.addressLine1" #address1="ngModel"
+                                    appAlphaNumericsOnly />
+                                <div class="validation-error-message" *ngIf="f.submitted && address1.invalid">
+                                    Address1 is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row"
+                            [ngClass]="{ 'validation-error' : f.submitted && address2.invalid}">
+                            <label class="col-md-3">Address Line2:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="address2" class="form-control height-38" maxlength="15"
+                                    autocomplete="off" [(ngModel)]="model.shippingAddress.addressLine2" #address2="ngModel"
+                                    appAlphaNumericsOnly />
+                                <div class="validation-error-message" *ngIf="f.submitted && address2.invalid">
+                                    Address1 is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row"
+                            [ngClass]="{ 'validation-error' : f.submitted && postalCode.invalid}">
+                            <label class="col-md-3">Postal Code:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="postalCode" class="form-control height-38" maxlength="15"
+                                    autocomplete="off" [(ngModel)]="model.shippingAddress.postalCode" #postalCode="ngModel"
+                                    appNumbersOnly />
+                                <div class="validation-error-message" *ngIf="f.submitted && postalCode.invalid">
+                                    Postal code is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row"
+                            [ngClass]="{ 'validation-error' : f.submitted && phone.invalid}">
+                            <label class="col-md-3">Phone:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="phone" class="form-control height-38" maxlength="15"
+                                    autocomplete="off" [(ngModel)]="model.shippingAddress.phone" #phone="ngModel"
+                                    appNumbersOnly />
+                                <div class="validation-error-message" *ngIf="f.submitted && phone.invalid">
+                                    Postal code is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && city.invalid}">
+                            <label class="col-md-3">City:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="city" class="form-control height-38" maxlength="20" autocomplete="off"
+                                    [(ngModel)]="model.shippingAddress.city" #city="ngModel" appAlphaNumericsLevelTwo />
+                                <div class="validation-error-message" *ngIf="f.submitted && city.invalid">
+                                    City is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && state.invalid}">
+                            <label class="col-md-3">State:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="state" class="form-control height-38" autocomplete="off" maxlength="20"
+                                    [(ngModel)]="model.shippingAddress.state" #state="ngModel" appAlphaNumericsLevelTwo />
+                                <div class="validation-error-message" *ngIf="f.submitted && state.invalid">
+                                    State is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row"
+                            [ngClass]="{ 'validation-error' : f.submitted && countryId.invalid}">
+                            <label class="col-md-3">Country:</label>
+                            <div class="col-md-9">
+                                <!-- <select name="countryId" class="form-control height-38" [(ngModel)]="model.shippingAddress.countryId"
+                                    #countryId="ngModel">
+                                    <option value="" selected>[Select]</option>
+                                    <option *ngFor="let item of countries" [value]="item.keyInt">
+                                        {{item.value}}
+                                    </option>
+                                </select> -->
+                                <ngx-select-dropdown  name="countryId" #countryId="ngModel"  (change)="getCustomerAdd()" [multiple]="false" 
+                                       [(ngModel)]="selectedCountry" [config]="config" [options]="countries"></ngx-select-dropdown>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <div class="form-group row"
+                            [ngClass]="{ 'validation-error' : f.submitted && deliveryInstruction.invalid}">
+                            <label class="col-md-3">Delivery Instructions:</label>
+                                                       <div class="col-md-9">
+                                                        <input type="text" name="deliveryInstruction" class="form-control height-38" autocomplete="off" maxlength="100"
+                                                        [(ngModel)]="model.shippingAddress.deliveryInstruction" #deliveryInstruction="ngModel" appAlphaNumericsLevelTwo />
+                            
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+    <app-customer-form-wizard-navigator (moveBackward)="prev()" [wizardStep]="wizardStep">
+    </app-customer-form-wizard-navigator>
+</form>

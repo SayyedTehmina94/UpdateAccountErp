@@ -1,0 +1,309 @@
+<div class="row">
+  <h3 class="blue-h heading col-md-12 title-border">
+    Add Income
+  </h3>
+</div>
+
+<div class="page-section">
+  <div class="row">
+    <div class="col-md-12" *blockUI="'container-blockui'">
+  <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm"
+  novalidate>
+    <div class="row add-customer-form">
+      <div class="col-md-6">
+        <div class="form-group row" [ngClass]="{ 'validation-error': f.submitted && paymentMode.invalid }">
+          <label class="col-md-3">Payment Mode:*</label>
+          <div class="col-md-9">
+            <!-- <select  name="paymentMode" class="form-control height-38"(change)="chengePaymentMode()"[(ngModel)]="model.paymentMode"
+              #paymentMode="ngModel" required >
+              <option value="">[Select]</option>
+              <option *ngFor="let item of invoicePaymentModes" [value]="item.keyInt">
+                {{ item.value }}
+              </option>
+            </select> -->
+            <ngx-select-dropdown  (change)="chengePaymentMode()" [multiple]="false" [(ngModel)]="selectedPaymentMode"
+            [config]="config" [options]="invoicePaymentModes" name="paymentMode"  #paymentMode="ngModel" required></ngx-select-dropdown>
+            <div class="validation-error-message" *ngIf="f.submitted && !paymentMode.valid">
+              Please select payment mode
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group row" [ngClass]="{ 'validation-error': f.submitted && bankAccountId.invalid}" >
+          <label class="col-md-3">Deposit To:*</label>
+          <div class="col-md-9">
+            <!-- <select   name="bankAccountId"  class="form-control height-38"   [(ngModel)]="model.bankAccountId"
+              #bankAccountId="ngModel"  required    >
+              <option value="">[Select]</option>
+              <option *ngFor="let item of bankAccounts" [value]="item.keyInt">
+                {{ item.value }}
+              </option>
+            </select> -->
+
+            <ngx-select-dropdown  (change)="changeDepositTo()" [multiple]="false" [(ngModel)]="selectedDepositTo"  name="bankAccountId"
+            #bankAccountId="ngModel" required  [config]="config" [options]="bankAccounts"></ngx-select-dropdown>
+            
+            <div class="validation-error-message"    *ngIf="f.submitted && !bankAccountId.valid" >
+              Please select deposit To
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="col-md-3">Payment type:</label>
+          <div class="col-md-9">
+            <!-- <select  name="paymentType" class="form-control height-38" (change)="chengePaymentType()"  [(ngModel)]="model.paymentType"
+              #paymentType="ngModel" required   >
+              <option value="">[Select]</option>
+              <option value="0">Advance payment</option>
+              <option value="1">Invoice payment</option>
+              <option value="4">Account payment</option>
+            </select> -->
+
+            <ngx-select-dropdown  (change)="changePaymentType()" [multiple]="false" [(ngModel)]="selectedPaymentType"
+            [config]="config" [options]="paymentTypes" name="paymentType"  #paymentType="ngModel" required></ngx-select-dropdown>
+            <div  class="validation-error-message" *ngIf="f.submitted && !paymentType.valid" >
+              Please select payment type
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="col-md-3">Payment Date:</label>
+          <div class="col-md-9">
+            <div class="input-group">
+              <input   class="form-control height-38"  name="paymentDate"  #paymentDate="ngModel"
+                [(ngModel)]="model.paymentDate" ngbDatepicker #d="ngbDatepicker"  [autoClose]="true"  readonly  />
+              <div class="input-group-append">
+                <button
+                  class="btn btn-success calendar"
+                  (click)="d.toggle()"
+                  type="button"
+                >
+                  <i class="fa fa-calendar"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" *ngIf="model.paymentType == '0'">
+        <div class="form-group row">
+          <label class="col-md-3">Select Customer:</label>
+          <div class="col-md-9">
+            <ngx-select-dropdown  name="customerId"  #customerId="ngModel" (change)="getCustomerDetail()"  [multiple]="false"
+              [(ngModel)]="selectedCustomer" [config]="config"[options]="customers" ></ngx-select-dropdown>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="model.paymentType == '0'">
+        <div class="form-group row">
+          <label class="col-md-3">Customer Details:</label>
+          <div class="col-md-9">
+            <p class="">
+              {{ customer.firstName }} {{ customer.middleName }}
+              {{ customer.lastName }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="model.paymentType == '1'">
+        <div class="form-group row">
+          <label class="col-md-3">Select Invoice:</label>
+          <div class="col-md-9">
+            <!-- <select  name="invoice"  class="form-control height-38"  (change)="chengeInvoice()" [(ngModel)]="model.invoiceId"
+              #invoice="ngModel" required >
+              <option value="">[Select]</option>
+              <option *ngFor="let item of invoices" value="{{ item.id }}">
+                {{ item.invoiceNumber }}
+              </option>
+            </select> -->
+
+            <ngx-select-dropdown  (change)="chengeInvoice()" [multiple]="false" [(ngModel)]="selectedInvoices"
+            [config]="config1" [options]="invoices" name="invoice" #invoice="ngModel" required ></ngx-select-dropdown>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="model.paymentType == '1'">
+        <div class="form-group row">
+          <label class="col-md-3">Invoice#:</label>
+          <div class="col-md-9">
+            <p class="">{{ invoiceSummaryModel.invoiceNumber }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" *ngIf="model.paymentType == '1'">
+        <div class="form-group row">
+          <label class="col-md-3">Customer Name:</label>
+          <div class="col-md-9">
+            <p class="">
+              {{ invoiceSummaryModel.firstName }}
+              {{ invoiceSummaryModel.middleName }}
+              {{ invoiceSummaryModel.lastName }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="model.paymentType != '1'">
+        <div class="form-group row">
+          <label class="col-md-3">DrAccont:</label>
+          <div class="col-md-9">
+            <!-- <select onfocus='this.size=10;' 
+            onblur='this.size=1;' 
+            onchange='this.size=1; this.blur();' name="craccount" [(ngModel)]="model.creditBankAccountId" #craccount="ngModel"
+              (change)="selectCrAccount($event)"  class="form-control dr-acc height-38" >
+              <optgroup *ngFor="let acchead of allAccounts"label="{{ acchead.accountMasterName }}" >
+                <option *ngFor="let acc of acchead.bankAccount" value="{{ acc.id }}"  >
+                  {{ acc.accountName }}
+                </option>
+              </optgroup>
+            </select> -->
+            <select  name="craccount" [(ngModel)]="model.creditBankAccountId" #craccount="ngModel"
+              (change)="selectCrAccount($event)"  class="form-control dr-acc height-38" >
+              <optgroup *ngFor="let acchead of allAccounts"label="{{ acchead.accountMasterName }}" >
+                <option *ngFor="let acc of acchead.bankAccount" value="{{ acc.id }}"  >
+                  {{ acc.accountName }}
+                </option>
+              </optgroup>
+            </select>
+            
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="col-md-6"
+        *ngIf="model.paymentType == '0' || model.paymentType != '1'"
+      >
+        <div class="form-group row">
+          <label class="col-md-3">Amount:</label>
+          <div class="col-md-9">
+            <input   type="number"  name="amount"   #amount="ngModel"  [(ngModel)]="model.amount"
+              class="form-control height-38" />
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6" *ngIf="model.paymentType == '1'">
+        <div class="form-group row">
+          <label class="col-md-3">Amount:</label>
+          <div class="col-md-9">
+            <p class="">{{ model.amount | currency }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-md-6" *ngIf="model.paymentMode > 0">
+        <div class="form-group row" [ngClass]="{ 'validation-error': f.submitted && depositFrom.invalid  }">
+          <label class="col-md-3">Deposit From:*</label>
+          <div class="col-md-6">
+            <select   name="depositFrom"  class="form-control height-38"  [(ngModel)]="model.depositFrom"
+              #depositFrom="ngModel"   required  >
+              <option value="">[Select]</option>
+              <option*ngFor="let item of depositFromAccounts" [value]="item.keyString" >
+                {{ item.value }}
+              </option>
+            </select>
+
+            <ngx-select-dropdown  (change)="changeDepositFrom()" [multiple]="false" [(ngModel)]="selectedDepositFrom"  name="depositFrom"
+            #depositFrom="ngModel" required  [config]="config" [options]="depositFromAccounts"></ngx-select-dropdown>
+            <div  class="validation-error-message"  *ngIf="f.submitted && !depositFrom.valid" >
+              Please select deposit from
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="col-md-6" *ngIf="model.paymentMode == '2'">
+        <div class="form-group row" [ngClass]="{  'validation-error': f.submitted && chequeNumber.invalid}" >
+          <label class="col-md-3">Cheque#:</label>
+          <div class="col-md-9">
+            <input type="text"  name="chequeNumber"  class="form-control height-38"  maxlength="50"
+              autocomplete="off" [(ngModel)]="model.chequeNumber"  #chequeNumber="ngModel" appAlphaNumericsLevelThree
+              required />
+            <div class="validation-error-message" *ngIf="f.submitted && chequeNumber.invalid" >
+              Cheque Number is required
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- <div class="col-md-6" *ngIf="model.paymentType != '1'">
+        <div class="form-group row">
+          <label class="col-md-3">DrAccont:</label>
+          <div class="col-md-6">
+            <select name="craccount" [(ngModel)]="model.creditBankAccountId" #craccount="ngModel"
+              (change)="selectCrAccount($event)"  class="form-control height-38" >
+              <optgroup *ngFor="let acchead of allAccounts"label="{{ acchead.accountMasterName }}" >
+                <option *ngFor="let acc of acchead.bankAccount" value="{{ acc.id }}"  >
+                  {{ acc.accountName }}
+                </option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+      </div> -->
+
+
+
+      <div class="col-md-6">
+        <div class="form-group row" >
+          <label class="col-md-3">Description :</label>
+          <div class="col-md-9" [ngClass]="{ 'validation-error': f.submitted && description.invalid }">
+            <textarea type="text"  name="description"  class="form-control height-38"  rows="2"
+              maxlength="50"  autocomplete="off"  [(ngModel)]="model.description"  #description="ngModel" appAlphaNumericsLevelThree ></textarea>
+            <div class="validation-error-message" *ngIf="f.submitted && description.invalid">
+              Description code is required
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row d-none">
+      <div class="col-6">
+        <div class="form-group row">
+          <label class="col-md-3">Tax:</label>
+          <div class="col-md-9">
+            <p class="">{{ invoiceSummaryModel.tax | currency }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group row">
+          <label class="col-md-3">Discount:</label>
+          <div class="col-md-9">
+            <p class="">
+              {{ invoiceSummaryModel.discount | currency }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-right">
+      <a  [routerLink]="['/transaction/transaction']"
+        class="btn btn-success m-r-5"  >
+        <i class="fa fa-arrow-left"></i> Back </a  >
+        
+      <button type="submit" class="btn btn-success">
+        <i class="fa fa-save"></i> Submit
+      </button>
+    </div>
+  
+  </form>
+
+
+</div>
+</div>
+</div>

@@ -1,0 +1,10 @@
+
+
+.navigationLink {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    padding: 0px 13px;
+    cursor: pointer;
+    transition: all 0.3s;
+}

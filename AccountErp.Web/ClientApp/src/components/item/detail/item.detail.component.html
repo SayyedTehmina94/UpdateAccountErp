@@ -1,0 +1,148 @@
+
+    <div class="row">
+            <h3 class="blue-h  col-md-6 title-border"> Item & Service Detail </h3>
+
+        <div class="col-md-6 text-right title-border">
+                    <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle"  data-toggle="dropdown">
+                        Action
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+                        <ul class="manageList">
+                            <li class="list">
+                                <a [routerLink]="['/item/edit', model.id]" class="">
+                                    <em class="fa fa-edit"></em>
+                                    <span class=""> Edit</span>
+                                </a>
+                            </li>
+                            <li class="list">
+                                <a href="javascript:;" class="" (click)="openDeleteModal(deleteModal)">
+                                    <em class="fa fa-trash"></em>
+                                    <span class="">
+                                        Delete
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+        </div>
+        
+      </div>
+    <div class="page-section">
+        <div class="row">
+            <div class="col-md-12" *blockUI="'container-blockui'">
+                
+                    
+                    <form class="form-horizontal add-inv-form"  name="form"  #f="ngForm"
+          novalidate>
+                    <div class="box" *ngIf="isModelLoaded">
+                        <div class="">
+                            <div class="col-md-8">
+                                <div class="form-group row">
+                                    <label class="col-md-4">Item/Service Name:</label>
+                                    <div class="col-md-6">
+                                        <p class="">{{model.name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="col-md-8">
+                                <div class="form-group row">
+                                    <label class="col-md-4">Rate:</label>
+                                    <div class="col-md-6">
+                                        <p class="">{{model.rate | currency}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="col-md-8">
+                                <div class="form-group row">
+                                    <label class="col-md-4">Description:</label>
+                                    <div class="col-md-6">
+                                        <p class="">{{model.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="col-md-8">
+                                <div class="form-group row">
+                                    <label class="col-md-4">Tax Applicability:</label>
+                                    <div class="col-md-6">
+                                         <p  *ngIf='model.isTaxable==1'> Taxable </p>
+                                        <p  *ngIf='model.isTaxable==0'> Non Taxable  </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="" *ngIf='model.isTaxable==1'>
+                            <div class="col-md-8">
+                                <div class="form-group row">
+                                    <label class="col-md-4">Tax:</label>
+                                    <div class="col-md-6">
+                                        <p class="">{{model.taxCode}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                          
+
+                          <!-- <div class="row" *ngIf='model.isForSell==1'>
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3">Income Account:</label>
+                                    <div class="col-md-9">
+                                        <p class="">Income account</p>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="row" *ngIf='model.isForSell==0'>
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <label class="col-md-3">Expense Account:</label>
+                                    <div class="col-md-9">
+                                        <p class="">Expense account</p>
+                                    </div>
+                                </div>
+                            </div>
+                          </div> -->
+                    
+                    </form>
+                    <br>
+                        <div class="text-right">
+                            <a [routerLink]="['/item/manage']" class="btn btn-success m-r-5">
+                                <i class="fa fa-arrow-left"></i> Back</a>
+                        </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <ng-template #deleteModal class="delmodal" id="deleteModal" let-modal>
+           
+        <div class="modal-header">
+            <h4 class="blue-h heading">Delete Confirmation</h4>
+            <div class="close-btn btn-success" (click)="closeDeleteModal()">
+                <img src="assets/images/sidebar-close-icon.png" alt="close">
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="">
+                <span>Are you sure you want to delete the selected item/service?</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="text-right">
+                <button type="button" class="btn btn-success" (click)="closeDeleteModal()">
+                    <i class="fa fa-arrow-left"></i> Cancel
+                </button>&nbsp;
+                <button type="button" class="btn btn-success" (click)="delete()">
+                    <i class="fa fa-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+   
+</ng-template>

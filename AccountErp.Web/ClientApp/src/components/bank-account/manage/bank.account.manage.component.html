@@ -1,0 +1,22 @@
+<div class="row">
+    <h3 class="blue-h heading col-md-12">
+        <span>Bank Accounts</span> &nbsp; <a href="#"><span>Manage</span></a>
+    </h3>
+       <div class="col-md-12">
+            <a [routerLink]="['/bank-account/add']" class="btn btn-primary" type="button"> 
+                <span><i class="fa fa-plus"></i> New Bank Account</span>
+            </a>
+        </div>
+</div>
+
+    <div class="page-section">
+        <div class="row bottom">
+           
+                            
+                            <div class="col-md-12 custom-table" *blockUI="'container-blockui'">
+                                <table datatable [dtOptions]="dtOptions" data-page="2" class="table table-sm table-striped table-hover">
+                                </table>
+                            </div>
+                        
+        </div>
+    </div>

@@ -1,0 +1,172 @@
+﻿@model AccountErp.Web.Models.InvoiceDetailModel
+@{
+    ViewData["Title"] = "Invoice";
+    Layout = "~/Views/Shared/_LayoutPrint.cshtml";
+    var counter = 1;
+    var amount = Model.Items.Sum(x => x.Rate);
+}
+
+<div style="width: 96%; margin-left: 2%;margin-top: 25px;">
+    <div style="width: 100%;text-align: center; margin-bottom: 50px;">
+        <h2 style="margin: 0;">CUSTOMER INVOICE</h2>
+    </div>
+    <div style="width: 100%;">
+        <table style="width: 100%; border: 1px solid black;border-collapse:collapse;">
+            <tr style="width: 50%;">
+                <td style="border-right: 1px solid black;padding-left: 5px;" rowspan="5" colspan="2">
+                    <h2 style="margin: 0px;">YOUR COMPANY</h2>
+                    <p style="margin: 0px;">Your Address</p>
+                    <p style="margin: 0px;">Your Address</p>
+                    <p style="margin: 0px;">Your City</p>
+                    <p style="margin: 0px;">Phone: Your Phone</p>
+                    <p style="margin: 0px;">Email: Your Email</p>
+                </td>
+            </tr>
+            <tr style="border: 1px solid black;width: 50%;">
+                <td style="padding-left: 5px;border-right: 1px solid black; width: 25%;">Invoice No: @Model.Id</td>
+                <td style="padding-left: 5px;width: 25%;">Date: @Model.CreatedOn.ToString("MM/dd/yyyy")</td>
+            </tr>
+            <tr style="width: 50%;">
+                <td style="padding-left: 5px;"></td>
+                <td style="padding-left: 5px;">&nbsp;</td>
+            </tr>
+            <tr style="width: 50%;">
+                <td style="padding-left: 5px;"></td>
+                <td style="padding-left: 5px;">&nbsp;</td>
+            </tr>
+            <tr style="width: 50%;">
+                <td style="padding-left: 5px;"></td>
+                <td style="padding-left: 5px;">&nbsp;</td>
+            </tr>
+            <tr style="border: 1px solid black;">
+                <td colspan="4" style="padding-left: 5px;padding-bottom: 20px;">
+                    <p style="margin: 0px;">To</p>
+                    <p style="margin: 0px;">
+                        M/S <strong style="padding-left: 20px;">
+                            @Utility.GetFullName(Model.Customer.FirstName, Model.Customer.MiddleName, Model.Customer.LastName)
+                        </strong>
+                    </p>
+                    <p style="padding-left: 45px;margin: 0px;">
+                        @Utility.GetFullAddress(Model.Customer.Address.StreetNumber, Model.Customer.Address.StreetName, Model.Customer.Address.City, Model.Customer.Address.State, Model.Customer.Address.PostalCode)
+                    </p>
+                    <p style="padding-left: 45px;margin: 0px;"></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="padding: 0px;">
+                    <table style="width:100%;border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th style="border-right: 1px solid black; border-bottom: 1px solid black; width: 5%; padding-left: 5px;">
+                                    SL NO
+                                </th>
+                                <th colspan="2" style="border-right: 1px solid black; border-bottom: 1px solid black; width: 40%; padding-left: 5px;">
+                                    DESCRIPTION OF GOODS
+                                </th>
+                                <th style="border-right: 1px solid black; border-bottom: 1px solid black; width: 10%; padding-left: 5px;">
+                                    QTY
+                                </th>
+                                <th style="border-right: 1px solid black; border-bottom: 1px solid black; width: 10%; padding-left: 5px;">
+                                    RATE
+                                </th>
+                                <th style="border-bottom: 1px solid black; width: 10%;">AMOUNT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Items)
+                            {
+                                <tr>
+                                    <td style="border-right: 1px solid black;padding-left: 5px;">
+                                        @(counter++)
+                                    </td>
+                                    <td colspan="2" style="border-right: 1px solid black;padding-left: 5px;">
+                                        @item.Name
+                                    </td>
+                                    <td style="border-right: 1px solid black;padding-left: 5px;">
+                                        1
+                                    </td>
+                                    <td style="border-right: 1px solid black;padding-right: 5px; text-align: right">
+                                        @item.Rate.ToString("C")
+                                    </td>
+                                    <td style="padding-right: 5px; text-align: right">
+                                        @item.Rate.ToString("C")
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td style="border-right: 1px solid black;border-bottom: 1px solid black;"></td>
+                                <td style="border-bottom: 1px solid black;"></td>
+                                <td style="border-right: 1px solid black;border-bottom: 1px solid black;"></td>
+                                <td style="border-right: 1px solid black;border-bottom: 1px solid black;"></td>
+                                <td style="border: 1px solid black;padding-left: 5px;">Total:</td>
+                                <td style="border: 1px solid black;padding-right: 5px; text-align: right">@amount.ToString("C")</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr style="border-bottom: 1px solid black;">
+                                <td rowspan="3" colspan="3" style="padding-left: 5px;">
+                                    @Utility.NumberToWords(Model.TotalAmount)
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid black;">
+                                <td colspan="2" style="text-align: right; border: 1px solid black;padding-right: 5px;">Tax </td>
+                                <td style="padding-right: 5px; text-align: right;">@((Model.Tax ?? 0).ToString("C"))</td>
+                            </tr>
+                            <tr style="border: 1px solid black;">
+                                <td colspan="2" style="text-align: right; border: 1px solid black;padding-right: 5px;">Discount</td>
+                                <td style="padding-right: 5px; text-align: right;">@((Model.Discount ?? 0).ToString("C"))</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4" colspan="3"
+                                    style="border-right: 1px solid black;border-bottom: 1px solid black; padding-left: 5px;">
+                                    <p style="margin: 0px; margin-bottom: 10px; margin-top: 10px;"><strong>TERMS:</strong></p>
+                                    <p style="margin: 0px;">Payment within 30 days of delivery</p>
+                                    <p style="margin: 0px;">Guarntee doesn't cover mishandling of components after delivery</p>
+                                    <p style="margin: 0px; margin-bottom: 10px; margin-top: 10px;"><strong>DECLARATION:</strong></p>
+                                    <p style="margin: 0px;">
+                                        we declare that this invoice shows the actual price of the goods described
+                                        and that <br> all particular are true and correct.
+                                    </p>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: left;padding-left: 5px;">
+                                    GRAND TOTAL:
+                                </td>
+                                <td style="text-align: right; padding-right: 5px;">
+                                    <h4>@Model.TotalAmount.ToString("C")</h4>
+                                </td>
+                            </tr>
+                            <tr style="border-top: 1px solid black;">
+                                <td colspan="3" style="text-align: center;padding-left: 5px;">FOR YOUR ENTERPRISES</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="text-align: center;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" colspan="3" style="border-right: 1px solid black;border-bottom: 1px solid black;">
+                                    <br>
+                                    Receiver signature
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="text-align: center;">&nbsp;</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid black;">
+                                <td colspan="3" style="text-align: center;">AUTHORISED SIGNATURY</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </td>
+            </tr>
+            <tr></tr>
+        </table>
+    </div>
+    <div style="width: 100%; text-align: center;">
+        <p>This is a computer generated invoice</p><br>
+    </div>
+</div>
+<script type="text/javascript">
+    window.print();
+</script>

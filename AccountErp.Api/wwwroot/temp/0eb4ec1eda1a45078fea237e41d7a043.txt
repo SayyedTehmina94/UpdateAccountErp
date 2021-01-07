@@ -1,0 +1,3 @@
+setting
+	confirm password not work
+	remove IsRequired (lastname, mobile number)

@@ -1,0 +1,148 @@
+<div class="row">
+    <h3 class="title-border blue-h heading col-md-6">   Trial Balance  </h3>
+
+    <div class="col-md-6 text-right title-border">
+        <div class="btn-group ">
+            <button type="button" class="btn btn-outline-success btn-sm dropdown-toggle"
+                data-toggle="dropdown">
+                Action
+           </button>
+                <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+                    <ul class="manageList table-hover">
+                            <li class="list">
+                                <a href="javascript:;"  (click)="openPDF()">
+                                    <em class=" fa fa-print"></em>
+                                    <span class=""> Preview</span>
+                                </a>
+                            </li>
+                            <li class="list">
+                                <a href="javascript:;" (click)="downloadPDF()">
+                                    <em class="fa fa-print"></em>
+                                    <span class=""> Print</span>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+        </div>
+    </div>
+</div>
+  <div  id="htmlData" #htmlData></div>
+  <div class="page-section report">
+    <div class="row">
+<form name="form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+                <div class="col-md-12" *blockUI="'container-blockui'">
+                                        <div class="row">
+                                          
+                                            <div class="col-4">
+                                                <div class="form-group row">
+                                                    <label class="col-md-12">As of:</label>
+                                                    <div class="col-md-12">
+                                                        <div class="input-group">
+                                                            <input class="form-control height-38" name="trailasOfDate" id="trialasOfDate"
+                                                                #trailasOfDate="ngModel" (dateSelect)="changeAsOfdate()"
+                                                                [(ngModel)]="asOfDate" ngbDatepicker
+                                                                #d1="ngbDatepicker" [autoClose]=" true" readonly />
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-success calendar"
+                                                                    (click)="d1.toggle()" type="button">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-4">
+                                                <div class="form-group row">
+                                                    <label class="col-md-12">Report Type:</label>
+                                                    <div class="col-md-12">
+                                                        <!-- <select class="form-control height-38" id="statementType" [(ngModel)]="selectedstType" 
+                                                        name="statementType" #statementType="ngModel">
+                                                            <option value="0">Accural (Paid & Unpaid)</option>
+                                                            <option value="1">Cash Basis (Paid)</option>
+                                                          </select> -->
+                                                          <ngx-select-dropdown  name="statementType" #statementType="ngModel" (change)="getStatementType()" [multiple]="false" 
+                                                          [(ngModel)]="selectedstType" [config]="config" [options]="reportTypeList"></ngx-select-dropdown>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-4 row">
+                                                <label class="col-md-10"></label>
+                                                <div class="col-md-12" style="position:absolute; left:360; top:31px;">
+                                                  <div class="input-group">
+                                                    <button class="btn btn-success" (click)="showTrialBalance()" type="submit">
+                                                        <i class="fa fa-search"></i>   View Report</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                     
+                                        </div>
+                </div>
+    
+    
+                <div class="col-md-12" *blockUI="'container-blockui'">
+                                    <div class="row justify-content-center">  
+                                          <div class="col-12"> 
+                                                <table class="table table-striped" id="my-table">
+                                                    <thead>
+                                                            <th colspan="4">ACCOUNTS</th>
+                                                            <th colspan="2">DEBIT</th>
+                                                            <th colspan="2"> CREDIT</th>
+                                                            <!-- <th style="width:15%">{{fromDate | date}} to {{toDate | date}}</th> -->
+                                                       
+                                                    </thead>
+                                                    <tbody *ngFor="let head of statement">
+                                                        <!-- <tr *ngFor="let item of salesTaxData.invoiceList; index as $index;"> -->
+                                                        <tr>
+                                                            <td  colspan="12" class="acchead" >
+                                                                {{head.accountMasterName}}
+                                                            </td >
+                                                            
+                                                        </tr>
+                                                        <tr *ngFor="let item of head.bankAccount ; index as $index"  class="accline">
+                                                        <!-- <tr> -->
+                                                            
+                                                            <td colspan="4" *ngIf="item.id!=0">
+                                                                <a [routerLink]="['/reports/account-transactions/',item.id]" class="external-link">{{item.accountName}}</a>
+                                                            </td>
+                                                            <td colspan="2" *ngIf="item.id!=0">
+                                                                {{item.debitAmount | currency}}
+                                                            </td>
+                                                            <td colspan="2" *ngIf="item.id!=0">
+                                                                {{item.creditAmount | currency}}
+                                                            </td>
+                                                            <!-- total -->
+                                                            <td colspan="4" class="Bold" *ngIf="item.id==0">
+                                                                <a>{{item.accountName}}</a>
+                                                            </td>
+                                                            <td colspan="2" class="Bold" *ngIf="item.id==0">
+                                                                {{item.debitAmount | currency}}
+                                                            </td>
+                                                            <td colspan="2"class="Bold" *ngIf="item.id==0" > 
+                                                                {{item.creditAmount | currency}}
+                                                            </td>
+                                                        </tr>
+                                                      
+                                                    </tbody>
+                                            
+                                                 </table>
+                                           </div>
+                                     </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-md-12 reportback text-right">
+                      <a [routerLink]="['/reports/report-menu']" class="btn btn-success">
+                        <i class="fa fa-arrow-left"></i> Back</a>
+                        &nbsp;
+                    </div>
+                  </div>
+   
+    </form>
+</div>
+
+    </div>
+    
+    

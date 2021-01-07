@@ -1,0 +1,430 @@
+<div class="row">
+  <h3 class="blue-h heading title-border col-md-12">
+    Add Quotation
+  </h3>
+</div>
+
+<div class="page-section">
+  <div class="row">
+    <div class="col-md-12" *blockUI="'container-blockui'">
+
+      <form
+        class="form-horizontal"
+        name="form"
+        (ngSubmit)="f.form.valid && submit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="row">
+          <div class="col-md-4">
+            <div
+              class="form-group row"
+              [ngClass]="{
+                'validation-error': f.submitted && customerId.invalid
+              }"
+            >
+              <label class="col-md-3">Quotaion#:</label>
+              <div class="col-md-9">
+                <input
+                  type="text"
+                  name="qutnumber"
+                  class="form-control height-38"
+                  autocomplete="off"
+                  [(ngModel)]="newQuotNumber"
+                  maxlength="100"
+                  placeholder=""
+                  appAlphaNumericsLevelTwo
+                  readonly
+                />
+              </div>
+            </div>
+            <div
+              class="form-group row"
+              [ngClass]="{
+                'validation-error': f.submitted && customerId.invalid
+              }"
+            >
+              <label class="col-md-3">Customer:*</label>
+              <div class="col-md-9">
+                <ngx-select-dropdown
+                  name="customerId"
+                  #customerId="ngModel"
+                  (change)="getCustomerDetail()"
+                  [multiple]="false"
+                  [(ngModel)]="selectedCustomer"
+                  [config]="config"
+                  [options]="customers"
+                >
+                </ngx-select-dropdown>
+              </div>
+              <!-- <button type="button"
+                                            class="btn btn-outline-success btn-elevate btn-icon btn-sm m-l-5"
+                                            (click)="openCustomerModal(addCustomerModal)">
+                                            <i class="la la-plus"></i></button> -->
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div  class="form-group row"  [ngClass]="{  'validation-error': f.submitted && customerId.invalid }"   >
+              <label class="col-md-3">Date:*</label>
+              <div class="col-md-9">
+                <div class="input-group ">
+                  <input class="form-control height-38 "
+                    name="quotationDate"
+                    #quotationDate="ngModel"
+                    [(ngModel)]="quotDate"
+                    ngbDatepicker
+                    #d="ngbDatepicker"
+                    (dateSelect)="changeQuotDate()"
+                    readonly  />
+                  <div class="input-group-append">
+                    <button class="btn btn-success calendar" (click)="d.toggle()" type="button" >
+                      <i class="fa fa-calendar"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- <div class="container">
+                  Start Date: <input id="startDate" width="276" />
+                  End Date: <input id="endDate" width="276" />
+              </div> -->
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3">Expires on:</label>
+              <div class="col-md-9">
+                <div class="input-group">
+                  <input
+                    class="form-control height-38"
+                    name="quotationExpireDate"
+                    #quotationExpireDate="ngModel"
+                    [(ngModel)]="expireDate"
+                    ngbDatepicker
+                    (dateSelect)="changeExpire()"
+                    #d1="ngbDatepicker"
+                    [autoClose]="true"
+                    readonly
+                  />
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-success calendar"
+                      (click)="d1.toggle()"
+                      type="button"
+                    >
+                      <i class="fa fa-calendar"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group row">
+              <label class="col-md-3">P.O/S.O:</label>
+              <div class="col-md-9">
+                <input
+                  type="text"
+                  name="poso"
+                  class="form-control height-38"
+                  autocomplete="off"
+                  [(ngModel)]="model.poSoNumber"
+                  maxlength="100"
+                  placeholder=""
+                  appNumbersOnly
+                />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-3">Memo:</label>
+              <div class="col-md-9">
+                <textarea
+                  name="remark"
+                  class="form-control height-38"
+                  rows="2"
+                  maxlength="250"
+                  autocomplete="off"
+                  [(ngModel)]="model.memo"
+                  #remark="ngModel"
+                  appAlphaNumericsLevelTwo
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group row">
+              <label class="col-md-3">Phone:</label>
+              <div class="col-md-9">
+                <p class="">{{ model.phone | mask: "000-000-0000" }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group row">
+              <label class="col-md-3">Email:</label>
+              <div class="col-md-9">
+                <p class="">{{ model.email }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group row">
+              <label class="col-md-3">Discount:</label>
+              <div class="col-md-9">
+                <p class="" *ngIf="customer.discount">
+                  {{ customer.discount }}%
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <span class="">Items/Services</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 acc-table" [ngClass]="{'disableDiv': customerDiscount==undefined}">
+             <app-item-selected
+              [selectedItems]="selectedItems"
+              [isForSale]="isForSale"
+              [readOnly]="false"
+              [customerDiscount]="customerDiscount"
+              (deleteItem)="deleteItem($event)"
+              (updateTotalAmount)="updateTotalAmount()"
+            >
+            </app-item-selected>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group text-right">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-outline-success"
+                    (click)="newRow()"
+                  >
+                    <i class="fa fa-plus"></i> Add More
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div *ngIf="model.totalAmount">
+          <div class="row">
+            <h3 class="blue-h heading col-md-12">Summary</h3>
+            <div class="col-md-8">
+              <div  class="form-group row"  [ngClass]="{  'validation-error': f.submitted && remark.invalid  }"  >
+                <label class="col-md-2">Description :</label>
+                <div class="col-md-9">
+                    <textarea  name="remark" class="form-control height-28" rows="2" maxlength="250" autocomplete="off"
+                      [(ngModel)]="model.remark" #remark="ngModel" appAlphaNumericsLevelTwo >
+                    </textarea>
+                    <div class="validation-error-message" *ngIf="f.submitted && remark.invalid" >
+                      Description is required
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <table class="table" id="my-table">
+                <tbody>
+                  <tr>
+                    <td>Sub Total:</td>
+                    <td class="Bold">
+                      <p class="">{{ model.subTotal | currency }}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Total Discount:</td>
+                    <td class="Bold">
+                      <p class="">{{ model.discount | currency }}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Tax:</td>
+                    <td class="Bold">
+                      <p class="">{{ model.tax | currency }}</p>
+                    </td>
+                  </tr>
+                  <tr class="Bold totaoblock">
+                    <td>Total Amount:</td>
+                    <td>
+                     {{ model.totalAmount | currency }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- <div class="form-group row">
+                                        <label class="col-md-8 ">Tax:</label>
+                                        <div class="col-md-4">
+                                          <p class="">{{model.tax | currency}} </p>
+                                        </div>
+                                      </div>
+                  
+                                      <div class="form-group row">
+                                        <label class="col-md-8 ">Total Discount:</label>
+                                        <div class="col-md-4">
+                                          <p class="">{{model.discount | currency}} </p>
+                                        </div>
+                                      </div>
+                  
+                                      <div class="form-group row">
+                                        <label class="col-md-8 ">Total Amount:</label>
+                                        <div class="col-md-4">
+                                          <p class="">{{model.totalAmount | currency}} </p>
+                                        </div>
+                                      </div> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <h3 class="blue-h heading col-md-12">Attachments</h3>
+        </div>
+        <div  class="row"  *ngFor="let item of model.attachments; index as $index" >
+        
+          <div class="col-md-12 inv-attach">
+            <div class="form-group row">
+              <!-- <div class="col-md-5">
+                <input   type="text"   name="title_{{ $index }}"  class="form-control height-38"  autocomplete="off"
+                  [(ngModel)]="item.title"  maxlength="250" placeholder="Title *" appAlphaNumericsLevelTwo />
+              </div> -->
+              <div class="col-md-6">
+                <div class="custom-file attach-sel-file">
+                  <input  type="file"  class="custom-file-input"
+                    id="invoiceAttachment"     (change)="onSelectFile($event, $index)"  />
+                  <!-- <label class="custom-file-label" for="invoiceAttachment" >Select file</label > -->
+                    <label class="custom-file-label" for="invoiceAttachment"  name="title_{{$index}}" 
+                    [(ngModel)]="item.title">{{item.title}}</label>
+                </div>
+                <ngb-progressbar class="m-t-2" type="info" [value]="item.uploadedPercent"
+                height="5px" *ngIf="item.uploadedPercent < 100"></ngb-progressbar>
+              </div>
+              <div class="col-1">
+                <div class="text-right">
+                  <i   class="fa fa-trash m-t-7 fs-20 cursor-pointer"
+                    (click)="removeAttachment(item)"
+                    *ngIf="model.attachments.length > 1"
+                  ></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group text-right">
+              <button   type="button"
+                class="btn btn-sm btn-outline-success"
+                (click)="addNewAttachment()" >
+                <i class="fa fa-plus"></i> Add More
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-right">
+          <button
+            [routerLink]="['/Quotation/quotation-manage']"
+            class="btn btn-success m-r-5"   >
+            <i class="fa fa-arrow-left"></i> Back</button>
+          <button type="button" class="btn btn-success" (click)="openAddModal(addModal)">
+            <i class="fa fa-save"></i> Submit
+          </button>
+          <!-- <div (click)="openConfirmationModal(ConfirmationModal)" class="btn btn-success">
+                                        <i class="la la-save"></i> Submit</div> -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<ng-template #addCustomerModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Add Customer</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="closeCustomerModal()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!-- <app-item-selector [selectedItems]='selectedItems'></app-item-selector> -->
+    <app-add-customer-popup></app-add-customer-popup>
+  </div>
+  <div class="modal-footer">
+    <div class="col-md-12 text-right">
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="closeCustomerModal()"
+      >
+        <i class="fa fa-check"></i> Done
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #ConfirmationModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Add Customer</h5>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="closeConfirmationModal()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{ ConfirmationMessage }}
+  </div>
+  <div class="modal-footer">
+    <div class="col-md-12 text-right">
+      <button type="button" class="btn btn-success" (click)="submit()">
+        <i class="fa fa-check"></i> Yes
+      </button>
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="closeConfirmationModal()"
+      >
+        <i class="fa fa-check"></i> Cancel
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #addModal class="delmodal" id="addModal" let-modal>
+           
+  <div class="modal-header">
+      <h4 class="blue-h heading">Add Confirmation</h4>
+      <div class="close-btn btn-success" (click)="closeAddModal()">
+          <img src="assets/images/sidebar-close-icon.png" alt="close">
+      </div>
+  </div>
+  <div class="col-md-12">
+      <div class="">
+          <span>Are you sure you want to add Quotation?</span>
+      </div>
+  </div>
+  <div class="modal-footer">
+      <div class="text-right">
+          <button type="button" class="btn btn-success" (click)="closeAddModal()">
+              <i class="fa fa-arrow-left"></i> Cancel
+          </button>&nbsp;
+          <button type="button" class="btn btn-success" (click)="submit()">
+              <i class="fa fa-save"></i> Save
+          </button>
+      </div>
+  </div>
+
+</ng-template>

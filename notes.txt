@@ -1,0 +1,10 @@
+item involved
+1:invoice
+2:billing
+3:quatation
+
+
+reflected files
+1:itemManager
+2:itemInterface
+3:itemRepo

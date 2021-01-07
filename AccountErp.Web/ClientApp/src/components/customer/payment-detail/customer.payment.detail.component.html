@@ -1,0 +1,66 @@
+<form name="form" (ngSubmit)="f.form.valid && next()" #f="ngForm" novalidate>
+   
+        <div class="cust-add-title">Bank Account Detail</div>
+
+           <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && bankName.invalid}">
+                            <label class="col-md-3">Bank Name:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="bankName" class="form-control height-38" maxlength="50"
+                                    autocomplete="off" [(ngModel)]="model.bankName" #bankName="ngModel"
+                                    appAlphabatesWithSpaceOnly />
+                                <div class="validation-error-message" *ngIf="f.submitted && bankName.invalid">
+                                    Bank name is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row"
+                            [ngClass]="{ 'validation-error' : f.submitted && bankBranch.invalid}">
+                            <label class="col-md-3">Bank Branch:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="bankBranch" class="form-control height-38" maxlength="20"
+                                    autocomplete="off" [(ngModel)]="model.bankBranch" #bankBranch="ngModel"
+                                    appAlphabatesWithSpaceOnly />
+                                <div class="validation-error-message" *ngIf="f.submitted && bankBranch.invalid">
+                                    Bank branch is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+           </div>
+
+            <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row"
+                            [ngClass]="{ 'validation-error' : f.submitted && accountNumber.invalid}">
+                            <label class="col-md-3">Account#:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="accountNumber" class="form-control height-38" maxlength="20"
+                                    autocomplete="off" [(ngModel)]="model.accountNumber" #accountNumber="ngModel"
+                                    appNumbersOnly />
+                                <div class="validation-error-message" *ngIf="f.submitted && accountNumber.invalid">
+                                    Account number is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && ifsc.invalid}">
+                            <label class="col-md-3">IFSC:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="ifsc" class="form-control height-38" maxlength="20" autocomplete="off"
+                                    [(ngModel)]="model.ifsc" #ifsc="ngModel" appAlphaNumericsOnly />
+                                <div class="validation-error-message" *ngIf="f.submitted && ifsc.invalid">
+                                    IFSC is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+    <app-customer-form-wizard-navigator (moveBackward)="prev()" [wizardStep]="wizardStep">
+    </app-customer-form-wizard-navigator>
+</form>

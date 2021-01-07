@@ -1,0 +1,162 @@
+<div class="row">
+  <h3 class="title-border blue-h   col-md-6"> Balance Sheet </h3>
+  <div class="col-md-6 text-right title-border">
+    <div class="btn-group">
+      <button type="button" class="btn btn-outline-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+        Action
+      </button>
+      <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right action-ul">
+        <ul class="manageList table-hover">
+          <li class="list">
+              <a href="javascript:;"  (click)="openPDF()">
+                  <em class=" fa fa-print"></em>
+                  <span class=""> Preview </span>
+              </a>
+          </li>
+          <li class="list">
+              <a href="javascript:;" (click)="downloadPDF()">
+                  <em class="fa fa-print"></em>
+                  <span class=""> Print</span>
+              </a>
+          </li>
+      </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div  id="htmlData" #htmlData></div>
+
+<div class="page-section report">
+  <div class="row">
+    <form name="form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="col-md-12" *blockUI="'container-blockui'">
+      
+        <div class="">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+
+                <div class="form-group col-md-4 row">
+                  <label class="col-md-9">As of:</label>
+                  <div class="col-md-12">
+                    <div class="input-group">
+                      <input class="form-control height-38" name="agedPayableasOfDate" id="agedPayableasOfDate"
+                        #agedPayableasOfDate="ngModel" (dateSelect)="changeAsOfdate()" [(ngModel)]="asOfDate"
+                        ngbDatepicker #d1="ngbDatepicker" [autoClose]=" true" readonly />
+                      <div class="input-group-append">
+                        <button class="btn btn-success calendar" (click)="d1.toggle()" type="button">
+                          <i class="fa fa-calendar"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-4 row">
+                  <label class="col-md-9">Report Type :</label>
+                  <div class="col-md-12">
+
+                    <!-- <select class="form-control height-38" id="reportType" [(ngModel)]="selectedstType"
+                      name="reportType" #reportType="ngModel">
+                      <option value="0">Accrual (Paid & Unpaid)</option>
+                      <option value="1">Cash Basis (Paid)</option>
+                    </select> -->
+                    <ngx-select-dropdown  name="statementType" #statementType="ngModel" (change)="getStatementType()" [multiple]="false" 
+                                            [(ngModel)]="selectedstType" [config]="config" [options]="reportTypeList"></ngx-select-dropdown>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-4 row">
+                  <label class="col-md-10"></label>
+                  <div class="col-md-12" style="position:absolute; left:360; top:31px;">
+                    <div class="input-group">
+                      <button class="btn btn-success" (click)="showBalanceSheet()" type="submit">
+                        <i class="fa fa-search"></i>  View  Report</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div  id="htmlData" #htmlData></div>
+        <div class="row balance-sheet box">
+
+          <div class="col-md-3">
+            <span>Cash and Bank &nbsp; + </span>
+            <div>{{statement.cashAndBank | currency}}</div>
+          </div>
+          <div class="col-md-3">
+            <span>To be received &nbsp; -</span>
+            <div>{{statement.toBeReceived| currency}}</div>
+          </div>
+          <div class="col-md-3">
+            <span>To be paid out &nbsp; =  </span>
+            <div>{{statement.toBePaidOut | currency}}</div>
+          </div>
+          <div class="col-md-3">
+            <span></span>
+            <div>{{statement.totalAmount | currency}}</div>
+          </div>
+
+        </div><br>
+
+        <div class="container">
+          <div class="row center">
+            <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons">
+
+              <label class="btn btn-outline-success active">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked (click)="toggleSummary()">
+                Summary
+              </label>
+
+              <label class="btn btn-outline-success">
+                <input type="radio" name="options" id="option2" autocomplete="off" (click)="toggleDetail()"> Details
+              </label>
+
+            </div>
+          </div>
+        </div><br>
+
+        <div class="row">
+          <div class="col-md-12" *blockUI="'container-blockui'">
+            <table class="table table-striped" id="my-table">
+              <thead>
+                <th>ACCOUNTS</th>
+                <th colspan="2" style="text-align:right" class="c" style="font-size:15px">
+                  {{model.asOfDate | date}}</th>
+                <!-- <th style="width:15%">{{fromDate | date}} to {{toDate | date}}</th> -->
+              </thead>
+              <!-- SHOW SUMMARY STARTS -->
+
+              <tbody *ngFor="let head of balanceSheetData.balanceSheetReportDtos">
+                <tr>
+                  <td colspan="2" style="background-colorrgb(0, 153, 0, 0.3)" class="Bold">{{head.accountMasterName}}
+                  </td>
+                </tr>
+
+                <tr *ngFor="let item of head.bankAccount">
+                  <td *ngIf="showSummary && item.id!=0">{{item.accountName}}</td>
+                  <td scope="row" *ngIf="showDetail && item.id!=0">
+                    <a [routerLink]="['/reports/account-transactions/']" class="external-link">{{item.accountName}}</a>
+                  </td>
+                  <td scope="row" class="c" *ngIf="item.id!=0"> {{item.amount | currency}} </td>
+
+                  <td *ngIf="item.id==0" class="Bold">{{item.accountName}}</td>
+                  <td scope="row" class="c Bold" *ngIf="item.id==0"> {{item.amount | currency}} </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 reportback text-right">
+          <a [routerLink]="['/reports/report-menu']" class="btn btn-success">
+            <i class="fa fa-arrow-left"></i> Back</a>
+            &nbsp;
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

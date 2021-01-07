@@ -1,0 +1,79 @@
+<form name="form" (ngSubmit)="f.form.valid && next()" #f="ngForm" novalidate>
+        <div class="cust-add-title">Personal Information</div>
+        
+            <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && !firstName.valid}">
+                            <label class="col-md-3">First Name: *</label>
+                            <div class="col-md-9">
+                                <input type="text" name="firstName" class="form-control height-38" [(ngModel)]="model.firstName"
+                                    #firstName="ngModel" autocomplete="off" maxlength="50" appAlphabatesWithSpaceOnly
+                                    required />
+                                <div class="validation-error-message" *ngIf="f.submitted && !firstName.valid">
+                                    First name is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row"
+                            [ngClass]="{ 'validation-error' : f.submitted && !middleName.valid}">
+                            <label class="col-md-3">Middle Name:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="middleName" class="form-control height-38" [(ngModel)]="model.middleName"
+                                    #middleName="ngModel" autocomplete="off" maxlength="50"
+                                    appAlphabatesWithSpaceOnly />
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && !lastName.valid}">
+                            <label class="col-md-3">Last Name:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="lastName" class="form-control height-38" [(ngModel)]="model.lastName"
+                                    #lastName="ngModel" autocomplete="off" maxlength="50" appAlphabatesWithSpaceOnly />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && email.invalid}">
+                            <label class="col-md-3">Email:*</label>
+                            <div class="col-md-9">
+                                <input type="email" name="email" class="form-control height-38" maxlength="250" autocomplete="off"
+                                    [(ngModel)]="model.email" #email="ngModel" [pattern]="appUtils.emailRegexPattern"
+                                    appEmailAddressOnly required />
+                                <div class="validation-error-message" *ngIf="f.submitted && email.invalid">
+                                    <span *ngIf="email.errors.required">
+                                        Email is required
+                                    </span>
+                                    <span *ngIf="email.errors.pattern">
+                                        Invalid email address
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="row add-customer-form">
+                    <div class="col-xl-6">
+                        <div class="form-group row" [ngClass]="{ 'validation-error' : f.submitted && phone.invalid}">
+                            <label class="col-md-3">Phone:</label>
+                            <div class="col-md-9">
+                                <input type="text" name="phone" class="form-control" maxlength="15" autocomplete="off"
+                                    [(ngModel)]="model.phone" #phone="ngModel" mask="000-000-0000" required >
+                                    <div class="validation-error-message" *ngIf="f.submitted && !phone.valid">
+                                        <span class="tag" *ngIf="phone.errors.required">Phone Number is required. 
+                                        </span>
+                                        <span  class="tag" *ngIf=" phone.errors.mask">Invaild Phone Number</span>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+    <app-customer-form-wizard-navigator (moveBackward)="prev()" [wizardStep]="wizardStep">
+    </app-customer-form-wizard-navigator>
+</form>

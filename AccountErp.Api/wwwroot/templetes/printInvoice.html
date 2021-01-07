@@ -1,0 +1,146 @@
+﻿<div style="width: 96%; margin-left: 2%;margin-top: 25px;">
+    <div style="width: 100%;text-align: center;">
+        <h4 style="margin: 0;">TAX INVOICE</h4>
+        <p style="margin: 0;">CASH/CREDIT</p>
+    </div>
+    <div style="width: 100%;">
+        <table style="width: 100%; border: 1px solid black;">
+            <tr style="border: 1px solid black; width: 50%;">
+                <td style="border: 1px solid black;padding-left: 5px;" rowspan="5" colspan="2">
+                    <h2>YOUR COMPANY</h2>
+                    <p>Your Address</p>
+                    <p>Your Address</p>
+                    <p>Your City</p>
+                    <p><strong>MOB: </strong>{{model.customer.phone}}</p>
+                    <p>Email: {{model.customer.email}}</p>
+                </td>
+            </tr>
+            <tr style="border: 1px solid black;width: 50%;">
+                <td style="padding-left: 5px;border-right: 1px solid black;">Invoice No: {{model.invoiceNumber}}</td>
+                <td style="padding-left: 5px;">Date:</td>
+            </tr>
+            <tr style="border: 1px solid black;width: 50%;">
+                <td style="padding-left: 5px;border-right: 1px solid black;">Our DC No:</td>
+                <td style="padding-left: 5px;">Date:</td>
+            </tr>
+            <tr style="border: 1px solid black;width: 50%;">
+                <td style="padding-left: 5px;border-right: 1px solid black;">Your DC No:</td>
+                <td style="padding-left: 5px;">Date:</td>
+            </tr>
+            <tr style="border: 1px solid black;width: 50%;">
+                <td style="padding-left: 5px;border-right: 1px solid black;">Your PO No:</td>
+                <td style="padding-left: 5px;">Date:</td>
+            </tr>
+            <tr style="border: 1px solid black;">
+                <td colspan="4" style="padding-left: 5px;padding-bottom: 20px;">
+                    <p>To</p>
+                    <p>M/S <strong style="padding-left: 20px;">{{model.customer.firstName}} {{model.customer.middleName}} {{model.customer.lastName}}</strong></p>
+                    <p style="padding-left: 45px;">{{model.customer.address.streetNumber}} {{model.customer.address.streetName}} {{model.customer.address.city}} {{model.customer.address.state}} {{model.customer.address.postalCode}}</p>
+                    <p style="padding-left: 45px;">GSTIN: 14ESHWAR1234AB</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="padding: 0px;">
+                    <table style="width:100%;border-collapse: collapse;">
+                        <thead>
+                        <th style="border-right: 1px solid black;border-bottom: 1px solid black; width: 5%;padding-left: 5px;">SL NO</th>
+                        <th style="border-right: 1px solid black;border-bottom: 1px solid black; width: 40%;padding-left: 5px;">DESCRIPTION OF GOODS</th>
+                        <th style="border-right: 1px solid black;border-bottom: 1px solid black; width: 15%;padding-left: 5px;">HSN CODE</th>
+                        <th style="border-right: 1px solid black;border-bottom: 1px solid black; width: 10%;padding-left: 5px;">QTY</th>
+                        <th style="border-right: 1px solid black;border-bottom: 1px solid black; width: 10%;padding-left: 5px;">RATE</th>
+                        <th style="border-bottom: 1px solid black;width: 10%;">AMOUNT</th>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let item of selectedItems; index as $index;">
+                                <td style="border-right: 1px solid black;padding-left: 5px;">
+                                    {{($index + 1)}}
+                                </td>
+                                <td style="border-right: 1px solid black;padding-left: 5px;">
+                                    {{item.name}}
+                                </td>
+                                <td style="border-right: 1px solid black;padding-left: 5px;">
+                                    123456
+                                </td>
+                                <td style="border-right: 1px solid black;padding-left: 5px;">
+                                    1
+                                </td>
+                                <td style="border-right: 1px solid black;padding-left: 5px;">
+                                    {{item.rate | currency}}
+                                </td>
+                                <td style="padding-left: 5px;">
+                                    {{item.rate | currency}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border-right: 1px solid black;border-bottom: 1px solid black;"></td>
+                                <td style="border-right: 1px solid black;border-bottom: 1px solid black;"></td>
+                                <td style="border-right: 1px solid black;border-bottom: 1px solid black;"></td>
+                                <td style="border-right: 1px solid black;border-bottom: 1px solid black;"></td>
+                                <td style="border: 1px solid black;padding-left: 5px;">Total:</td>
+                                <td style="border: 1px solid black;padding-left: 5px;">{{amount | currency}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr style="border-bottom: 1px solid black;">
+                                <td rowspan="3" colspan="3" style="padding-left: 5px;">Amount in words</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid black;">
+                                <td colspan="2" style="text-align: right; border: 1px solid black;padding-right: 5px;">SGST </td>
+                                <td style="padding-left: 5px;">{{model.tax | currency}}</td>
+                            </tr>
+                            <tr style="border: 1px solid black;">
+                                <td colspan="2" style="text-align: right; border: 1px solid black;padding-right: 5px;">Discount</td>
+                                <td style="padding-left: 5px;">{{model.discount | currency}}</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="6" colspan="3" style="border-right: 1px solid black;border-bottom: 1px solid black; padding-left: 5px;">
+                                    <p><strong>TERMS:</strong></p>
+                                    <p>Payment within 30 days of delivery</p>
+                                    <p>Guarntee doesn't cover mishandling of components after delivery</p>
+                                    <p><strong>DECLARATION:</strong></p>
+                                    <p>we declare that this invoice shows the actual price of the goods described and that <br> all particular are true and correct.</p>
+                                    <p></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: right;padding-right: 5px;border-right: 1px solid black;">FORWARDING</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: right;padding-right: 5px;border-right: 1px solid black;">Round Off </td>
+                                <td> </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align: right;padding-right: 5px;border-right: 1px solid black;">GRAND TOTAL</td>
+                                <td>{{model.totalAmount | currency}}</td>
+                            </tr>
+                            <tr style="border-top: 1px solid black;">
+                                <td colspan="3" style="text-align: center;padding-left: 5px;">FOR YOUR ENTERPRISES</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="text-align: center;">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" colspan="3" style="border-right: 1px solid black;border-bottom: 1px solid black;">
+                                    Receiver signature
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="text-align: center;">&nbsp;</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid black;">
+                                <td colspan="3" style="text-align: center;">AUTHORISED SIGNATURY</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+            </tr>
+        </table>
+    </div>
+    <div style="width: 100%; text-align: center;">
+        <p>This is a computer generated invoice</p><br>
+    </div>
+</div>

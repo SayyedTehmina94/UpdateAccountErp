@@ -1,0 +1,121 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="blue-h heading"> Dashboard </h3>
+    </div>
+</div>
+
+
+<div class="col detail-area">
+
+    <section class="widgets-area">
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6">
+          <div class="box green-border">
+            <div class="row box-header">
+              <div class="col">
+                <h5 class="light-h">Sales Statistics</h5>
+
+              </div>
+            </div>
+            <div class="row content-row">
+                <canvas baseChart 
+                [datasets]="barChartData" 
+                [labels]="barChartLabels" 
+                [options]="barChartOptions"
+                [colors]="barChartColors" 
+                [legend]="barChartLegend" 
+                [chartType]="barChartType" 
+                [plugins]="barChartPlugins">
+            </canvas>
+            </div>
+          </div>
+        </div>
+     
+        <div class="col-xl-6 col-lg-6">
+            <div class="box green-border">
+              <div class="row box-header">
+                <div class="col">
+                  <h5 class="light-h">Expense Statistics</h5>
+  
+                </div>
+              </div>
+              <div class="row content-row">
+                <canvas baseChart 
+                [datasets]="lineChartData" 
+                [labels]="lineChartLabels" 
+                [options]="lineChartOptions"
+                [colors]="lineChartColors" 
+                [legend]="lineChartLegend" 
+                [chartType]="lineChartType" 
+                [plugins]="lineChartPlugins">
+            </canvas>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6">
+          <div class="box green-border">
+            <div class="row box-header">
+              <div class="col">
+                <h5 class="light-h">Top Five Invoices</h5>
+
+              </div>
+            </div>
+            <div class="row content-row">
+                <!-- <div *blockUI="'container-blockui'"> -->
+                    <table datatable [dtOptions]="dtOptionsInvoice" data-page="2" class="table">
+                    </table>
+                <!-- </div> -->
+            </div>
+          </div>
+        </div>
+     
+        <div class="col-xl-6 col-lg-6">
+            <div class="box green-border">
+              <div class="row box-header">
+                <div class="col">
+                  <h5 class="light-h">Top Five Bills</h5>
+  
+                </div>
+              </div>
+              <div class="row content-row">
+                <!-- <div *blockUI="'container-blockui'"> -->
+                    <table datatable [dtOptions]="dtOptionsBills" data-page="2" class="table">
+                    </table>
+                <!-- </div> -->
+              </div>
+            </div>
+          </div>
+      </div>
+    </section>
+
+  </div>
+
+<br/>
+
+
+<!-- <div class="col-md-12">  
+    <div class="row">
+        <div class="box col-md-6">
+            <h4 class="blue-h">Top Five Invoices</h4>
+            <hr>
+            <div *blockUI="'container-blockui'">
+                <table datatable [dtOptions]="dtOptionsInvoice" data-page="2" class="table">
+                </table>
+            </div>
+        </div>
+        <div class="box col-md-6">
+            <h4 class="blue-h">Top Five Bills</h4>
+            <hr>
+            <div *blockUI="'container-blockui'">
+                <table datatable [dtOptions]="dtOptionsBills" data-page="2" class="table">
+                </table>
+            </div>
+        </div>
+       
+    </div>
+    <br/>
+</div> -->

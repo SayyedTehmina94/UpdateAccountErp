@@ -1,0 +1,41 @@
+<div class="">
+    <div class="" id="">
+        <div class="">
+            <h3 class="">
+                Calendar </h3>
+            <span class=""></span>
+            <div class="">
+                <a [routerLink]="['/']" class="">
+                    <i class="flaticon2-shelter"></i>
+                </a>
+                <span class=""></span>
+                <span class="">Calendar</span>
+            </div>
+        </div>
+        <div class="">
+            <div class="">
+            </div>
+        </div>
+    </div>
+    <div class="" id="">
+        <div class="row">
+            <div class="col-md-12" *blockUI="'container-blockui'">
+                <div class="">                   
+                    <div class="">
+                        <div class="row">
+                            <div class="col-12">
+                                <div *ngIf="options">
+                                    <ng-fullcalendar #fullcalendar [options]="options"
+                                        (eventClick)="eventClick($event.detail)"
+                                        (eventDrop)="updateEvent($event.detail)"
+                                        (eventResize)="updateEvent($event.detail)"
+                                        (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

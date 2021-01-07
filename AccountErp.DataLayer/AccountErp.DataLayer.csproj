@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200825064727_TransactionTableChange25082020.cs" />
+    <Compile Remove="Migrations\20200825064727_TransactionTableChange25082020.Designer.cs" />
+    <Compile Remove="Migrations\20200825081813_TransactionTableChange25082020.cs" />
+    <Compile Remove="Migrations\20200825081813_TransactionTableChange25082020.Designer.cs" />
+    <Compile Remove="Migrations\20201117092830_serverdbupdate17Nov2020.cs" />
+    <Compile Remove="Migrations\20201117092830_serverdbupdate17Nov2020.Designer.cs" />
+    <Compile Remove="Migrations\20201117093312_serverdbupdate17Nov2020.cs" />
+    <Compile Remove="Migrations\20201117093312_serverdbupdate17Nov2020.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.19" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AccountErp.Infrastructure\AccountErp.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

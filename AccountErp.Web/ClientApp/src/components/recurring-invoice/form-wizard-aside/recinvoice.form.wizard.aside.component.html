@@ -1,0 +1,33 @@
+<ul class="add-cust-ul">
+    <li>
+        <h6>    
+        <a href="javascript:;" [ngClass]="{'active': wizardStep === 1}" (click)="setWizardStep.emit(1)">
+         <span class="li-bold"> Invoice </span> <br/>Invoice Details
+        </a>
+        </h6>
+    </li>
+    <li>
+        <h6>    
+            <a href="javascript:;" [ngClass]="{'active': wizardStep === 2}"
+            (click)="setWizardStep.emit(2)">
+            <span class="li-bold"> Set schedule</span> <br/>  set recurring schedule
+            </a>
+        </h6>
+    </li>
+    <li>
+        <h6>    
+            <a href="javascript:;" [ngClass]="{'active': wizardStep === 3}"
+            (click)="setWizardStep.emit(3)">
+            <span class="li-bold"> Get paid</span> <br/>  invoice payment
+            </a>
+        </h6>
+    </li>
+    <li>
+        <h6>    
+            <a href="javascript:;" [ngClass]="{'active': wizardStep === 4}"
+            (click)="setWizardStep.emit(4)">
+            <span class="li-bold">Send</span> <br/> Send invoice to customer
+            </a>
+        </h6>
+    </li>
+   </ul>
